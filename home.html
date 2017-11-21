@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Food Art</title>
+		<style>
+			 html,body {
+				margin:0;
+				padding:0;
+				max-height:100%;
+
+				}
+
+			.parallax{
+				background-image: url("back.jpg");
+				display:block;
+				min-height: 1450px;
+    				/*height: 100%;
+    				position:relative;
+				top:-25px;
+				left: -25px;*/
+				background-position: center;
+    				background-repeat: no-repeat;
+    				background-size: cover;
+				margin:0;
+				overflow:hidden;
+				position:relative;
+ 				
+			}
+			
+
+			img{
+				position:relative;
+				top:20px;
+				margin-bottom:0;
+				overflow:hidden;
+				}
+				
+				
+			text
+			{
+				position:absolute;
+				text-align:center;
+				font-size: 70px;
+				font-family:"Purisa";
+				color:white;
+			}
+			
+			
+			
+			
+			.container
+			{
+				float:left;
+				width:33.3%;
+				overflow: hidden;
+				margin:0;
+				padding:0;
+				position:relative;
+			}
+			
+			.content
+			{
+				font-family:"Copperplate Gothic";
+				font-size:50px;
+				font-color:black;
+				text-align:center;
+				position:relative;
+				bottom:250px;
+				opacity:0;
+				overflow:hidden;
+				margin:0 auto;
+				padding:0;
+			}
+			
+			
+			.container:hover .content
+			{
+				opacity:1;
+				transition: all 300ms ease-out;
+				
+			}
+			
+			.pimg
+			{
+
+				width:100%;
+				padding:0;
+				margin:0;
+				position:relative;
+				top:0;
+			}
+			
+			.container:hover .pimg
+			{
+				transition: all 300ms ease-out;
+				opacity:0.5;
+			}
+			#menu{list-style-type:none; padding:15px; margin:0}
+			li{display:inline;margin:20px; padding:20px}
+			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
+			#menubar{padding:0; margin:0; background-color:#252525; height:50px}
+			#feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
+			
+		</style>
+				
+			
+			
+	</head>
+	<body>
+		<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="">Home</a></li>
+				<li><a class="menuopt" href="Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="submissions\submissions.html">Submissions</a></li>
+			</ol>
+		</div>
+		<div class="parallax">
+			
+			<svg width="100%" height="1400px">
+			
+  		<text id="foodart"  x="38%" y="340" fill="none" stroke="white" stroke-width="8" stroke-dasharray="1000"
+  			stroke-dashoffset="100">
+			Food Art
+  			<animate attributeName="stroke-dashoffset"
+    				from="1000"
+    				to="0" 
+    				dur="8s"
+      				fill="freeze">
+          
+      			</animate> 
+		</text>
+		
+		</svg>
+		<div id="feast">
+				A feast for your eyes
+		</div>
+		</div>
+		
+		
+		
+		
+		<div id="plates">
+			<div class="container">
+				<a href=""><img class="pimg"  src="9517f69eb471634c593804be4af37a1b.jpg" alt="Appetizers"  height="430"></a>
+				<div class="content">Appetizers</div>
+			</div>
+			<div class="container">
+				<a href="mains\mains.html"><img class="pimg"  src="download.jpg" alt="Main Course"  height="430"></a>
+				<div class="content">Main Course</div>
+			</div>
+			<div class="container">
+				<a href=""><img class="pimg"  src="RoundAppetizer6p5inSHF15.jpg" alt="Dessert"  height="430"></a>
+				<div class="content">Dessert</div>
+			</div>
+		</div>
+		
+
+	<script>
+
+			function placeDiv() {
+  				var d = document.getElementById("foodart");
+				var s = window.pageYOffset;
+				console.log(s);
+				if(s<=678)
+				{
+					var translate = 'translateY(' + s + 'px)';
+					console.log(translate);
+					d.style.transform = translate;
+				}
+				
+			}
+			window.addEventListener("scroll", placeDiv);
+			//console.log(document.body.scrollTop);
+			
+			
+		</script>
+	</body>
+</html>

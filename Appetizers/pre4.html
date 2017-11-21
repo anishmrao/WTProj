@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head> <title> Pre-Appetizers </title>
+       <style>
+            #menu{list-style-type:none; padding:15px; margin:0}
+	    li{display:inline;margin:20px; padding:20px}
+	    .menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
+	    #menubar{padding:0; margin:0; background-color:#252525; height:50px; width:150%;}
+            
+                
+            .center{
+                                position: absolute;
+                                left: 50%;
+                                bottom: 63%;
+                                transform: translate(-50%, -50%);
+                                font-size: 22px;
+                                font-family: "Purisa";
+                                color:rgb(240,240,230);
+		 }
+             .options{
+                                 background-color:rgb(150,120,234);height:30px;width:160px;
+                                 color:blue;
+                                 padding: 20px 20px 20px 20px; 
+                                 /*position:relative;right:400px;bottom:250px; */
+                                 -webkit-filter: grayscale(70%);
+                                 filter: grayscale(70%);
+                                 /*-webkit-filter: hue-rotate(90deg);
+                                 filter: hue-rotate(90deg); */
+                                 -webkit-filter: sepia(70%);
+                                 filter: sepia(70%);
+                                 -webkit-transform: scale(1.5, 1.5); /* IE 9 */
+                                 transform: scale(1.5,1.5);
+                                 -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+                                 -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+                                 animation-name: example;
+                                 animation-duration: 4s;
+                                 animation-iteration-count: 3;
+                      }
+                                 /*@-webkit-keyframes example {
+                                                            from {font-size:10px;}
+                                                            to {font-size:22px;}
+                                                             } */
+
+                              
+
+                      
+               #mx     {             
+                                 position:relative;left:-450px;bottom:400px;
+                                 -webkit-animation-name: example2; 
+                                 -webkit-animation-duration: 4s; 
+                                 animation-name: example2;
+                                 animation-duration: 4s;
+                                 animation-iteration-count: 3;
+                      }
+                                 /*@-webkit-keyframes example2 {
+                                                            from {position:relative;right:450px;}
+                                                            to {position:relative;right:200px;}
+                                                             } */
+               #am     {             
+                                 position:relative;left:-610px;bottom:300px;
+                                 -webkit-animation-name: example3; 
+                                 -webkit-animation-duration: 4s; 
+                                 animation-name: example3;
+                                 animation-duration: 4s;
+                                 animation-iteration-count: 3;
+                       }          
+                                 /*@-webkit-keyframes example3 {
+                                                            from {right:350px;}
+                                                            to {right:600px;}
+                                                             } */
+                      
+               #ab     {             
+                                 position:relative;left:-775px;bottom:200px;
+                      }
+               #it    {             
+                                 position:relative;left:60px;bottom:400px;
+                                 webkit-animation-name: example4; 
+                                 -webkit-animation-duration: 4s; 
+                                 animation-name: example4;
+                                 animation-duration: 4s;
+                                 animation-iteration-count: 3;
+                      }
+                                 /*@-webkit-keyframes example4 {
+                                                            from {right:150px;}
+                                                            to   {right:-80px;}
+                                                             } */
+
+               #in    {             
+                                 position:relative;left:390px;bottom:250px;
+                                 webkit-animation-name: example4; 
+                                 -webkit-animation-duration: 4s; 
+                                 animation-name: example4;
+                                 animation-duration: 4s;
+                                 animation-iteration-count: 3;
+                      }
+               #fr    {             
+                                 position:relative;left:553px;bottom:350px;
+                                 webkit-animation-name: example5; 
+                                 -webkit-animation-duration: 4s; 
+                                 animation-name: example5;
+                                 animation-duration: 4s;
+                                 animation-iteration-count: 3;
+                      }
+                                 /*@-webkit-keyframes example5 {
+                                                            from {right:50px;}
+                                                            to {right:280px;}
+                                                            
+                                                            } */
+		#image{
+			
+			            margin-top:-2%;
+                        background-image: url(woodback.jpg);
+                        background-repeat: no-repeat;
+                        background-size:cover;
+		                background-position: center;
+                        
+			}
+		#pos{
+			position:absolute;
+			top:110%;
+			left:40%;
+		}
+    #img{opacity:100;margin-top:-12%;margin-right:100%;}
+    p{font-family:"Purisa";color:white;top:60%;margin-left:10%;font-size:26px;}
+
+
+    /*.set{background-color: "blue"; height:50%; width:30%;}   <!-- left is 30% --> */
+    #first{background-color:red;margin:20px;padding:40px; border :3px solid black;margin-left: 22%;margin-top:10%;}
+
+    #arrowleft{height:7%;width:7%;margin-top:-55%;top:25%;left:70%;}
+    #arrowright{height:7%;width:7%;color:red;}
+ 
+		
+
+</style>
+<script> 
+
+
+function go(presentIndex, dir,group)
+			{
+				var names = ["Mexican Corn Cheese Dip", "Mini Tamale", "Nachos Supreme","Chicken Wings","Fried pickles with spicy Mayo","Honey Apple Brie Bites","Kofta","Moutabal","Shawarma","Carbonara Quasedillas","Garlic Bread","Stuffed Italian Chicken Sausage","Salmon Trout Tartare","Brandade de Morue Au Gratin","Mini smoked salmon croque","Chicken 65","Samosa","Dabeli"]
+				var imgsrcs = ["mex.jpg", "mex2.jpg", "mex3.jpg","amer1.jpg","amer2.jpg","amer3.jpg","ab.jpg","ab2.jpg","ab3.jpg","ita.jpg","ita2.jpg","ita3.jpg","fra.jpg","fra2.jpg","fra3.jpg","ind.jpg","ind2.jpg","ind3.jpg"]
+			/*	var ingsdesc = ["Hot Cheesy .; Mexican Salsa, Bean Mash", "Penne, Garlic Bread, Parmesan Cheese, Baby Corn, Zucchini, Black Olives, Basil Pesto","","","","","","","","","","","","","","" ] */
+				 if(group==0)
+                     presentIndex.index = -1;
+                 else if(group==1)
+                    presentIndex.index = 2;
+                 else if(group==2)
+                    presentIndex.index = 5;
+                 else if(group==3)
+                    presentIndex.index = 8;
+                 else if(group==4)
+                    presentIndex.index = 11;
+                 else if(group==5)
+                    presentIndex.index = 14;
+                 else
+                    presentIndex.index+=0;
+                    
+                if(dir == 1)
+				{
+					if(presentIndex.index == 17)
+						presentIndex.index = 0;
+                    else
+                        presentIndex.index+=1;
+                 } 
+				if(dir == 0)
+				{
+					if(presentIndex.index == 0)
+						presentIndex.index = 17;
+                    else
+                        presentIndex.index-=1;
+				}
+                
+				var mainimg = document.getElementById("mainimg");
+				mainimg.setAttribute("src", imgsrcs[presentIndex.index]);
+				
+				var name = document.getElementById("name");
+				name.textContent = names[presentIndex.index];
+				
+				/*var ings = document.getElementById("ings");
+				ings.textContent = ingsdesc[presentIndex.index]; */
+                
+               if(presentIndex.index < 3 && presentIndex.index > -1)
+                document.getElementById("mx").style.backgroundColor = 'red';
+               else
+                document.getElementById("mx").style.backgroundColor = 'rgb(150,120,234)';
+
+               if(presentIndex.index < 6 && presentIndex.index > 2)
+                document.getElementById("am").style.backgroundColor = 'red';
+               else
+                document.getElementById("am").style.backgroundColor = 'rgb(150,120,234)';
+
+               if(presentIndex.index < 9 && presentIndex.index > 5)
+                document.getElementById("ab").style.backgroundColor = 'red';
+               else
+                document.getElementById("ab").style.backgroundColor = 'rgb(150,120,234)';
+
+               if(presentIndex.index < 12 && presentIndex.index > 8)
+                document.getElementById("it").style.backgroundColor = 'red';
+               else
+                document.getElementById("it").style.backgroundColor = 'rgb(150,120,234)';
+
+               if(presentIndex.index < 15 && presentIndex.index > 11)
+                document.getElementById("fr").style.backgroundColor = 'red';
+               else
+                document.getElementById("fr").style.backgroundColor = 'rgb(150,120,234)';
+
+               if(presentIndex.index < 18 && presentIndex.index > 14)
+                document.getElementById("in").style.backgroundColor = 'red';
+               else
+                document.getElementById("in").style.backgroundColor = 'rgb(150,120,234)';
+
+
+              
+			}
+			
+			var presentIndex = {index:0};
+			var right = document.getElementById("arrowright");
+			right.addEventListener("click", function(){go(presentIndex, 1,10)}, false);
+			var left = document.getElementById("arrowleft");
+			left.addEventListener("click", function(){go(presentIndex, 0,10)}, false);
+
+        
+			
+
+</script> 
+</head>
+<body>
+<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="..\home.html">Home</a></li>
+				<li><a class="menuopt" href="">Appetizers</a></li>
+				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
+			</ol>
+		</div>
+      
+      <div id="image">
+      <p><br><br> Here are some the most delicious appetizers from a variety of cusinies.</p>
+      <div class="center"><h1><u>Appetizers</u></h1></div>
+      
+      <div id="first" style="height:650px;width:650px;background-color:rgb(250,235,215);;font-size:28px; text-align:center; border-radius:50px; position:relative; top:-70px; font-family: Comic Sans MS;"> 
+              <img id="arrowleft" src="arrowleft.png" onclick="go(presentIndex,0,10)">
+               <img id="arrowright" src="arrowright.png"onclick="go(presentIndex,1,10)">
+              <img id="mainimg" src="mex.jpg" alt="Hong Kong Noodles" height="85%"/>
+				<br><br> 
+                
+      
+				<span id="name">Mexican cheesy corn dip</span><br>
+				<!-- <span id="ings">Ingredients : </span> -->
+                
+                </div>
+                
+     <!-- <img src ="app7.jpg" height="360px" width="750px" id="img"/> -->
+     <!-- <img src ="mex2.jpg"height="360px" width="240px" id="img"/> -->
+      <!--<img src ="mex3.jpg"height="360px" width="240px" id="img"/>
+      <img src ="mex4.jpg"height="360px" width="240px" id="img"/>  -->
+      
+      </div>
+<div id="pos">
+      <button type="button" class="options" id="mx" onclick="go(presentIndex,1,0)"/>Mexican</button>
+      <button type="button" class="options" id="am" onclick="go(presentIndex,1,1)"/>American</button>
+      <button type="button" class="options" id="ab" onclick="go(presentIndex,1,2)"/>Arabic</button>
+      <button type="button" class="options" id="it" onclick="go(presentIndex,1,3)"/>Italian</button>
+      <button type="button" class="options" id="fr" onclick="go(presentIndex,1,4)"/>French</button>
+      <button type="button" class="options" id="in" onclick="go(presentIndex,1,5)"/>Indian</button>
+    
+	  
+      
+    </div></div>
+
+
+
+<div> 
+<div>
+</body>
+</html>

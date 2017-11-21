@@ -1,0 +1,180 @@
+<html>
+	<head>
+		<style>
+		*{
+		margin:0;
+		padding: 0;
+	}
+				body{
+					background-image: url("woodback.jpg");
+					display:block;
+					position:relative;
+					background-size: cover;
+					border:0px;
+					padding:0px;
+
+					}
+				.a
+				{
+					display:block;
+					position:relative;
+					top:30px;
+
+					margin:0 auto;
+					background-color:#2525100;
+					width:60%;
+					height:60%;
+
+
+				}
+			.b
+				{
+					position:relative;
+					top:10px;
+					display:block;
+					margin:0 auto;
+
+				}
+				.c
+				{
+					position:relative;
+					top:20px;
+					display:block;
+					margin:0 auto;
+					padding:5px;
+					font-size:25px;
+					color:white;
+					font-family: 'Oswald', candara;
+					text-align: center;
+
+				}
+				#menu{list-style-type:none; padding:15px; margin:0}
+			li{display:inline;margin:20px; padding:20px}
+			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
+			#menubar{padding:0; margin:0; background-color:#252525; height:50px;width:100.85%}
+		</style>
+	</head>
+	<body>
+		<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="..\home.html">Home</a></li>
+				<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
+			</ol>
+		</div>
+		<div class="a" >
+			<img src="orangecake.jpg" class="b"height="400px" width="400 px"> </img>
+			<div class="c"><b> Orange Pound Cake</b><br>
+Plunge into delight with this lush dessert. Indulge in this olive oil based cake cooked with fresh oranges and cashew nuts. Be amazed by this unique combination of these flavors.
+		</div>
+		</div>
+		</div>
+
+	</body>
+	<script>
+		var div=document.querySelector(".a");
+		var pic_no=1;
+
+		function change_next(e)
+		{
+			if(e.keyCode==38 || e.keyCode==39)
+			{
+				if(pic_no==1)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","lemontart.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Lemon Tart</b><br> Enjoy this incredible classic dessert, which is made with rich, tangy and citrusy lemon curd on a crumbly base to set off the texture of the velvety curd."
+					pic_no=2;
+				}
+				else if(pic_no==2)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","jam_cookie.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Jam Sandwich Cookies</b> <br>Prepare your taste buds for a sweet taste that they will never forget. A pair of delicacies made with the classic cookie filled with a twist of strawberry jam centre and chef's special blueberry compote, respectively.";
+					pic_no=3;
+				}
+				else if(pic_no==3)
+				{
+
+					img=document.querySelector(".b");
+					img.setAttribute("src","butterfingercheesecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Butter finger cheesecake</b> <br>A rich and creamy cheesecake you can swoon over. This is baked with smooth milk chocolate butterfingers and a crunchy cookie crumble to send it over the top!";
+
+					pic_no=4;
+				}
+				else if(pic_no==4)
+				{
+					img = document.querySelector(".b");
+					img.setAttribute("src","orangecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b> Orange Pound Cake</b><br> Plunge into delight with this lush dessert. Indulge in this olive oil based cake cooked with fresh oranges and cashew nuts. Be amazed by this unique combination of these flavors.";
+
+					pic_no=1;
+
+
+				}
+
+
+			}
+			else if(e.keyCode==37||e.keyCode==40)
+			{
+				e.preventDefault();
+				if(pic_no==2)
+				{
+					img = document.querySelector(".b");
+					img.setAttribute("src","orangecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b> Orange Pound Cake</b><br> Plunge into delight with this lush dessert. Indulge in this olive oil based cake cooked with fresh oranges and cashew nuts. Be amazed by this unique combination of these flavors.";
+
+					pic_no=1;
+				}
+				else if(pic_no==3)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","lemontart.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Lemon Tart</b><br> Enjoy this incredible classic dessert, which is made with rich, tangy and citrusy lemon curd on a crumbly base to set off the texture of the velvety curd."
+
+					pic_no=2;
+
+				}
+				else if(pic_no==4)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","jam_cookie.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Jam Sandwich Cookies</b> <br>Prepare your taste buds for a sweet taste that they will never forget. A pair of delicacies made with the classic cookie filled with a twist of strawberry jam centre and chef's special blueberry compote, respectively.";
+					pic_no=3;
+				}
+				else if(pic_no==1)
+				{
+
+					img=document.querySelector(".b");
+					img.setAttribute("src","butterfingercheesecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Butter finger cheesecake</b> <br>A rich and creamy cheesecake you can swoon over. This is baked with smooth milk chocolate butterfingers and a crunchy cookie crumble to send it over the top!";
+
+					pic_no=4;
+
+				}
+				}
+
+
+
+
+		}
+
+
+
+		document.body.addEventListener("keyup",change_next,false);
+
+
+	</script>
+</html>
