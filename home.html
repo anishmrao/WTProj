@@ -101,6 +101,42 @@
 			#menubar{padding:0; margin:0; background-color:#252525; height:50px}
 			#feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
 			
+			.searchDiv
+			{
+				background-color: black;
+				opacity: 0.8;
+				position: relative;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			.searchBar
+			{
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 20px;
+				border-radius: 20px;
+				font-color: white;
+				background: transparent;
+			}
+			
+			.searchButton
+			{
+				background: url("/home/student/WTProj-master/search.png");
+				background-size: contain;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: absolute;
+				width:5%;
+				top: 20%;
+				border-style: none;
+				border-radius: 5px;
+				height: 40px;
+			}
+				
 		</style>
 				
 			
@@ -160,7 +196,31 @@
 		
 
 	<script>
-
+			function search()
+			{
+				var searchDiv = document.createElement("div");
+				var searchBar = document.createElement("input");
+				var searchButton = document.createElement("input");
+				searchDiv.setAttribute("class", "searchDiv");
+				searchBar.setAttribute("class", "searchBar");
+				searchButton.setAttribute("class", "searchButton");
+				searchBar.setAttribute("type", "text");
+				searchButton.setAttribute("type", "button");
+				searchBar.setAttribute("placeholder", "Search...");
+				searchDiv.appendChild(searchBar);
+				searchDiv.appendChild(searchButton);
+				var referenceNode = document.getElementById("menubar");
+				referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+			}
+			function startSearch(e)
+			{
+				
+				if(e.ctrlKey && e.keyCode === 70)
+				{
+					e.preventDefault();
+					search();
+				}
+			}
 			function placeDiv() {
   				var d = document.getElementById("foodart");
 				var s = window.pageYOffset;
@@ -174,6 +234,7 @@
 				
 			}
 			window.addEventListener("scroll", placeDiv);
+			window.addEventListener("keydown", startSearch);
 			//console.log(document.body.scrollTop);
 			
 			
