@@ -24,9 +24,9 @@
 				margin:0;
 				overflow:hidden;
 				position:relative;
- 				
+
 			}
-			
+
 
 			img{
 				position:relative;
@@ -34,8 +34,8 @@
 				margin-bottom:0;
 				overflow:hidden;
 				}
-				
-				
+
+
 			text
 			{
 				position:absolute;
@@ -44,10 +44,10 @@
 				font-family:"Purisa";
 				color:white;
 			}
-			
-			
-			
-			
+
+
+
+
 			.container
 			{
 				float:left;
@@ -57,7 +57,7 @@
 				padding:0;
 				position:relative;
 			}
-			
+
 			.content
 			{
 				font-family:"Copperplate Gothic";
@@ -71,15 +71,15 @@
 				margin:0 auto;
 				padding:0;
 			}
-			
-			
+
+
 			.container:hover .content
 			{
 				opacity:1;
 				transition: all 300ms ease-out;
-				
+
 			}
-			
+
 			.pimg
 			{
 
@@ -89,58 +89,93 @@
 				position:relative;
 				top:0;
 			}
-			
+
 			.container:hover .pimg
 			{
 				transition: all 300ms ease-out;
 				opacity:0.5;
 			}
-			#menu{list-style-type:none; padding:15px; margin:0}
-			li{display:inline;margin:20px; padding:20px}
-			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
-			#menubar{padding:0; margin:0; background-color:#252525; height:50px}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
 			#feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
-			
+
 			.searchDiv
 			{
-				background-color: black;
-				opacity: 0.8;
-				position: relative;
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 50px;
 				width: 100%;
 				justify-content: center;
 				align-items: center;
+				z-index: 1;
 			}
-			
+
 			.searchBar
 			{
+				display: table-cell;
+				vertical-align: middle;
 				position: relative;
 				margin: 10px;
 				padding: 10px;
 				width: 80%;
 				height: 20px;
-				border-radius: 20px;
-				font-color: white;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
 				background: transparent;
 			}
-			
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			::placeholder
+			{
+				color: white;
+			}
 			.searchButton
 			{
-				background: url("/home/student/WTProj-master/search.png");
-				background-size: contain;
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
 				cursor:pointer;
 				background-repeat: no-repeat;
-				position: absolute;
-				width:5%;
-				top: 20%;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
 				border-style: none;
-				border-radius: 5px;
+				transition: all 200ms ease-in;
 				height: 40px;
+				padding:0;
+				width: 40px;
 			}
-				
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px
+
+			}
 		</style>
-				
-			
-			
+
+
+
 	</head>
 	<body>
 		<div id="menubar">
@@ -152,33 +187,35 @@
 				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
 				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
 				<li><a class="menuopt" href="submissions\submissions.html">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
 			</ol>
+
 		</div>
 		<div class="parallax">
-			
+
 			<svg width="100%" height="1400px">
-			
+
   		<text id="foodart"  x="38%" y="340" fill="none" stroke="white" stroke-width="8" stroke-dasharray="1000"
   			stroke-dashoffset="100">
 			Food Art
   			<animate attributeName="stroke-dashoffset"
     				from="1000"
-    				to="0" 
+    				to="0"
     				dur="8s"
       				fill="freeze">
-          
-      			</animate> 
+
+      			</animate>
 		</text>
-		
+
 		</svg>
 		<div id="feast">
 				A feast for your eyes
 		</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div id="plates">
 			<div class="container">
 				<a href=""><img class="pimg"  src="9517f69eb471634c593804be4af37a1b.jpg" alt="Appetizers"  height="430"></a>
@@ -193,28 +230,34 @@
 				<div class="content">Dessert</div>
 			</div>
 		</div>
-		
+
 
 	<script>
 			function search()
 			{
-				var searchDiv = document.createElement("div");
-				var searchBar = document.createElement("input");
-				var searchButton = document.createElement("input");
-				searchDiv.setAttribute("class", "searchDiv");
-				searchBar.setAttribute("class", "searchBar");
-				searchButton.setAttribute("class", "searchButton");
-				searchBar.setAttribute("type", "text");
-				searchButton.setAttribute("type", "button");
-				searchBar.setAttribute("placeholder", "Search...");
-				searchDiv.appendChild(searchBar);
-				searchDiv.appendChild(searchButton);
-				var referenceNode = document.getElementById("menubar");
-				referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
-			}
+				if(!document.querySelector(".searchDiv"))
+				{
+					var searchDiv = document.createElement("div");
+					var searchBar = document.createElement("input");
+					var searchButton = document.createElement("input");
+					searchDiv.setAttribute("class", "searchDiv");
+					searchBar.setAttribute("class", "searchBar");
+					searchButton.setAttribute("class", "searchButton");
+					searchBar.setAttribute("type", "text");
+					searchButton.setAttribute("type", "button");
+					searchBar.setAttribute("placeholder", "Search...");
+					searchDiv.appendChild(searchBar);
+					searchDiv.appendChild(searchButton);
+					var referenceNode = document.getElementById("menubar");
+					referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+			  }
+				else {
+					document.body.removeChild(document.querySelector(".searchDiv"));
+				}
+		}
 			function startSearch(e)
 			{
-				
+
 				if(e.ctrlKey && e.keyCode === 70)
 				{
 					e.preventDefault();
@@ -231,13 +274,14 @@
 					console.log(translate);
 					d.style.transform = translate;
 				}
-				
+
 			}
 			window.addEventListener("scroll", placeDiv);
 			window.addEventListener("keydown", startSearch);
+			document.getElementById("searchimg").addEventListener("click", function(){search();});
 			//console.log(document.body.scrollTop);
-			
-			
+
+
 		</script>
 	</body>
 </html>
