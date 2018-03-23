@@ -3,9 +3,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
      h3{color:red;font-family:"Purisa";,font-size:30px;text-align:center;}
-     h2{color:gray;font-family:"Purisa";,font-size:30px;margin-left:10%;position: absolute;left: 30%;top:15%;}
+     h2{color:gray;font-family:"Purisa";,font-size:30px;margin-left:10%;position: absolute;left: 30%;top:20%;}
      h5{font-family:"Purisa";font-size:12px;text-align:center;}
-     input{ background-color: lightgrey;height:30px;width: 420px;padding: 10px;margin: 20px;border-radius: 12px;position:relative;left:11%;}
+     .fill{ background-color: lightgrey;height:30px;width: 420px;padding: 10px;margin: 20px;border-radius: 12px;position:relative;left:11%;}
      textarea{ background-color: lightgrey;width: 420px;border: 2px solid red;padding: 30px;margin: 30px;position:relative;left:10%}
      #submit{height:45px;width:200px;text-align:center;margin-left:10px;color:white;position:relative;left:29%}
      #ball{position:relative;top:5%;left:-5%}
@@ -44,7 +44,7 @@
       /*  height:170%; */
         width:45%;
 	position:relative;
-	top:200px;
+	top:230px;
 	left:20px;
 	
 	}
@@ -61,7 +61,7 @@
 	{
 	position:absolute;
 	left:45%;
-        top:-105%;
+        top:-65%;
         
      /*   height:170%; */
         width:45%;
@@ -193,15 +193,15 @@
         <h5> message to the food art team </h5>
         <form action="action_page.php" method="post" onsubmit="func()">
          <h3>-----How shall we call you?-----</h3><br>
-        <input  type="text" name="name" placeholder="Type your name here">
+        <input  type="text" class="fill" name="name" placeholder="Type your name here">
         <br>
          <h3>-----Share your Email-----</h3><br>
-         <input type="email" name="email" placeholder="We'll keep is safe we promise">
+         <input type="email" class="fill" name="email" placeholder="We'll keep is safe we promise">
          <br><br>
          <h3>-----We're all Ears!-----</h3>
-         <textarea name="message" rows="10" cols="30" placeholder="Share with us any information that might help us respond to your request"> </textarea><br>
+         <textarea name="message" class="fill" rows="10" cols="30" placeholder="Share with us any information that might help us respond to your request"> </textarea><br>
          
-         <input type="submit" value="*   Send Message   *" id="submit"><hr>
+         <input type="submit" class="fill" value="*   Send Message   *" id="submit"><hr>
          </form> 
 	     </div>
 	     <div class="container2" width="50%">
