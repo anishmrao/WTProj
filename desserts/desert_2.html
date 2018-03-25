@@ -1,11 +1,12 @@
 <html>
 <head>
 <style>
-*{
+{
 	margin: 0;
 	padding: 0;
 	//width: 100%;
 }
+html{margin:0;padding:0}
 body{
 				width: 100%;
 				background-image: url("woodback.jpg");
@@ -16,14 +17,88 @@ body{
     		background-size: contain;
 				border:0px;
 				padding:0px;
+				margin:0;
 
 
 			}
 
-			#menu{list-style-type:none; padding:15px; margin:0}
-			li{display:inline;margin:20px; padding:20px}
-			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
-			#menubar{padding:0; margin:0; background-color:#252525; height:50px;width:100.85%}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+			#feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
+
+			.searchDiv
+			{
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 50px;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			.searchBar
+			{
+				display: table-cell;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 40px;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
+				background: transparent;
+			}
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			::placeholder
+			{
+				color: white;
+			}
+			.searchButton
+			{
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
+				border-style: none;
+				transition: all 200ms ease-in;
+				height: 40px;
+				padding:0;
+				width: 40px;
+			}
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px
+
+			}
 			#sgcontainer{
 			padding-top: 3px;
 			width: 70%;
@@ -186,17 +261,19 @@ body{
 
 
 <body>
-<div id="menubar">
-			<ol id="menu">
-				<li><a class="menuopt" href="..\home.html">Home</a></li>
-				<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
-				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
-				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
-				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
-				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
-				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
-			</ol>
-		</div>
+	<div id="menubar">
+		<ol id="menu">
+			<li><a class="menuopt" href="..\home.html">Home</a></li>
+			<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+			<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+			<li><a class="menuopt" href="desert.html">Desserts</a></li>
+			<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+			<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+			<li><a class="menuopt" href="..\newsubs\submissions.html">Submissions</a></li>
+			<li><img id="searchimg" src="searchicon.png"/></li>
+		</ol>
+
+	</div>
 		<div id="contains">
 		 <div id="box"><img id="sgimg" src="salted_caramel.jpg" ></div>
 		 <div id="sgcontainer">
@@ -217,14 +294,45 @@ body{
 		<div id="contains3">
 		 <div id="box3"><img id="sgimg3" src="choco_truffle.jpg" ></div>
 		 <div id="sgcontainer3">The ultimate chocolate indulgence! Enjoy this decadent pastry made of dense dark chocolate truffle and layered with dark chocolate ganache in the center. Every bite is blissful!
-		 
-			
+
+
 		</div>
 		</div>
 
 
 </body>
 <script>
+function search()
+{
+	if(!document.querySelector(".searchDiv"))
+	{
+		var searchDiv = document.createElement("div");
+		var searchBar = document.createElement("input");
+		var searchButton = document.createElement("input");
+		searchDiv.setAttribute("class", "searchDiv");
+		searchBar.setAttribute("class", "searchBar");
+		searchButton.setAttribute("class", "searchButton");
+		searchBar.setAttribute("type", "text");
+		searchButton.setAttribute("type", "button");
+		searchBar.setAttribute("placeholder", "Search...");
+		searchDiv.appendChild(searchBar);
+		searchDiv.appendChild(searchButton);
+		var referenceNode = document.getElementById("menubar");
+		referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+	}
+	else {
+		document.body.removeChild(document.querySelector(".searchDiv"));
+	}
+}
+function startSearch(e)
+{
+
+	if(e.ctrlKey && e.keyCode === 70)
+	{
+		e.preventDefault();
+		search();
+	}
+}
  var img=document.getElementById("box");
  function change()
  {
@@ -280,7 +388,8 @@ body{
 
   img3.addEventListener("mouseover",change3,false);
   img3.addEventListener("mouseout",remove3,false);
-
+	window.addEventListener("keydown", startSearch);
+	document.getElementById("searchimg").addEventListener("click", function(){search();});
 
 </script>
 </html>

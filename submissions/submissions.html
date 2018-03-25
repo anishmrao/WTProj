@@ -7,6 +7,8 @@
 			body{margin:0;padding:0;width:100%;display:table-cell}
 			#back
 			{
+				position:relative;
+				top:50px;
 				height:100%;
 				background-image:url("woodback.jpg");
 				display:block;
@@ -23,17 +25,18 @@
 				justify-content:center;
 				border-radius:20px;
 				padding:20px;
+
 				margin:50px auto;
 			}
 			#heading
 			{
 				font-family:"Copperplate Gothic";
+				display: inline-block;
 				color:white;
 				font-size:50px;
-				margin-top:50px;
-				margin-bottom:20px;
-				padding:0;
-				
+			  margin-top:4%;
+				margin-bottom:1%;
+
 			}
 			.subimg
 			{
@@ -64,7 +67,7 @@
 				margin:100px auto;
 				padding:20px;
 				position:relative;
-				
+
 			}
 			label
 			{
@@ -83,7 +86,7 @@
 				color:black;
 				display:block;
 				text-align:center;
-				
+
 			}
 			#artDesc
 			{
@@ -126,10 +129,83 @@
 			#close:hover{opacity:1}
 			#edit:hover{opacity:1}
 			#ok{width:4%;position:absolute;right:-1%;bottom:-2%;cursor:pointer;}
-			#menu{list-style-type:none; padding:15px; margin:0}
-			li{display:inline;margin:20px; padding:20px}
-			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"; cursor:pointer}
-			#menubar{padding:0; margin:0; background-color:#252525; height:50px}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+
+
+			.searchDiv
+			{
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 50px;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			.searchBar
+			{
+				display: table-cell;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 20px;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
+				background: transparent;
+			}
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			::placeholder
+			{
+				color: white;
+			}
+			.searchButton
+			{
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
+				border-style: none;
+				transition: all 200ms ease-in;
+				height: 40px;
+				padding:0;
+				width: 40px;
+			}
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px
+
+			}
 		</style>
 	</head>
 	<body onload="load()">
@@ -142,7 +218,9 @@
 				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
 				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
 				<li><a class="menuopt" href="">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
 			</ol>
+
 		</div>
 		<div id="back">
 			<span  id="heading">Submissions</span>
@@ -154,7 +232,7 @@
 				<p>
 				<label>Name your art :</label>
 				<input type="text" id="name" placeholder="What's your art called?"/></p>
-				
+
 				<label>Add description :</label>
 				<br>
 				<textarea id="artDesc"></textarea>
@@ -162,17 +240,49 @@
 				<input id="submit" type="button" value="Submit Art" class="button"/>
 			</div>
 		</div>
-		
+
 		<script>
+		function search()
+	{
+		if(!document.querySelector(".searchDiv"))
+		{
+			var searchDiv = document.createElement("div");
+			var searchBar = document.createElement("input");
+			var searchButton = document.createElement("input");
+			searchDiv.setAttribute("class", "searchDiv");
+			searchBar.setAttribute("class", "searchBar");
+			searchButton.setAttribute("class", "searchButton");
+			searchBar.setAttribute("type", "text");
+			searchButton.setAttribute("type", "button");
+			searchBar.setAttribute("placeholder", "Search...");
+			searchDiv.appendChild(searchBar);
+			searchDiv.appendChild(searchButton);
+			var referenceNode = document.getElementById("menubar");
+			referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+		}
+		else {
+			document.body.removeChild(document.querySelector(".searchDiv"));
+		}
+}
+	function startSearch(e)
+	{
+
+		if(e.ctrlKey && e.keyCode === 70)
+		{
+			e.preventDefault();
+			search();
+		}
+	}
 			function load()
 			{
+				console.log("Loading...");
 
 		        if (window.XMLHttpRequest) {
 		            xmlhttp = new XMLHttpRequest();
 		            xhr = new XMLHttpRequest();
-		        } 
+		        }
 				var done1 = 0, done2 = 0;
-				
+
 				var objs = []
 				var name, desc, src="";
 		        xmlhttp.onreadystatechange = function() {
@@ -198,15 +308,15 @@
 									//console.log(name);
 									//console.log(desc);
 									//console.log(src);
-								
+
 								}
 							}
-						
+
 						}
-						
-						
+
+
 		            }
-					
+
 			    };
 				 xhr.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
@@ -217,9 +327,9 @@
 							imgs[ims[i].split("*")[0]] = ims[i].split("*")[1];
 						addthem(objs);
 					}
-					
+
 				};
-				
+
 				xhr.open("GET", "backend3.php", true);
 				xhr.send();
 		        xmlhttp.open("GET","backend.php",true);
@@ -242,19 +352,19 @@
 				}
 				imgs = {};
 			}
-			
+
 			var back = document.getElementById("back");
-			
+
 			var container = document.getElementById("container");
-			
+
 			var inpimage = document.getElementById("inpimage");
-			
+
 			function update()
 			{
 				if (window.XMLHttpRequest) {
 		            xmlhttp = new XMLHttpRequest();
 					xhr = new XMLHttpRequest();
-		        } 
+		        }
 		        xmlhttp.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
 		                console.log(this.responseText);
@@ -287,12 +397,12 @@
 		        xmlhttp.open("GET","alter.php?q="+entry,true);
 		        xmlhttp.send();
 			}
-			
+
 			function onUploadComplete(e)
 			{
 				console.log("Upload complete");
 			}
-			function onUploadProgress(event) 
+			function onUploadProgress(event)
 			{
 				if (event.lengthComputable) {
 					var percentComplete = event.loaded / event.total;
@@ -305,10 +415,11 @@
 				{
 					var back = document.getElementById("back");
 					back.removeChild(e.target.parentNode);
+
 				}
-				
+
 			}
-			
+
 			function editsub(e)
 			{
 				if(!document.getElementById("ok"))
@@ -327,36 +438,36 @@
 						if(children[i].className == "desclabel")
 							var desc = children[i];
 					}
-			
+
 					var edimage = document.createElement("input");
 					edimage.setAttribute("class", "edimage");
 					edimage.setAttribute("type", "file");
-					
+
 					var edname = document.createElement("input");
 					edname.setAttribute("class", "edname");
 					edname.setAttribute("placeholder", name.textContent);
-					
+
 					var eddesc = document.createElement("textarea");
 					eddesc.setAttribute("class", "eddesc");
 					eddesc.setAttribute("placeholder", desc.textContent);
-					
+
 					var ok = document.createElement("img");
 					ok.setAttribute("id", "ok");
 					ok.setAttribute("src", "ok.png");
-					ok.addEventListener("click", function(){ 
-													
+					ok.addEventListener("click", function(){
+
 													if(edname.value)
 														var newname = edname.value;
 													else
 														var newname = edname.placeholder;
-													
+
 													if(eddesc.value)
 														var newdesc = eddesc.value;
 													else
 														var newdesc = eddesc.placeholder;
-													
+
 													var back = document.getElementById("back");
-													
+
 													if(edimage.value)
 													{
 														var reader = new FileReader();
@@ -364,27 +475,27 @@
 														//newnameslist[newname] = edname.placeholder;
 														reader.readAsDataURL(edimage.files[0]);
 														reader.onloadend = function(e){addImg(e.target.result, newname, newdesc, parent, 1);}
-												
+
 													}
 													else
 													{
 														//imgfilenames[newname] = {name:'ignore'};
 														addImg(img.src, newname, newdesc, parent, 1);
 													}
-												
-													
+
+
 												}, false);
-					
+
 					parent.removeChild(name);
 					parent.removeChild(desc);
 					parent.appendChild(edimage);
 					parent.appendChild(edname);
 					parent.appendChild(eddesc);
 					parent.appendChild(ok);
-					
+
 				}
 			}
-				
+
 			function showx(e)
 			{
 				//console.log("in mouseover function");
@@ -399,7 +510,7 @@
 				e.target.insertBefore(edit, e.target.children[0]);
 				e.target.insertBefore(close, e.target.children[0]);
 			}
-			
+
 			function hidex(e)
 			{
 				var x = document.getElementById("close");
@@ -407,14 +518,14 @@
 				e.target.removeChild(x);
 				e.target.removeChild(edit);
 			}
-			
+
 			function addImg(filename, name, artDesc, refNode, cameFrom)
 			{
-	
+
 				var container = document.createElement("div");
 				container.setAttribute("class", "submitcontainer");
-				container.addEventListener("mouseenter", showx, false); 
-				container.addEventListener("mouseleave", hidex, false); 
+				container.addEventListener("mouseenter", showx, false);
+				container.addEventListener("mouseleave", hidex, false);
 				var img = document.createElement("img");
 				img.setAttribute("class", "subimg");
 				img.setAttribute("alt", "There was a problem loading your submission");
@@ -431,8 +542,8 @@
 				var back = document.getElementById("back");
 				//console.log(back.children.length);
 				var flag=0;
-				if(refNode && refNode != document.getElementById("container")) 
-					flag =1;
+				/*if(refNode && refNode != document.getElementById("container"))
+					flag =1;*/
 				var referenceNode = refNode || document.getElementById("container");
 				referenceNode.parentNode.insertBefore(container, referenceNode.nextSibling);
 				if(flag)
@@ -440,13 +551,14 @@
 				console.log("IMGFILENAMES",imgfilenames);
 				if(!cameFrom)
 					update();
-				
+				console.log("added",name);
+				console.log("reference",referenceNode)
 			}
-			
-			
-			
+
+
+
 			var submit = document.getElementById("submit");
-			submit.addEventListener("click", function(){ 
+			submit.addEventListener("click", function(){
 												var name = document.getElementById("name");
 												var artDesc = document.getElementById("artDesc");
 												if(inpimage.value && name.value && artDesc.value)
@@ -459,12 +571,14 @@
 												}
 												else
 													window.alert("Please enter all values before submitting");
-												
+
 											}, false);
-			
+
 			imgfilenames = {};
 			imgs = {};
 			newnameslist={};
+			window.addEventListener("keydown", startSearch);
+			document.getElementById("searchimg").addEventListener("click", function(){search();});
 		</script>
 	</body>
 </html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Submissions</title>
+		<style>
+			html{margin:0;padding:0;height:100%;width:100%;display:table}
+			body{margin:0;padding:0;width:100%;display:table-cell}
+			#back
+			{
+				position:relative;
+				top:50px;
+				height:100%;
+				background-image:url("woodback.jpg");
+				display:block;
+				background-repeat:repeat;
+				background-size:contain;
+				text-align:center;
+				justify-content:center;
+				align-items:center;
+			}
+			#container
+			{
+				width:80%;
+				background-color:white;
+				justify-content:center;
+				border-radius:20px;
+				padding:20px;
+
+				margin:50px auto;
+			}
+			#heading
+			{
+				font-family:"Copperplate Gothic";
+				display: inline-block;
+				color:white;
+				font-size:50px;
+			  margin-top:4%;
+				margin-bottom:1%;
+
+			}
+			.subimg
+			{
+				width:100%;
+			}
+			.submitnamelabel
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:40px;
+				margin:5px;
+				display:block;
+			}
+			.cuisinelabel
+			{
+				display: block;
+			}
+			.spicylabel
+			{
+				display: block;
+			}
+			.desclabel
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:20px;
+				margin:5px;
+				display:block;
+			}
+			.submitcontainer
+			{
+				width:80%;
+				background-color:white;
+				border-radius:20px;
+				justify-content:center;
+				margin:100px auto;
+				padding:20px;
+				position:relative;
+
+			}
+			label
+			{
+				font-family:"Copperplate Gothic";
+				font-size:18px;
+			}
+			#name
+			{
+				margin:5px;
+			}
+			.edname
+			{
+				margin:5px auto;
+				font-family:"Purisa";
+				font-size:40px;
+				color:black;
+				display:block;
+				text-align:center;
+
+			}
+			#artDesc
+			{
+				margin:10px;
+				width:40%;
+				height:100px;
+			}
+			.eddesc
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:20px;
+				margin:5px auto;
+				text-align:center;
+			}
+			.button
+			{
+				padding:10px;
+				margin:10px;
+				background-color:gray;
+				font-family:"Copperplate Gothic";
+				color:white;
+				border:none;
+				border-radius:5px;
+				cursor:pointer;
+			}
+			#inpimage
+			{
+				margin:10px;
+				cursor:pointer;
+			}
+			.edimage
+			{
+				margin:10px;
+				cursor:pointer;
+				display:block;
+			}
+			#close{width:5%;position:absolute;right:-1%;top:-2%;cursor:pointer;opacity:0.75;}
+			#edit{width:4%;position:absolute;left:-1%;top:-2%;cursor:pointer;opacity:0.75;}
+			#close:hover{opacity:1}
+			#edit:hover{opacity:1}
+			#ok{width:4%;position:absolute;right:-1%;bottom:-2%;cursor:pointer;}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+
+
+			.searchDiv
+			{
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 50px;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			.searchBar
+			{
+				display: table-cell;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 20px;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
+				background: transparent;
+			}
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			::placeholder
+			{
+				color: white;
+			}
+			.searchButton
+			{
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
+				border-style: none;
+				transition: all 200ms ease-in;
+				height: 40px;
+				padding:0;
+				width: 40px;
+			}
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px
+
+			}
+
+		</style>
+	</head>
+	<body onload="load()">
+		<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="..\home.html">Home</a></li>
+				<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
+			</ol>
+
+		</div>
+		<div id="back">
+			<span  id="heading">Submissions</span>
+			<br><br>
+			<div id="container">
+				<p>
+				<label>Upload image :</label>
+				<input type="file" id="inpimage" /></p>
+				<p>
+				<label>Name your art :</label>
+				<input type="text" id="name" placeholder="What's your art called?"/></p>
+				<label>Cuisine: </label>
+				<select id="cuisineselect">
+					<option value="null">---</option>
+					<option value="italian">Italian</option>
+					<option value="indian">Indian</option>
+					<option value="mexican">Mexican</option>
+					<option value="japanese">Japanese</option>
+				</select>
+				<br><br>
+				<label>Is this dish spicy?</label>
+				<select id="isSpicy">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+				<br><br>
+				<label>Ingredients :</label>
+				<br>
+				<textarea id="artDesc"></textarea>
+				<br>
+
+				<input id="submit" type="button" value="Submit Art" class="button"/>
+			</div>
+		</div>
+
+		<script>
+		function submission(dish_id, name, pic_name, ing, cuisine, spicy)
+		{
+			this.dish_id = dish_id;
+			this.nameval = name;
+			this.pic_name = pic_name;
+			this.ing = ing;
+			this.cuisine = cuisine;
+			this.spicy = spicy;
+		}
+		function search()
+	{
+		if(!document.querySelector(".searchDiv"))
+		{
+			var searchDiv = document.createElement("div");
+			var searchBar = document.createElement("input");
+			var searchButton = document.createElement("input");
+			searchDiv.setAttribute("class", "searchDiv");
+			searchBar.setAttribute("class", "searchBar");
+			searchButton.setAttribute("class", "searchButton");
+			searchBar.setAttribute("type", "text");
+			searchButton.setAttribute("type", "button");
+			searchBar.setAttribute("placeholder", "Search...");
+			searchDiv.appendChild(searchBar);
+			searchDiv.appendChild(searchButton);
+			var referenceNode = document.getElementById("menubar");
+			referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+		}
+		else {
+			document.body.removeChild(document.querySelector(".searchDiv"));
+		}
+}
+	function startSearch(e)
+	{
+
+		if(e.ctrlKey && e.keyCode === 70)
+		{
+			e.preventDefault();
+			search();
+		}
+	}
+			function load()
+			{
+
+       	if (!window.XMLHttpRequest) return;
+				console.log("Loading...");
+        xmlhttp = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
+
+				var done1 = 0, done2 = 0;
+
+				var objs = []
+				var dish_id, name, src="", ing, cuisine, spicy;
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+						var retstring = this.responseText;
+		                console.log(retstring);
+						if(retstring)
+						{
+							var subs = retstring.split("#");
+							var splits;
+							var parent = document.getElementById("container");
+							for(var i=0; i<subs.length; ++i)
+							{
+								splits = subs[i].split("*");
+								dish_id = splits[0];
+								if(dish_id!="")
+								{
+									name = splits[1];
+									src = splits[2];
+									ing = splits[3];
+									cuisine = splits[4];
+									if(splits[5] == 1)
+										spicy = 'yes';
+									else
+										spicy = 'no';
+									var sub = new submission(dish_id, name, {name:src}, ing, cuisine, spicy);
+									//subs.push(sub);
+									//obj[dish_id] = sub;
+									objs.push(sub);
+									//console.log(name);
+									//console.log(desc);
+									//console.log(src);
+
+								}
+							}
+
+						}
+
+
+		            }
+
+			    };
+				 xhr.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+						var retstring = this.responseText;
+		                //console.log(retstring);
+						var ims = retstring.split("#");
+						for(var i=0; i<ims.length; ++i)
+							imgs[ims[i].split("*")[0]] = ims[i].split("*")[2];
+						addthem(objs);
+					}
+
+				};
+
+				xhr.open("GET", "backend3.php", true);
+				xhr.send();
+		        xmlhttp.open("GET","backend.php",true);
+		        xmlhttp.send();
+			}
+			function addthem(objs)
+			{
+				var parent = document.getElementById("container");
+				console.log(objs);
+				console.log(imgs);
+				for(var i=0; i<objs.length; ++i)
+				{
+					if(objs[i].dish_id)
+					{
+						var imgsrc = "data:image/jpg;base64," + imgs[objs[i].dish_id];
+						addImg(imgsrc, objs[i], parent, 1);
+						var parents = document.querySelectorAll(".submitcontainer");
+						parent = parents[parents.length - 1];
+					}
+				}
+				imgs = {};
+			}
+
+			var back = document.getElementById("back");
+
+			var container = document.getElementById("container");
+
+			var inpimage = document.getElementById("inpimage");
+
+			function update()
+			{
+				if (!window.XMLHttpRequest) {
+		           console.log("Update failed.");
+							 return;
+		        }
+						xmlhttp = new XMLHttpRequest();
+			xhr = new XMLHttpRequest();
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                console.log(this.responseText);
+		            }
+			    };
+				var entry = "";
+				var subs = document.querySelectorAll(".submitcontainer");
+				var name, desc, src;
+				for(var i=0; i<subs.length; ++i)
+				{
+					name = subs[i].querySelector(".submitnamelabel").textContent;
+					desc = subs[i].querySelector(".desclabel").textContent;
+					if(imgfilenames[name])
+						src = imgfilenames[name].name;
+					else
+						src = imgfilenames[newnameslist[name]].name;
+					entry += name+"*"+desc+"*"+src+"#";
+				}
+				var formData = new FormData();
+				formData.append('fileToUpload', imgfilenames[name], imgfilenames[name].name);
+				xhr.open("POST", "backend2.php");
+				xhr.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                console.log(this.responseText);
+		            }
+			    };
+				xhr.upload.addEventListener("load", onUploadComplete, false);
+				xhr.upload.addEventListener("progress", onUploadProgress, false);
+				xhr.send(formData);
+		        xmlhttp.open("GET","alter.php?q="+entry,true);
+		        xmlhttp.send();
+			}
+
+			function onUploadComplete(e)
+			{
+				console.log("Upload complete");
+			}
+			function onUploadProgress(event)
+			{
+				if (event.lengthComputable) {
+					var percentComplete = event.loaded / event.total;
+					console.log(parseFloat(percentComplete*100).toFixed(2));
+				}
+			}
+			function removesub(e)
+			{
+				if(window.confirm("Are you sure you want to delete this submission?"))
+				{
+					if (!window.XMLHttpRequest) {
+			           console.log("Remove failed.");
+								 return;
+			        }
+
+							node = e.target.parentNode;
+							xmlhttp = new XMLHttpRequest();
+
+			        xmlhttp.onreadystatechange = function() {
+			            if (this.readyState == 4 && this.status == 200) {
+			                console.log(this.responseText);
+											var back = document.getElementById("back");
+											back.removeChild(node);
+			            }
+				    };
+						var entry = node.id;
+						xmlhttp.open("GET","remove.php?q="+entry,true);
+						xmlhttp.send();
+				}
+
+			}
+
+			function editsub(e)
+			{
+				if(!document.getElementById("ok"))
+				{
+					//console.log("edit mode");
+					var parent = e.target.parentNode;
+					var children = parent.children;
+					//console.log(children);
+					for(i=0; i<children.length; ++i)
+					{
+						//console.log(children[i].className);
+						if(children[i].className == "subimg")
+							var img = children[i];
+						if(children[i].className == "submitnamelabel")
+							var name = children[i];
+						if(children[i].className == "desclabel")
+							var desc = children[i];
+					}
+
+					var edimage = document.createElement("input");
+					edimage.setAttribute("class", "edimage");
+					edimage.setAttribute("type", "file");
+
+					var edname = document.createElement("input");
+					edname.setAttribute("class", "edname");
+					edname.setAttribute("placeholder", name.textContent);
+
+					var eddesc = document.createElement("textarea");
+					eddesc.setAttribute("class", "eddesc");
+					eddesc.setAttribute("placeholder", desc.textContent);
+
+					var ok = document.createElement("img");
+					ok.setAttribute("id", "ok");
+					ok.setAttribute("src", "ok.png");
+					ok.addEventListener("click", function(){
+
+													if(edname.value)
+														var newname = edname.value;
+													else
+														var newname = edname.placeholder;
+
+													if(eddesc.value)
+														var newdesc = eddesc.value;
+													else
+														var newdesc = eddesc.placeholder;
+
+													var back = document.getElementById("back");
+
+													if(edimage.value)
+													{
+														var reader = new FileReader();
+														imgfilenames[newname] = edimage.files[0];
+														//newnameslist[newname] = edname.placeholder;
+														reader.readAsDataURL(edimage.files[0]);
+														reader.onloadend = function(e){addImg(e.target.result, newname, newdesc, parent, 1);}
+
+													}
+													else
+													{
+														//imgfilenames[newname] = {name:'ignore'};
+														addImg(img.src, newname, newdesc, parent, 1);
+													}
+
+
+												}, false);
+
+					parent.removeChild(name);
+					parent.removeChild(desc);
+					parent.appendChild(edimage);
+					parent.appendChild(edname);
+					parent.appendChild(eddesc);
+					parent.appendChild(ok);
+
+				}
+			}
+
+			function showx(e)
+			{
+				//console.log("in mouseover function");
+				var close = document.createElement("img");
+				close.setAttribute("id", "close");
+				close.setAttribute("src", "close.png");
+				close.addEventListener("click", removesub, false);
+				var edit = document.createElement("img");
+				edit.setAttribute("id", "edit");
+				edit.setAttribute("src", "edit.png");
+				edit.addEventListener("click", editsub, false);
+				e.target.insertBefore(edit, e.target.children[0]);
+				e.target.insertBefore(close, e.target.children[0]);
+			}
+
+			function hidex(e)
+			{
+				var x = document.getElementById("close");
+				var edit = document.getElementById("edit");
+				e.target.removeChild(x);
+				e.target.removeChild(edit);
+			}
+			function insert(submission)
+			{
+				if (!window.XMLHttpRequest)
+				{
+					console.log("Upload not possible.");
+					return;
+				}
+
+				xmlhttp = new XMLHttpRequest();
+				xhr = new XMLHttpRequest();
+
+				xmlhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+								console.log(this.responseText);
+						}
+				};
+				xmlhttp.open("GET","alter.php?q="+entry,true);
+				var formData = new FormData();
+				formData.append('fileToUpload', submission.pic_name, submission.pic_name.name);
+				xhr.open("POST", "backend2.php");
+				xhr.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+										console.log(this.responseText);
+								}
+					};
+				if(submission.spicy=="yes")
+					var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+1+"*"+submission.ing;
+				else
+					var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+0+"*"+submission.ing;
+
+
+				xhr.upload.addEventListener("load", function(){xmlhttp.send();}, false);
+				xhr.upload.addEventListener("progress", onUploadProgress, false);
+				xhr.send(formData);
+
+			}
+			function addImg(filename, submission, refNode, cameFrom)
+			{
+
+				var container = document.createElement("div");
+				container.setAttribute("class", "submitcontainer");
+				container.setAttribute("id", submission.dish_id);
+				container.addEventListener("mouseenter", showx, false);
+				container.addEventListener("mouseleave", hidex, false);
+				var img = document.createElement("img");
+				img.setAttribute("class", "subimg");
+				img.setAttribute("alt", "There was a problem loading your submission");
+				img.setAttribute("src", filename);
+				var namelabel = document.createElement("label");
+				namelabel.setAttribute("class", "submitnamelabel");
+				namelabel.textContent = submission.nameval;
+				var desclabel = document.createElement("label");
+				desclabel.setAttribute("class", "desclabel");
+				desclabel.textContent = submission.ing;
+				var cuisine = document.createElement("label");
+				cuisine.setAttribute("class", "cuisinelabel");
+				cuisine.textContent = submission.cuisine;
+				var spicy = document.createElement("label");
+				if(submission.spicy)
+					spicy.textContent = "Spicy";
+				else
+					spicy.textContent = "Not spicy";
+				spicy.setAttribute("class", "spicylabel");
+				container.appendChild(img);
+				container.appendChild(namelabel);
+				container.appendChild(spicy);
+				container.appendChild(cuisine);
+				container.appendChild(desclabel);
+				var back = document.getElementById("back");
+				//console.log(back.children.length);
+				var flag=0;
+				/*if(refNode && refNode != document.getElementById("container"))
+					flag =1;*/
+				var referenceNode = refNode || document.getElementById("container");
+				referenceNode.parentNode.insertBefore(container, referenceNode.nextSibling);
+				if(flag)
+					back.removeChild(refNode);
+
+				if(!cameFrom)
+					insert(submission);
+				console.log("added",name);
+			}
+
+
+
+			var submit = document.getElementById("submit");
+			submit.addEventListener("click", function(){
+												var name = document.getElementById("name");
+												var artDesc = document.getElementById("artDesc");
+												var cuisine = document.getElementById("cuisineselect");
+												var spicy = document.getElementById("isSpicy");
+												var picName = inpimage.value.split("\\")[-1];
+												console.log(inpimage);
+												var obj = new submission('00'+document.querySelectorAll(".submitcontainer").length, name.value, inpimage.files[0], artDesc.value, cuisine.value, spicy.value);
+												console.log(obj);
+												if(inpimage.value && name.value && artDesc.value)
+												{
+													var reader = new FileReader();
+													//console.log(inpimage.files[0].name);
+													imgfilenames[name.value] = inpimage.files[0];
+													reader.readAsDataURL(inpimage.files[0]);
+													reader.onloadend = function(e){addImg(e.target.result, obj);}
+												}
+												else
+													window.alert("Please enter all values before submitting");
+
+											}, false);
+
+			imgfilenames = {};
+			imgs = {};
+			newnameslist={};
+			window.addEventListener("keydown", startSearch);
+			document.getElementById("searchimg").addEventListener("click", function(){search();});
+		</script>
+	</body>
+</html>

@@ -17,7 +17,7 @@
 			foreach($return as $filename)
 			{
 			  $file = file_get_contents("uploads/".$filename);
-			  echo $filename."*".base64_encode($file)+"#";
+			  echo $filename."*".base64_encode($file)."#";
 			}
 		}
 		else
