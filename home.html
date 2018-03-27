@@ -7,6 +7,7 @@
 				margin:0;
 				padding:0;
 				max-height:100%;
+				/*margin-bottom: 150px;*/
 
 				}
 
@@ -26,7 +27,7 @@
 				position:relative;
 
 			}
-
+			
 
 			img{
 				position:relative;
@@ -53,9 +54,11 @@
 				float:left;
 				width:33.3%;
 				overflow: hidden;
-				margin:0;
-				padding:0;
-				position:relative;
+				margin:0px;
+				padding:0px;
+				margin-bottom: -85px;
+			
+
 			}
 
 			.content
@@ -71,7 +74,11 @@
 				margin:0 auto;
 				padding:0;
 			}
-
+			.container img{
+				flex-shrink: 0;
+				min-width: 100%;
+				min-height: 100%;
+			}
 
 			.container:hover .content
 			{
@@ -102,7 +109,7 @@
 			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
 			#feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
 
-			.searchDiv
+		.searchDiv
 			{
 				display: table;
 				background: transparent;
@@ -169,7 +176,7 @@
 				cursor: pointer;
 				position: relative;
 				top:3px;
-				left: 5px
+				left: 5px;
 
 			}
 		</style>
@@ -218,15 +225,15 @@
 
 		<div id="plates">
 			<div class="container">
-				<a href=""><img class="pimg"  src="9517f69eb471634c593804be4af37a1b.jpg" alt="Appetizers"  height="430"></a>
+				<a href=""><img class="pimg"  src="9517f69eb471634c593804be4af37a1b.jpg" alt="Appetizers"></a>
 				<div class="content">Appetizers</div>
 			</div>
 			<div class="container">
-				<a href="mains\mains.html"><img class="pimg"  src="download.jpg" alt="Main Course"  height="430"></a>
+				<a href="mains\mains.html"><img class="pimg"  src="download.jpg" alt="Main Course" ></a>
 				<div class="content">Main Course</div>
 			</div>
 			<div class="container">
-				<a href=""><img class="pimg"  src="RoundAppetizer6p5inSHF15.jpg" alt="Dessert"  height="430"></a>
+				<a href=""><img class="pimg"  src="RoundAppetizer6p5inSHF15.jpg" alt="Dessert"></a>
 				<div class="content">Dessert</div>
 			</div>
 		</div>
@@ -244,6 +251,9 @@
 					searchBar.setAttribute("class", "searchBar");
 					searchButton.setAttribute("class", "searchButton");
 					searchBar.setAttribute("type", "text");
+					searchBar.setAttribute("id","query");
+					searchBar.addEventListener("keydown",find,false);
+					searchButton.addEventListener("click",find2,false);
 					searchButton.setAttribute("type", "button");
 					searchBar.setAttribute("placeholder", "Search...");
 					searchDiv.appendChild(searchBar);
@@ -280,8 +290,74 @@
 			window.addEventListener("keydown", startSearch);
 			document.getElementById("searchimg").addEventListener("click", function(){search();});
 			//console.log(document.body.scrollTop);
-
-
+			function find(e)
+			{
+				if(e.keyCode==13)
+				{
+					find2(e);
+				}
+			}
+			function find2(e)
+			{
+				
+		        if (window.XMLHttpRequest) {
+		            xmlhttp = new XMLHttpRequest();
+		            xhr = new XMLHttpRequest();
+		        } 
+				var done1 = 0, done2 = 0;
+				
+				var objs = []
+				var name, desc, src="";
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+						var retstring = this.responseText;
+		                //console.log(retstring);
+						if(retstring)
+						{
+							var subs = retstring.split("#");
+							var splits;
+							var parent = document.getElementById("container");
+							for(var i=0; i<subs.length; ++i)
+							{
+								splits = subs[i].split("*");
+								name = splits[0];
+								if(name!="")
+								{
+									desc = splits[1];
+									src = splits[2];
+									imgfilenames[name] = {name:src};
+									var obj = {subname:name,description:desc,source:src};
+									objs.push(obj);
+									//console.log(name);
+									//console.log(desc);
+									//console.log(src);
+								
+								}
+							}
+						
+						}
+						
+						
+		            }
+					
+			    };
+				 xhr.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+						var retstring = this.responseText;
+		                //console.log(retstring);
+						var ims = retstring.split("#");
+						for(var i=0; i<ims.length; ++i)
+							imgs[ims[i].split("*")[0]] = ims[i].split("*")[1];
+						addthem(objs);
+					}
+					
+				};
+				
+				var x=document.getElementById("query");
+		        xmlhttp.open("GET","result.php?q="+x.value,true);
+		        xmlhttp.send();
+			}
+			
 		</script>
 	</body>
 </html>
