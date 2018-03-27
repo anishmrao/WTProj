@@ -1,0 +1,298 @@
+<html>
+	<head>
+		<style>
+		*{
+		margin:0;
+		padding: 0;
+	}
+				body{
+					background-image: url("woodback.jpg");
+					display:block;
+					position:relative;
+					background-size: cover;
+					border:0px;
+					padding:0px;
+
+					}
+				.a
+				{
+					display:block;
+					position:relative;
+					top:100px;
+
+					margin:0 auto;
+					background-color:#2525100;
+					width:60%;
+					height:60%;
+
+
+				}
+			.b
+				{
+					position:relative;
+					top:10px;
+					display:block;
+					margin:0 auto;
+
+				}
+				.c
+				{
+					position:relative;
+					top:20px;
+					display:block;
+					margin:0 auto;
+					padding:5px;
+					font-size:25px;
+					color:white;
+					font-family: 'Oswald', candara;
+					text-align: center;
+
+				}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+			.searchDiv
+			{
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 38px;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			.searchBar
+			{
+				display: table-cell;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 30px;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
+				background: transparent;
+			}
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			::placeholder
+			{
+				color: white;
+			}
+			.searchButton
+			{
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
+				border-style: none;
+				transition: all 200ms ease-in;
+				height: 40px;
+				padding:0;
+				width: 40px;
+			}
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px;
+
+			}
+		</style>
+	</head>
+	<body>
+		<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="..\home.html">Home</a></li>
+				<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
+			</ol>
+		</div>
+		<div class="a" >
+			<img src="orangecake.jpg" class="b"height="400px" width="400 px"> </img>
+			<div class="c"><b> Orange Pound Cake</b><br>
+Plunge into delight with this lush dessert. Indulge in this olive oil based cake cooked with fresh oranges and cashew nuts. Be amazed by this unique combination of these flavors.
+		</div>
+		</div>
+		</div>
+
+	</body>
+	<script>
+		var div=document.querySelector(".a");
+		var pic_no=1;
+
+		function change_next(e)
+		{
+			if(e.keyCode==38 || e.keyCode==39)
+			{
+				if(pic_no==1)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","lemontart.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Lemon Tart</b><br> Enjoy this incredible classic dessert, which is made with rich, tangy and citrusy lemon curd on a crumbly base to set off the texture of the velvety curd."
+					pic_no=2;
+				}
+				else if(pic_no==2)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","jam_cookie.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Jam Sandwich Cookies</b> <br>Prepare your taste buds for a sweet taste that they will never forget. A pair of delicacies made with the classic cookie filled with a twist of strawberry jam centre and chef's special blueberry compote, respectively.";
+					pic_no=3;
+				}
+				else if(pic_no==3)
+				{
+
+					img=document.querySelector(".b");
+					img.setAttribute("src","butterfingercheesecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Butter finger cheesecake</b> <br>A rich and creamy cheesecake you can swoon over. This is baked with smooth milk chocolate butterfingers and a crunchy cookie crumble to send it over the top!";
+
+					pic_no=4;
+				}
+				else if(pic_no==4)
+				{
+					img = document.querySelector(".b");
+					img.setAttribute("src","orangecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b> Orange Pound Cake</b><br> Plunge into delight with this lush dessert. Indulge in this olive oil based cake cooked with fresh oranges and cashew nuts. Be amazed by this unique combination of these flavors.";
+
+					pic_no=1;
+
+
+				}
+
+
+			}
+			else if(e.keyCode==37||e.keyCode==40)
+			{
+				e.preventDefault();
+				if(pic_no==2)
+				{
+					img = document.querySelector(".b");
+					img.setAttribute("src","orangecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b> Orange Pound Cake</b><br> Plunge into delight with this lush dessert. Indulge in this olive oil based cake cooked with fresh oranges and cashew nuts. Be amazed by this unique combination of these flavors.";
+
+					pic_no=1;
+				}
+				else if(pic_no==3)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","lemontart.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Lemon Tart</b><br> Enjoy this incredible classic dessert, which is made with rich, tangy and citrusy lemon curd on a crumbly base to set off the texture of the velvety curd."
+
+					pic_no=2;
+
+				}
+				else if(pic_no==4)
+				{
+					img=document.querySelector(".b");
+					img.setAttribute("src","jam_cookie.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Jam Sandwich Cookies</b> <br>Prepare your taste buds for a sweet taste that they will never forget. A pair of delicacies made with the classic cookie filled with a twist of strawberry jam centre and chef's special blueberry compote, respectively.";
+					pic_no=3;
+				}
+				else if(pic_no==1)
+				{
+
+					img=document.querySelector(".b");
+					img.setAttribute("src","butterfingercheesecake.jpg");
+					content=document.querySelector(".c");
+					content.innerHTML="<b>Butter finger cheesecake</b> <br>A rich and creamy cheesecake you can swoon over. This is baked with smooth milk chocolate butterfingers and a crunchy cookie crumble to send it over the top!";
+
+					pic_no=4;
+
+				}
+				}
+
+
+
+
+		}
+		document.body.addEventListener("keyup",change_next,false);
+		function search()
+			{
+				if(!document.querySelector(".searchDiv"))
+				{
+					var searchDiv = document.createElement("div");
+					var searchBar = document.createElement("input");
+					var searchButton = document.createElement("input");
+					searchDiv.setAttribute("class", "searchDiv");
+					searchBar.setAttribute("class", "searchBar");
+					searchButton.setAttribute("class", "searchButton");
+					searchBar.setAttribute("type", "text");
+					searchBar.setAttribute("id","query");
+					//searchBar.addEventListener("keydown",find,false);
+					//searchButton.addEventListener("click",find2,false);
+					searchButton.setAttribute("type", "button");
+					searchBar.setAttribute("placeholder", "Search...");
+					searchDiv.appendChild(searchBar);
+					searchDiv.appendChild(searchButton);
+					var referenceNode = document.getElementById("menubar");
+					referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+			  }
+				else {
+					document.body.removeChild(document.querySelector(".searchDiv"));
+				}
+		}
+			function startSearch(e)
+			{
+
+				if(e.ctrlKey && e.keyCode === 70)
+				{
+					e.preventDefault();
+					search();
+				}
+			}
+			function placeDiv() {
+  				var d = document.getElementById("foodart");
+				var s = window.pageYOffset;
+				console.log(s);
+				if(s<=678)
+				{
+					var translate = 'translateY(' + s + 'px)';
+					console.log(translate);
+					d.style.transform = translate;
+				}
+
+			}
+			window.addEventListener("scroll", placeDiv);
+			window.addEventListener("keydown", startSearch);
+			document.getElementById("searchimg").addEventListener("click", function(){search();});
+
+
+	</script>
+</html>
