@@ -4,9 +4,6 @@
   </head>
   <style>
     html,body{margin:0;padding:0}
-    body{
-        background-color: black;
-    }
     #menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
     li{float:left;}
     .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 46px;}
@@ -69,6 +66,7 @@
       border-radius: 10px;
       border-width: 1px;
       margin-left: 10%;
+      padding: 5px;
       background-color: inherit;
       font-family: "Berlin Sans FB";
       font-size: 18px;
@@ -102,11 +100,21 @@
     }
     #submit:hover
     {
-      background-color: white;
+      background-color: inherit;
       border-width: 1px;
       border-style: solid;
       border-color: green;
       color: green;
+    }
+    #invalid
+    {
+      display: block;
+      margin-left: 25%;
+      margin-top: 8%;
+      margin-bottom: 2%;
+      color: red;
+      font-family: "Berlin Sans FB";
+      font-size: 15px;
     }
   </style>
   <body>
@@ -124,13 +132,57 @@
     <div id="back">
       <div id="container"></div>
       <div id="loginwindow">
-        <label class="heading">Login</label>
-        <label class="text">Username</label>
-        <input type="text" class="boxes" id="username" placeholder="Eg: beastmaster64"></input>
-        <label class="text">Password</label>
-        <input type="password" class="boxes" id="password" placeholder="***************"></input>
-        <input type="submit" value="Login" id="submit"></input>
+        <form id="form">
+          <label class="heading">Login</label>
+          <label class="text" id="userlabel">Username</label>
+          <input name="username" type="text" class="boxes" id="username" placeholder="Eg: beastmaster64"></input>
+          <label class="text">Password</label>
+          <input name="password" type="password" class="boxes" id="password" placeholder="***************"></input>
+          <input type="submit" value="Login" id="submit"></input>
+        </form>
       </div>
     </div>
   </body>
+  <script>
+    function submitnow(e)
+    {
+      e.preventDefault();
+      if (!window.XMLHttpRequest)
+      {
+        window.alert("Login not possible. Please try with a different browser.");
+        return;
+      }
+      var form = document.getElementById("form");
+      xmlhttp = new XMLHttpRequest();
+      var formData = new FormData(form);
+      xmlhttp.open("POST", "auth.php");
+      xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  var response = this.responseText;
+                  //console.log(response);
+                  var split = response.split('*');
+                  if(split[0] == '1')
+                  {
+                    var invalid = document.getElementById("invalid");
+                    if(invalid)
+                      document.getElementById("form").removeChild(invalid);
+                    var user_name = split[1];
+                    sessionStorage.setItem('loggedIn', '1');
+                    sessionStorage.setItem('Username', user_name);
+                    //console.log(sessionStorage.getItem('Username'));
+                    window.location = "..\\home.html";
+                  }
+                  else {
+                    var invalid = document.createElement("label");
+                    invalid.setAttribute("id", "invalid");
+                    invalid.textContent = "Invalid Username or Password";
+                    document.getElementById("form").insertBefore(invalid, document.getElementById("userlabel"));
+                  }
+              }
+      };
+      xmlhttp.send(formData);
+    }
+    var form = document.getElementById("form");
+    form.addEventListener("submit", submitnow, false);
+  </script>
 </html>
