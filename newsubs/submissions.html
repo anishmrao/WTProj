@@ -139,7 +139,7 @@
 			#ok{width:4%;position:absolute;right:-1%;bottom:-2%;cursor:pointer;}
 			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
 			li{float:left;}
-			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 25px;cursor: pointer}
 			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
 			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
 
@@ -176,7 +176,7 @@
 			{
 				outline: none;
 			}
-			::placeholder
+			.searchBar::placeholder
 			{
 				color: white;
 			}
@@ -207,14 +207,31 @@
 			{
 				display: block;
 				width: 35%;
-				padding:0;
+				padding-left:35%;
 				cursor: pointer;
 				position: relative;
 				top:3px;
 				left: 5px
 
 			}
-
+			.edspicylabel
+			{
+				display: block;
+			}
+			.spicyselect
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.selectcuisine
+			{
+				display: block;
+				margin:5px auto;
+			}
+			.cuisinelabel
+			{
+				display: block;
+			}
 		</style>
 	</head>
 	<body onload="load()">
@@ -228,6 +245,7 @@
 				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
 				<li><a class="menuopt" href="">Submissions</a></li>
 				<li><img id="searchimg" src="searchicon.png"/></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
 
 		</div>
@@ -252,8 +270,8 @@
 				<br><br>
 				<label>Is this dish spicy?</label>
 				<select id="isSpicy">
-					<option value="yes">Yes</option>
-					<option value="no">No</option>
+					<option value="1">Yes</option>
+					<option value="0">No</option>
 				</select>
 				<br><br>
 				<label>Ingredients :</label>
@@ -266,7 +284,8 @@
 		</div>
 
 		<script>
-		function submission(dish_id, name, pic_name, ing, cuisine, spicy)
+		submissionslist={}
+		function submission(dish_id, name, pic_name, ing, cuisine, spicy, user_id)
 		{
 			this.dish_id = dish_id;
 			this.nameval = name;
@@ -274,6 +293,7 @@
 			this.ing = ing;
 			this.cuisine = cuisine;
 			this.spicy = spicy;
+			this.user_id = user_id;
 		}
 		function search()
 	{
@@ -317,7 +337,7 @@
 				var done1 = 0, done2 = 0;
 
 				var objs = []
-				var dish_id, name, src="", ing, cuisine, spicy;
+				var dish_id, name, src="", ing, cuisine, spicy, user_id;
 		        xmlhttp.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
 						var retstring = this.responseText;
@@ -337,14 +357,13 @@
 									src = splits[2];
 									ing = splits[3];
 									cuisine = splits[4];
-									if(splits[5] == 1)
-										spicy = 'yes';
-									else
-										spicy = 'no';
-									var sub = new submission(dish_id, name, {name:src}, ing, cuisine, spicy);
+									spicy = splits[5];
+									user_id=splits[6];
+									var sub = new submission(dish_id, name, {name:src}, ing, cuisine, spicy, user_id);
 									//subs.push(sub);
 									//obj[dish_id] = sub;
 									objs.push(sub);
+									submissionslist[dish_id] = sub;
 									//console.log(name);
 									//console.log(desc);
 									//console.log(src);
@@ -374,6 +393,7 @@
 				xhr.send();
         xmlhttp.open("GET","backend.php",true);
         xmlhttp.send();
+
 			}
 			function addthem(objs)
 			{
@@ -391,6 +411,7 @@
 					}
 				}
 				imgs = {};
+				console.log(submissionslist);
 			}
 
 			var back = document.getElementById("back");
@@ -494,6 +515,10 @@
 							var name = children[i];
 						if(children[i].className == "desclabel")
 							var desc = children[i];
+						if(children[i].className == "cuisinelabel")
+							var cuisine = children[i];
+						if(children[i].className == "spicylabel")
+							var spicy = children[i];
 					}
 
 					var edimage = document.createElement("input");
@@ -507,6 +532,37 @@
 					var eddesc = document.createElement("textarea");
 					eddesc.setAttribute("class", "eddesc");
 					eddesc.setAttribute("placeholder", desc.textContent);
+
+					var edcuisinelabel = document.createElement("label");
+					edcuisinelabel.textContent = "Cuisine: ";
+					edcuisinelabel.setAttribute("class", "edcuisinelabel");
+
+					var cuisinelist = ["Italian", "Mexican", "Indian", "Japanese"];
+					var selectcuisine = document.createElement("select");
+					for(var i=0;i<cuisinelist.length; i+=1)
+					{
+						var option = document.createElement("option");
+						option.value = cuisinelist[i];
+						option.textContent = cuisinelist[i];
+						selectcuisine.appendChild(option);
+					}
+					selectcuisine.setAttribute("class", "selectcuisine");
+
+					var edspicylabel = document.createElement("label");
+					edspicylabel.textContent = "Is this dish spicy?";
+					edspicylabel.setAttribute("class", "edspicylabel");
+
+					var spicyselect = document.createElement("select");
+					var yesoption = document.createElement("option");
+					yesoption.value = "1";
+					yesoption.textContent = "Yes";
+					spicyselect.appendChild(yesoption);
+					var nooption = document.createElement("option");
+					nooption.value = "0";
+					nooption.textContent = "No";
+					spicyselect.appendChild(nooption);
+					spicyselect.setAttribute("class", "spicyselect");
+
 
 					var ok = document.createElement("img");
 					ok.setAttribute("id", "ok");
@@ -525,19 +581,24 @@
 
 													var back = document.getElementById("back");
 
+													var newspicy = spicyselect.value;
+													var newcuisine = selectcuisine.value;
+
 													if(edimage.value)
 													{
 														var reader = new FileReader();
 														imgfilenames[newname] = edimage.files[0];
 														//newnameslist[newname] = edname.placeholder;
 														reader.readAsDataURL(edimage.files[0]);
-														reader.onloadend = function(e){addImg(e.target.result, newname, newdesc, parent, 1);}
+														var sub = new submission(parent.id, newname, edimage.files[0], newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'));
+														reader.onloadend = function(e){addImg(e.target.result, sub, parent, 1,1);}
 
 													}
 													else
 													{
 														//imgfilenames[newname] = {name:'ignore'};
-														addImg(img.src, newname, newdesc, parent, 1);
+														var sub = new submission(parent.id, newname, {name:submissionslist[parent.id].pic_name}, newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'));
+														addImg(img.src, sub, parent, 1,1);
 													}
 
 
@@ -545,8 +606,14 @@
 
 					parent.removeChild(name);
 					parent.removeChild(desc);
+					parent.removeChild(cuisine);
+					parent.removeChild(spicy);
 					parent.appendChild(edimage);
 					parent.appendChild(edname);
+					parent.appendChild(edspicylabel);
+					parent.appendChild(spicyselect);
+					parent.appendChild(edcuisinelabel);
+					parent.appendChild(selectcuisine);
 					parent.appendChild(eddesc);
 					parent.appendChild(ok);
 
@@ -556,24 +623,31 @@
 			function showx(e)
 			{
 				//console.log("in mouseover function");
-				var close = document.createElement("img");
-				close.setAttribute("id", "close");
-				close.setAttribute("src", "close.png");
-				close.addEventListener("click", removesub, false);
-				var edit = document.createElement("img");
-				edit.setAttribute("id", "edit");
-				edit.setAttribute("src", "edit.png");
-				edit.addEventListener("click", editsub, false);
-				e.target.insertBefore(edit, e.target.children[0]);
-				e.target.insertBefore(close, e.target.children[0]);
+				if(sessionStorage.getItem('loggedIn')=='0') return;
+				//var user_id = sessionStorage.getItem('UserID');
+				console.log(sessionStorage.getItem('UserID'));
+				console.log(e.target.id);
+				//if(user_id == submissionslist[e.target.id].user_id)
+				//{
+					var close = document.createElement("img");
+					close.setAttribute("id", "close");
+					close.setAttribute("src", "close.png");
+					close.addEventListener("click", removesub, false);
+					var edit = document.createElement("img");
+					edit.setAttribute("id", "edit");
+					edit.setAttribute("src", "edit.png");
+					edit.addEventListener("click", editsub, false);
+					e.target.insertBefore(edit, e.target.children[0]);
+					e.target.insertBefore(close, e.target.children[0]);
+				//}
 			}
 
 			function hidex(e)
 			{
 				var x = document.getElementById("close");
 				var edit = document.getElementById("edit");
-				e.target.removeChild(x);
-				e.target.removeChild(edit);
+				if(x) e.target.removeChild(x);
+				if(edit) e.target.removeChild(edit);
 			}
 			function insert(submission)
 			{
@@ -600,10 +674,8 @@
 										console.log(this.responseText);
 								}
 					};
-				if(submission.spicy=="yes")
-					var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+"1"+"*"+submission.ing;
-				else
-					var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+"0"+"*"+submission.ing;
+				var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+submission.spicy+"*"+submission.ing+"*"+sessionStorage.getItem('UserID');
+
 				xmlhttp.open("GET","alter.php?q="+entry,true);
 
 				xhr.upload.addEventListener("load", function(){xmlhttp.send();}, false);
@@ -611,7 +683,25 @@
 				xhr.send(formData);
 
 			}
-			function addImg(filename, submission, refNode, cameFrom)
+			function updatedb(submission)
+			{
+				if (!window.XMLHttpRequest)
+				{
+					console.log("Upload not possible.");
+					return;
+				}
+				var formData = new FormData();
+				formData.append('object', JSON.stringify(submission));
+				xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("POST", "update.php");
+				xmlhttp.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+										console.log(this.responseText);
+								}
+					};
+				xmlhttp.send(formData);
+			}
+			function addImg(filename, submission, refNode, cameFrom, update)
 			{
 
 				var container = document.createElement("div");
@@ -633,7 +723,7 @@
 				cuisine.setAttribute("class", "cuisinelabel");
 				cuisine.textContent = submission.cuisine;
 				var spicy = document.createElement("label");
-				if(submission.spicy)
+				if(submission.spicy == '1')
 					spicy.textContent = "Spicy";
 				else
 					spicy.textContent = "Not spicy";
@@ -646,16 +736,21 @@
 				var back = document.getElementById("back");
 				//console.log(back.children.length);
 				var flag=0;
-				/*if(refNode && refNode != document.getElementById("container"))
-					flag =1;*/
+				if(refNode && refNode != document.getElementById("container") && refNode.className == "submitcontainer")
+					flag =1;
 				var referenceNode = refNode || document.getElementById("container");
 				referenceNode.parentNode.insertBefore(container, referenceNode.nextSibling);
-				if(flag)
-					back.removeChild(refNode);
+
 
 				if(!cameFrom)
 					insert(submission);
-				console.log("added",name);
+				if(update)
+				{
+					updatedb(submission);
+					if(flag)
+						back.removeChild(refNode);
+				}
+				console.log("added",submission.nameval);
 			}
 
 
@@ -682,12 +777,25 @@
 													window.alert("Please enter all values before submitting");
 
 											}, false);
-
+			function redirectLogin(e)
+			{
+				window.location = "..\\login\\login.html";
+			}
 			imgfilenames = {};
 			imgs = {};
 			newnameslist={};
 			window.addEventListener("keydown", startSearch);
 			document.getElementById("searchimg").addEventListener("click", function(){search();});
+			var login = document.getElementById("login");
+			if(sessionStorage.getItem('loggedIn')=='1')
+			{
+				login.textContent = sessionStorage.getItem('Username');
+			}
+			else {
+				login.textContent = "Login";
+				document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+			}
+
 		</script>
 	</body>
 </html>

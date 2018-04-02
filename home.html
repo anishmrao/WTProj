@@ -27,7 +27,7 @@
 				position:relative;
 
 			}
-			
+
 
 			img{
 				position:relative;
@@ -57,7 +57,7 @@
 				margin:0px;
 				padding:0px;
 				margin-bottom: -85px;
-			
+
 
 			}
 
@@ -104,7 +104,7 @@
 			}
 			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
 			li{float:left;}
-			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 25px;cursor: pointer}
 			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
 			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
 			#feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
@@ -172,7 +172,7 @@
 			{
 				display: block;
 				width: 35%;
-				padding:0;
+				padding-left:35%;
 				cursor: pointer;
 				position: relative;
 				top:3px;
@@ -193,8 +193,9 @@
 				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
 				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
 				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
-				<li><a class="menuopt" href="submissions\submissions.html">Submissions</a></li>
+				<li><a class="menuopt" href="newsubs\submissions.html">Submissions</a></li>
 				<li><img id="searchimg" src="searchicon.png"/></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
 
 		</div>
@@ -299,13 +300,13 @@
 			}
 			function find2(e)
 			{
-				
+
 		        if (window.XMLHttpRequest) {
 		            xmlhttp = new XMLHttpRequest();
 		            xhr = new XMLHttpRequest();
-		        } 
+		        }
 				var done1 = 0, done2 = 0;
-				
+
 				var objs = []
 				var name, desc, src="";
 		        xmlhttp.onreadystatechange = function() {
@@ -331,15 +332,15 @@
 									//console.log(name);
 									//console.log(desc);
 									//console.log(src);
-								
+
 								}
 							}
-						
+
 						}
-						
-						
+
+
 		            }
-					
+
 			    };
 				 xhr.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
@@ -350,14 +351,28 @@
 							imgs[ims[i].split("*")[0]] = ims[i].split("*")[1];
 						addthem(objs);
 					}
-					
+
 				};
-				
+
 				var x=document.getElementById("query");
 		        xmlhttp.open("GET","result.php?q="+x.value,true);
 		        xmlhttp.send();
 			}
-			
+
+			function redirectLogin(e)
+			{
+				window.location = "login\\login.html";
+			}
+
+			var login = document.getElementById("login");
+			if(sessionStorage.getItem('loggedIn')=='1')
+			{
+				login.textContent = sessionStorage.getItem('Username');
+			}
+			else {
+				login.textContent = "Login";
+				document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+			}
 		</script>
 	</body>
 </html>

@@ -117,7 +117,7 @@
       font-size: 15px;
     }
   </style>
-  <body>
+  <body onload="load()">
     <div id="menubar">
       <ol id="menu">
         <li><a class="menuopt" href="..\home.html">Home</a></li>
@@ -144,6 +144,16 @@
     </div>
   </body>
   <script>
+  function load()
+  {
+    var form = document.getElementById("form");
+    form.addEventListener("submit", submitnow, false);
+    sessionStorage.setItem('loggedIn', '0');
+    if(sessionStorage.getItem('Username'))
+      sessionStorage.removeItem('Username');
+    if(sessionStorage.getItem('UserID'))
+      sessionStorage.removeItem('UserID');
+  }
     function submitnow(e)
     {
       e.preventDefault();
@@ -169,8 +179,9 @@
                     var user_name = split[1];
                     sessionStorage.setItem('loggedIn', '1');
                     sessionStorage.setItem('Username', user_name);
-                    //console.log(sessionStorage.getItem('Username'));
-                    window.location = "..\\home.html";
+                    var userid = split[2];
+                    sessionStorage.setItem('UserID', userid);
+                    window.location="..\\home.html";
                   }
                   else {
                     var invalid = document.createElement("label");
@@ -182,7 +193,6 @@
       };
       xmlhttp.send(formData);
     }
-    var form = document.getElementById("form");
-    form.addEventListener("submit", submitnow, false);
+
   </script>
 </html>
