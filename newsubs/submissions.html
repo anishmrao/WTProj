@@ -266,6 +266,7 @@
 					<option value="indian">Indian</option>
 					<option value="mexican">Mexican</option>
 					<option value="japanese">Japanese</option>
+					<option value="chinese">Chinese</option>
 				</select>
 				<br><br>
 				<label>Is this dish spicy?</label>
@@ -278,14 +279,20 @@
 				<br>
 				<textarea id="artDesc"></textarea>
 				<br>
-
+				<select id="typeselect">
+					<option value="veg">Vegetarian</option>
+					<option value="nonveg">Non Vegetarian</option>
+				</select><br>
+				<input id="restname" placeholder="Restaurant name" type="text"/><br>
+				<input id="locationinput" type="text" placeholder="City"/><br>
+				<input id="recipie" type="text" placeholder="Recipie link"/><br>
 				<input id="submit" type="button" value="Submit Art" class="button"/>
 			</div>
 		</div>
 
 		<script>
 		submissionslist={}
-		function submission(dish_id, name, pic_name, ing, cuisine, spicy, user_id)
+		function submission(dish_id, name, pic_name, ing, cuisine, spicy, user_id, restaurant, city, link, type)
 		{
 			this.dish_id = dish_id;
 			this.nameval = name;
@@ -294,6 +301,10 @@
 			this.cuisine = cuisine;
 			this.spicy = spicy;
 			this.user_id = user_id;
+			this.restaurant = restaurant;
+			this.city = city;
+			this.link = link;
+			this.type = type;
 		}
 		function search()
 	{
@@ -337,7 +348,7 @@
 				var done1 = 0, done2 = 0;
 
 				var objs = []
-				var dish_id, name, src="", ing, cuisine, spicy, user_id;
+				var dish_id, name, src="", ing, cuisine, spicy, user_id,restaurant,city,link,type;
 		        xmlhttp.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
 						var retstring = this.responseText;
@@ -359,7 +370,11 @@
 									cuisine = splits[4];
 									spicy = splits[5];
 									user_id=splits[6];
-									var sub = new submission(dish_id, name, {name:src}, ing, cuisine, spicy, user_id);
+									restaurant = splits[7];
+									city = splits[8];
+									link = splits[9];
+									type = splits[10];
+									var sub = new submission(dish_id, name, {name:src}, ing, cuisine, spicy, user_id, restaurant, city, link, type);
 									//subs.push(sub);
 									//obj[dish_id] = sub;
 									objs.push(sub);
@@ -372,7 +387,7 @@
 							}
 
 						}
-
+						xhr.send();
 
 		            }
 
@@ -390,7 +405,7 @@
 				};
 
 				xhr.open("GET", "backend3.php", true);
-				xhr.send();
+
         xmlhttp.open("GET","backend.php",true);
         xmlhttp.send();
 
@@ -511,14 +526,23 @@
 						//console.log(children[i].className);
 						if(children[i].className == "subimg")
 							var img = children[i];
-						if(children[i].className == "submitnamelabel")
+						else if(children[i].className == "submitnamelabel")
 							var name = children[i];
-						if(children[i].className == "desclabel")
+						else if(children[i].className == "desclabel")
 							var desc = children[i];
-						if(children[i].className == "cuisinelabel")
+						else if(children[i].className == "cuisinelabel")
 							var cuisine = children[i];
-						if(children[i].className == "spicylabel")
+						else if(children[i].className == "spicylabel")
 							var spicy = children[i];
+						else if(children[i].className == "restlabel")
+							var restlabel = children[i];
+						else if(children[i].className == "citylabel")
+							var city = children[i];
+						else if(children[i].className == "typelabel")
+							var typelabel = children[i];
+						else if(children[i].className == "linkname")
+							var link = children[i];
+
 					}
 
 					var edimage = document.createElement("input");
@@ -563,6 +587,31 @@
 					spicyselect.appendChild(nooption);
 					spicyselect.setAttribute("class", "spicyselect");
 
+					var edrestlabel = document.createElement("input");
+					edrestlabel.setAttribute("type", "input");
+					edrestlabel.setAttribute("class", "edrestlabel");
+					edrestlabel.setAttribute("placeholder", restlabel.textContent);
+
+					var edcity = document.createElement("input");
+					edcity.setAttribute("type", "text");
+					edcity.setAttribute("class", "edcity");
+					edcity.setAttribute("placeholder", city.textContent);
+
+					var edtype = document.createElement("select");
+					edtype.setAttribute("class", "edtype");
+					var vegopt = document.createElement("option");
+					vegopt.value = "veg";
+					vegopt.textContent = "Vegetarian";
+					edtype.appendChild(vegopt);
+					var nonvegopt = document.createElement("option");
+					nonvegopt.value = "nonveg";
+					nonvegopt.textContent = "Non vegetarian";
+					edtype.appendChild(nonvegopt);
+
+					var edlink = document.createElement("input");
+					edlink.setAttribute("type", "text");
+					edlink.setAttribute("class", "edlink");
+					edlink.setAttribute("placeholder", link.textContent);
 
 					var ok = document.createElement("img");
 					ok.setAttribute("id", "ok");
@@ -583,6 +632,22 @@
 
 													var newspicy = spicyselect.value;
 													var newcuisine = selectcuisine.value;
+													var newtype = edtype.value;
+
+													if(edrestlabel.value)
+													 	var newrest = edrestlabel.value;
+													else
+														var newrest = edrestlabel.placeholder;
+
+													if(edcity.value)
+													 	var newcity = edcity.value;
+													else
+														var newcity = edcity.placeholder;
+
+													if(edlink.value)
+													 	var newlink = edlink.value;
+													else
+														var newlink = edlink.placeholder;
 
 													if(edimage.value)
 													{
@@ -590,24 +655,30 @@
 														imgfilenames[newname] = edimage.files[0];
 														//newnameslist[newname] = edname.placeholder;
 														reader.readAsDataURL(edimage.files[0]);
-														var sub = new submission(parent.id, newname, edimage.files[0], newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'));
+														var sub = new submission(parent.id, newname, edimage.files[0], newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'), newrest, newcity, newlink, newtype);
 														reader.onloadend = function(e){addImg(e.target.result, sub, parent, 1,1);}
 
 													}
 													else
 													{
 														//imgfilenames[newname] = {name:'ignore'};
-														var sub = new submission(parent.id, newname, {name:submissionslist[parent.id].pic_name}, newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'));
+														var sub = new submission(parent.id, newname, {name:submissionslist[parent.id].pic_name}, newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'),newrest, newcity, newlink, newtype);
 														addImg(img.src, sub, parent, 1,1);
 													}
 
 
 												}, false);
 
+
+
 					parent.removeChild(name);
 					parent.removeChild(desc);
 					parent.removeChild(cuisine);
 					parent.removeChild(spicy);
+					parent.removeChild(restlabel);
+					parent.removeChild(city);
+					parent.removeChild(typelabel);
+					parent.removeChild(link);
 					parent.appendChild(edimage);
 					parent.appendChild(edname);
 					parent.appendChild(edspicylabel);
@@ -615,6 +686,10 @@
 					parent.appendChild(edcuisinelabel);
 					parent.appendChild(selectcuisine);
 					parent.appendChild(eddesc);
+					parent.appendChild(edrestlabel);
+					parent.appendChild(edcity);
+					parent.appendChild(edtype);
+					parent.appendChild(edlink);
 					parent.appendChild(ok);
 
 				}
@@ -624,11 +699,12 @@
 			{
 				//console.log("in mouseover function");
 				if(sessionStorage.getItem('loggedIn')=='0') return;
-				//var user_id = sessionStorage.getItem('UserID');
-				console.log(sessionStorage.getItem('UserID'));
-				console.log(e.target.id);
-				//if(user_id == submissionslist[e.target.id].user_id)
-				//{
+				var user_id = sessionStorage.getItem('UserID');
+				//console.log(sessionStorage.getItem('UserID'));
+				//console.log(e.target.id);
+
+				if(user_id == submissionslist[e.target.id].user_id || sessionStorage.getItem('isAdmin')=='1')
+				{
 					var close = document.createElement("img");
 					close.setAttribute("id", "close");
 					close.setAttribute("src", "close.png");
@@ -639,7 +715,7 @@
 					edit.addEventListener("click", editsub, false);
 					e.target.insertBefore(edit, e.target.children[0]);
 					e.target.insertBefore(close, e.target.children[0]);
-				//}
+				}
 			}
 
 			function hidex(e)
@@ -674,7 +750,7 @@
 										console.log(this.responseText);
 								}
 					};
-				var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+submission.spicy+"*"+submission.ing+"*"+sessionStorage.getItem('UserID');
+				var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+submission.spicy+"*"+submission.ing+"*"+sessionStorage.getItem('UserID')+"*"+submission.restaurant+"*"+submission.city+"*"+submission.type+"*"+submission.link;
 
 				xmlhttp.open("GET","alter.php?q="+entry,true);
 
@@ -728,11 +804,29 @@
 				else
 					spicy.textContent = "Not spicy";
 				spicy.setAttribute("class", "spicylabel");
+				var type = document.createElement("label");
+				type.setAttribute("class", "typelabel");
+				type.textContent = submission.type;
+				var restaurant = document.createElement("label");
+				restaurant.setAttribute("class", "restlabel");
+				restaurant.textContent = submission.restaurant;
+				var city = document.createElement("label");
+				city.setAttribute("class", "citylabel");
+				city.textContent = submission.city;
+				var link = document.createElement("a");
+				link.setAttribute("class", "linkname");
+				link.href = submission.link;
+				link.textContent = submission.link;
+
 				container.appendChild(img);
 				container.appendChild(namelabel);
 				container.appendChild(spicy);
 				container.appendChild(cuisine);
 				container.appendChild(desclabel);
+				container.appendChild(type);
+				container.appendChild(restaurant);
+				container.appendChild(city);
+				container.appendChild(link);
 				var back = document.getElementById("back");
 				//console.log(back.children.length);
 				var flag=0;
@@ -762,10 +856,14 @@
 												var cuisine = document.getElementById("cuisineselect");
 												var spicy = document.getElementById("isSpicy");
 												var picName = inpimage.value.split("\\")[-1];
+												var type = document.getElementById("typeselect");
+												var link = document.getElementById("recipie");
+												var city = document.getElementById("locationinput");
+												var restaurant = document.getElementById("restname");
 												console.log(inpimage);
-												var obj = new submission('00'+document.querySelectorAll(".submitcontainer").length, name.value, inpimage.files[0], artDesc.value, cuisine.value, spicy.value);
+												var obj = new submission('00'+document.querySelectorAll(".submitcontainer").length, name.value, inpimage.files[0], artDesc.value, cuisine.value, spicy.value, sessionStorage.getItem('UserID'), restaurant.value, city.value, link.value, type.value);
 												console.log(obj);
-												if(inpimage.value && name.value && artDesc.value)
+												if(inpimage.value && name.value && artDesc.value && cuisine.value && link.value && type.value && city.value && restaurant.value)
 												{
 													var reader = new FileReader();
 													//console.log(inpimage.files[0].name);

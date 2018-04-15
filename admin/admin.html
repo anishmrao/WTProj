@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <script src="checkAdmin.js"></script>
+    <title>Administrator Tools</title>
+    <style>
+      html,body
+      {
+        padding:0;
+        margin:0;
+      }
+      #back
+      {
+        background-image: url('woodback.jpg');
+        background-size: contain;
+        background-repeat: repeat;
+        height:100%;
+
+      }
+      .heading
+      {
+        position: relative;
+        margin: 10px;
+        margin-left: 50%;
+        top: 5%;
+        font-size: 35px;
+        font-family: "Copperplate Gothic";
+        color: white;
+      }
+      th {
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+      .tableclass
+      {
+        position: relative;
+        width: 20%;
+        text-align: center;
+        border: 1px solid black;
+        margin: 20px auto;
+        top: 20%;
+
+      }
+      td{
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body onload="usersList()">
+    <div id="back">
+      <span id="users" class="heading">Users</span>
+
+    </div>
+  </body>
+  <script>
+    function usersList()
+    {
+      xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(this.responseText);
+            console.log(obj);
+            //console.log(obj[0]['User_ID']);
+            var table = document.createElement("table");
+            table.setAttribute("class", "tableclass");
+            table.setAttribute("id", "userstable");
+            var row1 = document.createElement("tr");
+            var th1 = document.createElement("th");
+            th1.textContent = "User ID";
+            var th2 = document.createElement("th");
+            th2.textContent = "Username";
+            row1.appendChild(th1);
+            row1.appendChild(th2);
+            table.appendChild(row1);
+            for(i=0; i< obj.length; ++i)
+            {
+              var row = document.createElement("tr");
+              var td1 = document.createElement("td");
+              td1.textContent = obj[i]['User_ID'];
+              var td2 = document.createElement("td");
+              td2.textContent = obj[i]['User_Name'];
+              row.appendChild(td1);
+              row.appendChild(td2);
+              table.appendChild(row);
+            }
+            document.getElementById("back").appendChild(table);
+          }
+      };
+      xmlhttp.open("GET","returnusers.php",true);
+      xmlhttp.send();
+    }
+  </script>
+</html>
