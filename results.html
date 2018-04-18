@@ -1,0 +1,97 @@
+<html>
+<head>
+</head>
+<style>
+
+			body,html{margin:0;padding:0;}
+			body
+			{
+				height:100%;
+				background-image:url("woodback.jpg");
+				display:block;
+    			background-repeat:repeat;
+    			background-size:contain;
+				text-align:center;
+				justify-content:center;
+				align-items:center;
+			}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px;
+			}
+			.submitcontainer
+			{
+				width:80%;
+				background-color:white;
+				border-radius:20px;
+				justify-content:center;
+				margin:100px auto;
+				padding:20px;
+				position:relative;
+
+			}
+</style>
+<body onload="searchResult()">
+	<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="..\home.html">Home</a></li>
+				<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="">Main Course</a></li>
+				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="..\newsubs\submissions.html">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
+			</ol>
+		</div>
+</body>
+<script>
+	function searchResult()
+	{
+		  var url_string=window.location.href;
+		  var url=new URL(url_string);
+		  var c=url.searchParams.get("var1");
+		  console.log(c);
+		  xmlhttp = new XMLHttpRequest();
+      	  xmlhttp.onreadystatechange = function() {
+      	  	console.log("a");
+      	  	//console.warn(xmlhttp.responseText);
+          if (this.readyState == 4 && this.status == 200) {
+
+          	var obj = JSON.parse(this.responseText);
+            console.log(obj);
+			for(var i=0;i<obj.length;i++)
+			{
+				var div=document.createElement("div");
+				div.setAttribute("class","result");
+				var img=document.createElement("img");
+				img.src=obj[i]['pic_name'];
+				div.appendChild(img);
+				var content=document.createElement("div");
+				content.setAttribute("class","data");
+				content.innerHTML=div.innerHTML=+obj[i]['Dish_id']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
+				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];
+
+				div.appendChild(content);
+				document.body.appendChild(div);
+			}
+			}
+			};
+
+			xmlhttp.open("GET","results.php?q="+c,true);
+		    xmlhttp.send();           
+	}
+	
+</script>
+</html>
