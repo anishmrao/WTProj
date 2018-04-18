@@ -4,7 +4,7 @@
     echo mysqli_connect_error();
   else
   {
-    $query = "SELECT User_ID,User_Name FROM users";
+    $query = "SELECT User_ID,User_Name,upload_date FROM users,uploads u where user_id = u_id and upload_date = (select max(upload_date) from uploads where u_id = u.u_id) order by upload_date desc";
     if($res = mysqli_query($conn, $query))
 		{
       $array = array();
@@ -18,6 +18,6 @@
     }
     else
       echo "Error: " . $query . "<br>" . mysqli_error($conn);
-    
+
   }
 ?>

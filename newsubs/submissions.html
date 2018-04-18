@@ -109,6 +109,7 @@
 				font-size:20px;
 				margin:5px auto;
 				text-align:center;
+				width: 70%;
 			}
 			.button
 			{
@@ -139,7 +140,7 @@
 			#ok{width:4%;position:absolute;right:-1%;bottom:-2%;cursor:pointer;}
 			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
 			li{float:left;}
-			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 25px;cursor: pointer}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 22px;cursor: pointer}
 			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
 			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
 
@@ -231,6 +232,69 @@
 			.cuisinelabel
 			{
 				display: block;
+				margin: 5px auto;
+			}
+			.typelabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.restlabel
+			{
+				display:block;
+				margin: 5px;
+				font-family: "Purisa";
+			}
+			.citylabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.linkname
+			{
+				display:block;
+				margin: 5px;
+			}
+			.edrestlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.restwhatlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.linkwhatlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.citywhatlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.edlink
+			{
+				display: block;
+				margin: 5px auto;
+				width: 50%;
+			}
+			.edcity
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.edtype
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.edtypelabel
+			{
+				display: block;
+				margin: 5px auto;
 			}
 		</style>
 	</head>
@@ -261,7 +325,6 @@
 				<input type="text" id="name" placeholder="What's your art called?"/></p>
 				<label>Cuisine: </label>
 				<select id="cuisineselect">
-					<option value="null">---</option>
 					<option value="italian">Italian</option>
 					<option value="indian">Indian</option>
 					<option value="mexican">Mexican</option>
@@ -285,7 +348,7 @@
 				</select><br>
 				<input id="restname" placeholder="Restaurant name" type="text"/><br>
 				<input id="locationinput" type="text" placeholder="City"/><br>
-				<input id="recipie" type="text" placeholder="Recipie link"/><br>
+				<input id="recipie" type="text" placeholder="Recipe link"/><br>
 				<input id="submit" type="button" value="Submit Art" class="button"/>
 			</div>
 		</div>
@@ -587,15 +650,27 @@
 					spicyselect.appendChild(nooption);
 					spicyselect.setAttribute("class", "spicyselect");
 
+					var restwhatlabel = document.createElement("label");
+					restwhatlabel.textContent = "Restaurant:";
+					restwhatlabel.setAttribute("class", "restwhatlabel");
+
 					var edrestlabel = document.createElement("input");
 					edrestlabel.setAttribute("type", "input");
 					edrestlabel.setAttribute("class", "edrestlabel");
 					edrestlabel.setAttribute("placeholder", restlabel.textContent);
 
+					var citywhatlabel = document.createElement("label");
+					citywhatlabel.textContent = "City:";
+					citywhatlabel.setAttribute("class", "citywhatlabel");
+
 					var edcity = document.createElement("input");
 					edcity.setAttribute("type", "text");
 					edcity.setAttribute("class", "edcity");
 					edcity.setAttribute("placeholder", city.textContent);
+
+					var edtypelabel = document.createElement("label");
+					edtypelabel.textContent = "Type:";
+					edtypelabel.setAttribute("class", "edtypelabel");
 
 					var edtype = document.createElement("select");
 					edtype.setAttribute("class", "edtype");
@@ -607,6 +682,10 @@
 					nonvegopt.value = "nonveg";
 					nonvegopt.textContent = "Non vegetarian";
 					edtype.appendChild(nonvegopt);
+
+					var linkwhatlabel = document.createElement("label");
+					linkwhatlabel.textContent = "Link:";
+					linkwhatlabel.setAttribute("class", "linktwhatlabel");
 
 					var edlink = document.createElement("input");
 					edlink.setAttribute("type", "text");
@@ -686,9 +765,13 @@
 					parent.appendChild(edcuisinelabel);
 					parent.appendChild(selectcuisine);
 					parent.appendChild(eddesc);
+					parent.appendChild(restwhatlabel);
 					parent.appendChild(edrestlabel);
+					parent.appendChild(citywhatlabel);
 					parent.appendChild(edcity);
+					parent.appendChild(edtypelabel);
 					parent.appendChild(edtype);
+					parent.appendChild(linkwhatlabel);
 					parent.appendChild(edlink);
 					parent.appendChild(ok);
 
@@ -820,10 +903,10 @@
 
 				container.appendChild(img);
 				container.appendChild(namelabel);
-				container.appendChild(spicy);
 				container.appendChild(cuisine);
 				container.appendChild(desclabel);
 				container.appendChild(type);
+				container.appendChild(spicy);
 				container.appendChild(restaurant);
 				container.appendChild(city);
 				container.appendChild(link);
@@ -844,6 +927,7 @@
 					if(flag)
 						back.removeChild(refNode);
 				}
+				submissionslist[submission.dish_id] = submission;
 				console.log("added",submission.nameval);
 			}
 
@@ -851,6 +935,11 @@
 
 			var submit = document.getElementById("submit");
 			submit.addEventListener("click", function(){
+												if(sessionStorage.getItem('loggedIn')!='1')
+												{
+													alert("Please log in to submit\n");
+													window.location = "..\\login\\login.html";
+												}
 												var name = document.getElementById("name");
 												var artDesc = document.getElementById("artDesc");
 												var cuisine = document.getElementById("cuisineselect");

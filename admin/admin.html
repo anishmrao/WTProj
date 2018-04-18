@@ -7,12 +7,14 @@
       {
         padding:0;
         margin:0;
-      }
-      #back
-      {
         background-image: url('woodback.jpg');
         background-size: contain;
         background-repeat: repeat;
+      }
+      #back
+      {
+
+
         height:100%;
 
       }
@@ -30,6 +32,7 @@
     background-color: white;
     color: black;
     padding: 10px;
+
 }
       .tableclass
       {
@@ -42,15 +45,97 @@
 
       }
       td{
+        width: 200px;
         padding: 10px;
       }
+      .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+          position: relative;
+          top: 8%;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+          background-color: inherit;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+          background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+          background-color: #ccc;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+          display: none;
+          padding: 6px 12px;
+          border: 1px solid #ccc;
+          border-top: none;
+          animation: fadeEffect 1s;
+      }
+
+      /* Go from zero to full opacity */
+      @keyframes fadeEffect {
+          from {opacity: 0;}
+          to {opacity: 1;}
+      }
+      #menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 32px;cursor: pointer}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
     </style>
   </head>
   <body onload="usersList()">
-    <div id="back">
-      <span id="users" class="heading">Users</span>
+    <div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="">Home</a></li>
+				<li><a class="menuopt" href="Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="newsubs\submissions.html">Submissions</a></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
+			</ol>
 
+		</div>
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'users')">Users</button>
+      <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
     </div>
+
+    <!-- Tab content -->
+    <div id="users" class="tabcontent">
+      <div id="back">
+        <span id="users" class="heading">Users</span>
+      </div>
+    </div>
+
+    <div id="Paris" class="tabcontent">
+      <h3>Paris</h3>
+      <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="Tokyo" class="tabcontent">
+      <h3>Tokyo</h3>
+      <p>Tokyo is the capital of Japan.</p>
+    </div>
+
   </body>
   <script>
     function usersList()
@@ -58,6 +143,7 @@
       xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
             var obj = JSON.parse(this.responseText);
             console.log(obj);
             //console.log(obj[0]['User_ID']);
@@ -69,8 +155,11 @@
             th1.textContent = "User ID";
             var th2 = document.createElement("th");
             th2.textContent = "Username";
+            var th3 = document.createElement("th");
+            th3.textContent = "Latest Upload Date";
             row1.appendChild(th1);
             row1.appendChild(th2);
+            row1.appendChild(th3);
             table.appendChild(row1);
             for(i=0; i< obj.length; ++i)
             {
@@ -79,8 +168,11 @@
               td1.textContent = obj[i]['User_ID'];
               var td2 = document.createElement("td");
               td2.textContent = obj[i]['User_Name'];
+              var td3 = document.createElement("td");
+              td3.textContent = obj[i]['upload_date'];
               row.appendChild(td1);
               row.appendChild(td2);
+              row.appendChild(td3);
               table.appendChild(row);
             }
             document.getElementById("back").appendChild(table);
@@ -89,5 +181,44 @@
       xmlhttp.open("GET","returnusers.php",true);
       xmlhttp.send();
     }
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    function redirectLogin(e)
+    {
+      window.location = "login\\login.html";
+    }
+
+    var login = document.getElementById("login");
+    if(sessionStorage.getItem('loggedIn')=='1')
+    {
+      login.textContent = sessionStorage.getItem('Username');
+      console.log(sessionStorage.getItem('Username'));
+      if(sessionStorage.getItem('isAdmin')!='1')
+      {
+        redirectLogin();
+      }
+    }
+    else {
+      redirectLogin();
+    }
+    document.body.querySelectorAll(".tablinks")[0].click();
   </script>
 </html>
