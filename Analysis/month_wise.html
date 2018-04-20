@@ -1,0 +1,121 @@
+<html>
+<head>
+</head>
+<style>
+
+			body,html{margin:0;padding:0;}
+			body
+			{
+				height:100%;
+				background-image:url("woodback.jpg");
+				display:block;
+    			background-repeat:repeat;
+    			background-size:contain;
+				text-align:center;
+				justify-content:center;
+				align-items:center;
+			}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px;
+			}
+			.result
+			{
+				width:80%;
+				background-color:white;
+				border-radius:20px;
+				justify-content:center;
+				margin:100px auto;
+				padding:20px;
+				position:relative;
+
+			}
+</style>
+<body onload="searchResult()">
+	<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="home.html">Home</a></li>
+				<li><a class="menuopt" href="Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="">Main Course</a></li>
+				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="newsubs\submissions.html">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
+			</ol>
+		</div>
+	<div id="chartContainer" style="height: 300px; max-width: 920px; padding: 100px ;"></div>
+</body>
+<script src="canvasjs.min.js"></script>
+<script>
+	function searchResult()
+	{
+		
+		  xmlhttp = new XMLHttpRequest();
+      	  xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+          	var array=new Array();
+          	var obj = JSON.parse(this.responseText);
+            console.log(obj);
+   			var xVal=1;
+          	var yVal=1;
+ 			var dataPoints = []; // dataPoints
+			var chart = new CanvasJS.Chart("chartContainer", {
+			title :{
+						text: "Dynamic Data"
+					},
+			axisY: {
+					includeZero: false
+					},      
+			data: [{
+					type: "line",
+					dataPoints: dataPoints
+				   }]
+				   })
+			       
+			/*for(var i=0;i<obj.length;i++)
+			{
+				//var yVal = obj[i]['count'];
+				//console.log(yVal);
+				dps.push({
+							x: xVal,
+							y: yVal
+						});
+
+				xVal++;
+				yVal++
+			}*/
+			console.log(typeof(obj[0]['count']))
+			for (var i = 0; i < obj.length; i++) {
+				
+				var yVal=Number(obj[i].count);
+				console.log(yVal);
+				dataPoints.push({
+				x: xVal,
+				y: yVal
+				});
+				xVal++;
+		}
+	chart.render(); 
+			
+			
+			}
+			};
+
+			xmlhttp.open("GET","month_wise.php",true);
+		    xmlhttp.send();           
+	}
+	
+</script>
+</html>

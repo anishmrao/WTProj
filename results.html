@@ -30,7 +30,7 @@
 				top:3px;
 				left: 5px;
 			}
-			.submitcontainer
+			.result
 			{
 				width:80%;
 				background-color:white;
@@ -45,13 +45,13 @@
 <body onload="searchResult()">
 	<div id="menubar">
 			<ol id="menu">
-				<li><a class="menuopt" href="..\home.html">Home</a></li>
-				<li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="home.html">Home</a></li>
+				<li><a class="menuopt" href="Appetizers\pre4.html">Appetizers</a></li>
 				<li><a class="menuopt" href="">Main Course</a></li>
-				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
-				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
-				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
-				<li><a class="menuopt" href="..\newsubs\submissions.html">Submissions</a></li>
+				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="newsubs\submissions.html">Submissions</a></li>
 				<li><img id="searchimg" src="searchicon.png"/></li>
 			</ol>
 		</div>
@@ -62,28 +62,27 @@
 		  var url_string=window.location.href;
 		  var url=new URL(url_string);
 		  var c=url.searchParams.get("var1");
-		  console.log(c);
 		  xmlhttp = new XMLHttpRequest();
       	  xmlhttp.onreadystatechange = function() {
-      	  	console.log("a");
-      	  	//console.warn(xmlhttp.responseText);
+      	  	console.log(this.responseText);
           if (this.readyState == 4 && this.status == 200) {
 
           	var obj = JSON.parse(this.responseText);
-            console.log(obj);
-			for(var i=0;i<obj.length;i++)
+            console.log(obj.length);
+			for(var i=0;i<obj.length;++i)
 			{
 				var div=document.createElement("div");
+				console.log(obj[i]['Dish_ID'])
 				div.setAttribute("class","result");
 				var img=document.createElement("img");
 				img.src=obj[i]['pic_name'];
+				console.log(img.src);
 				div.appendChild(img);
 				var content=document.createElement("div");
 				content.setAttribute("class","data");
-				content.innerHTML=div.innerHTML=+obj[i]['Dish_id']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
+				content.innerHTML=div.innerHTML=obj[i]['Dish_ID']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
 				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];
-
-				div.appendChild(content);
+				//div.appendChild(content);
 				document.body.appendChild(div);
 			}
 			}
