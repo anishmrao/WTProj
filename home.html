@@ -318,63 +318,8 @@
 			}
 			function find2(e)
 			{
-
-		        if (window.XMLHttpRequest) {
-		            xmlhttp = new XMLHttpRequest();
-		            xhr = new XMLHttpRequest();
-		        }
-				var done1 = 0, done2 = 0;
-
-				var objs = []
-				var name, desc, src="";
-		        xmlhttp.onreadystatechange = function() {
-		            if (this.readyState == 4 && this.status == 200) {
-						var retstring = this.responseText;
-		                //console.log(retstring);
-						if(retstring)
-						{
-							var subs = retstring.split("#");
-							var splits;
-							var parent = document.getElementById("container");
-							for(var i=0; i<subs.length; ++i)
-							{
-								splits = subs[i].split("*");
-								name = splits[0];
-								if(name!="")
-								{
-									desc = splits[1];
-									src = splits[2];
-									imgfilenames[name] = {name:src};
-									var obj = {subname:name,description:desc,source:src};
-									objs.push(obj);
-									console.log(name);
-									console.log(desc);
-									console.log(src);
-
-								}
-							}
-
-						}
-
-
-		            }
-
-			    };
-				 xhr.onreadystatechange = function() {
-		            if (this.readyState == 4 && this.status == 200) {
-						var retstring = this.responseText;
-		                //console.log(retstring);
-						var ims = retstring.split("#");
-						for(var i=0; i<ims.length; ++i)
-							imgs[ims[i].split("*")[0]] = ims[i].split("*")[1];
-						addthem(objs);
-					}
-
-				};
-
 				var x=document.getElementById("query");
-		        xmlhttp.open("GET","result.php?q="+x.value,true);
-		        xmlhttp.send();
+				window.location.href="results.html?var1="+x.value;
 			}
 
 			function redirectLogin(e)
