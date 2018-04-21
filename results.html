@@ -62,9 +62,10 @@
 		  var url_string=window.location.href;
 		  var url=new URL(url_string);
 		  var c=url.searchParams.get("var1");
+			//console.log(c);
 		  xmlhttp = new XMLHttpRequest();
-      	  xmlhttp.onreadystatechange = function() {
-      	  	
+      xmlhttp.onreadystatechange = function() {
+
           if (this.readyState == 4 && this.status == 200) {
 
           //	var obj = JSON.parse(this.responseText);
@@ -86,13 +87,14 @@
 				document.body.appendChild(div);
 			}
 			}*/
+		}
 			};
 			console.log(c);
 			xmlhttp.open("GET","results.php?q="+c,true);
-		    xmlhttp.send();           
+		    xmlhttp.send();
 	}
-}
 
-	
+
+
 </script>
 </html>
