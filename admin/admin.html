@@ -21,33 +21,40 @@
       .heading
       {
         position: relative;
-        margin: 10px;
-        margin-left: 50%;
+        margin: 10px auto;
         top: 5%;
         font-size: 35px;
         font-family: "Copperplate Gothic";
-        color: white;
+        color: black;
       }
-      th {
-    background-color: white;
+      .tableclass th {
+    background-color: #2a7bfc;
+    border: 1px solid #ddd;
+    font-family: "Copperplate Gothic";
     color: black;
     padding: 10px;
 
 }
+
+
       .tableclass
       {
         position: relative;
-        width: 20%;
+        border-collapse: collapse;
+        width: 80%;
         text-align: center;
-        border: 1px solid black;
+        border: none;
         margin: 20px auto;
         top: 20%;
 
       }
-      td{
-        width: 200px;
+      .tableclass td{
+        font-family: "Trebuchet MS";
+        border: 1px solid #ddd;
         padding: 10px;
       }
+      .tableclass tr:nth-child(even){background-color: #f2f2f2;}
+      .tableclass tr:hover {background-color: #ddd;}
       .tab {
           overflow: hidden;
           border: 1px solid #ccc;
@@ -81,8 +88,7 @@
       .tabcontent {
           display: none;
           padding: 6px 12px;
-          border: 1px solid #ccc;
-          border-top: none;
+          border: none;
           animation: fadeEffect 1s;
       }
 
@@ -96,6 +102,75 @@
 			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 32px;cursor: pointer}
 			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
 			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #sqlcontainer
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 100px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      #userscontainer
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 100px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      #query
+      {
+        width:80%;
+        height:50%;
+        margin: 20px auto;
+        font-size: 15px;
+      }
+      #sqllabel
+      {
+        position: relative;
+        display: block;
+        font-size: 25px;
+        font-family: "Copperplate Gothic";
+        margin: 10px auto;
+      }
+      #sqlsubmit
+      {
+        display: block;
+        width: 30%;
+        border:1px solid green;
+        padding: 10px;
+        font-family: "Copperplate Gothic";
+        font-size: 15px;
+        color: white;
+        background-color: green;
+        margin: 10px auto;
+        cursor: pointer;
+      }
+      #sqlsubmit:hover
+      {
+        color: green;
+        background-color: white;
+      }
+      .tablediv
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 200px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
     </style>
   </head>
   <body onload="usersList()">
@@ -115,20 +190,27 @@
     <!-- Tab links -->
     <div class="tab">
       <button class="tablinks" onclick="openCity(event, 'users')">Users</button>
-      <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+      <button class="tablinks" onclick="openCity(event, 'puresql')">Pure SQL</button>
       <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
     </div>
 
     <!-- Tab content -->
     <div id="users" class="tabcontent">
       <div id="back">
-        <span id="users" class="heading">Users</span>
+        <div id="userscontainer">
+          <span id="users" class="heading">Users</span>
+        </div>
       </div>
     </div>
 
-    <div id="Paris" class="tabcontent">
-      <h3>Paris</h3>
-      <p>Paris is the capital of France.</p>
+    <div id="puresql" class="tabcontent">
+      <div id="sqlcontainer">
+        <label id="sqllabel">Enter query here:</label>
+        <form id="sqlform">
+          <textarea id="query" name="query" placeholder="MySQL Query"></textarea>
+          <input type="submit" id="sqlsubmit" value="Submit"></input>
+        </form>
+      </div>
     </div>
 
     <div id="Tokyo" class="tabcontent">
@@ -175,7 +257,7 @@
               row.appendChild(td3);
               table.appendChild(row);
             }
-            document.getElementById("back").appendChild(table);
+            document.getElementById("userscontainer").appendChild(table);
           }
       };
       xmlhttp.open("GET","returnusers.php",true);
@@ -201,6 +283,84 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+    function sqlsubmit(e)
+    {
+      e.preventDefault();
+      var query = document.getElementById("query").value;
+      //console.log(query);
+      if(!query)
+      {
+        alert("Please enter an SQL query before submitting");
+        return;
+      }
+      xmlhttp = new XMLHttpRequest();
+
+      //var form = document.getElementById("sqlform");
+      var formData = new FormData(e.target);
+      console.log(formData);
+      xmlhttp.open("POST","puresql.php");
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+          var response = this.responseText;
+          console.log(response);
+          try
+          {
+            var obj = JSON.parse(response);
+          }
+          catch(e)
+          {
+            alert("Invalid query");
+            return;
+          }
+          console.log(obj);
+
+          if(obj.length==0)
+          {
+            alert("Query returned no result");
+          }
+          else {
+            var sqlcontainer = document.getElementById("sqlcontainer");
+            var tablediv = document.createElement("div");
+            tablediv.setAttribute("class","tablediv");
+            var resultslabel = document.createElement("label");
+            resultslabel.setAttribute("class", "heading");
+            resultslabel.textContent = "Results";
+            tablediv.appendChild(resultslabel);
+            var keys = Object.keys(obj[0]);
+            var length = keys.length;
+            var table = document.createElement("table");
+            table.setAttribute("class", "tableclass");
+            var headtr = document.createElement("tr");
+            for(var i=0; i<length; ++i)
+            {
+              var th = document.createElement("th");
+              th.textContent = keys[i];
+              headtr.appendChild(th);
+            }
+            table.appendChild(headtr);
+            for(var i=0; i<obj.length; ++i)
+            {
+              var tr = document.createElement("tr");
+              for(var j=0; j<length; ++j)
+              {
+                var td = document.createElement("td");
+                td.textContent = obj[i][keys[j]];
+                tr.appendChild(td);
+              }
+              table.appendChild(tr);
+            }
+            tablediv.appendChild(table);
+            sqlcontainer.parentNode.insertBefore(tablediv,sqlcontainer.nextSibling);
+          }
+
+        }
+      };
+      xmlhttp.send(formData);
+    }
+
+
     function redirectLogin(e)
     {
       window.location = "login\\login.html";
@@ -220,5 +380,6 @@
       redirectLogin();
     }
     document.body.querySelectorAll(".tablinks")[0].click();
+    document.getElementById("sqlform").addEventListener("submit", sqlsubmit, false);
   </script>
 </html>
