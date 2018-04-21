@@ -30,7 +30,7 @@
 				top:3px;
 				left: 5px;
 			}
-			.result
+			.submitcontainer
 			{
 				width:80%;
 				background-color:white;
@@ -40,6 +40,60 @@
 				padding:20px;
 				position:relative;
 
+			}
+			label
+			{
+				font-family:"Copperplate Gothic";
+				font-size:18px;
+			}
+			.subimg
+			{
+				width:100%;
+			}
+			.desclabel
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:20px;
+				margin:5px;
+				display:block;
+			}
+			.submitnamelabel
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:40px;
+				margin:5px;
+				display:block;
+			}
+			.cuisinelabel
+			{
+				display: block;
+			}
+			.spicylabel
+			{
+				display: block;
+			}
+			.typelabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.restlabel
+			{
+				display:block;
+				margin: 5px;
+				font-family: "Purisa";
+			}
+			.citylabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.linkname
+			{
+				display:block;
+				margin: 5px;
 			}
 </style>
 <body onload="searchResult()">
@@ -57,22 +111,81 @@
 		</div>
 </body>
 <script>
+	
+	
 	function searchResult()
 	{
 		  var url_string=window.location.href;
 		  var url=new URL(url_string);
 		  var c=url.searchParams.get("var1");
-			//console.log(c);
 		  xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-
+		  var dish_id, name, src="", ing, cuisine, spicy, user_id,restaurant,city,link,type;
+		  xmlhttp.onreadystatechange = function() {
+      	  	
           if (this.readyState == 4 && this.status == 200) {
 
           	var obj = JSON.parse(this.responseText);
+<<<<<<< HEAD
+          	
+          	console.log(typeof(submissionslist));
+			
+				for(var i=0;i<obj.length;i++)
+				{
+					var imgsrc = "data:image/jpg;base64," + obj[i]['pic_name'];
+					var container = document.createElement("div");
+					container.setAttribute("class", "submitcontainer");
+					var img = document.createElement("img");
+					img.setAttribute("class", "subimg");
+					img.setAttribute("src", imgsrc);
+					var namelabel = document.createElement("label");
+					namelabel.setAttribute("class", "submitnamelabel");
+					namelabel.textContent = obj[i]['Dish_Name'];
+					var desclabel = document.createElement("label");
+					desclabel.setAttribute("class", "desclabel");
+					desclabel.textContent = obj[i]['Ingredients'];
+					var cuisine = document.createElement("label");
+					cuisine.setAttribute("class", "cuisinelabel");
+					cuisine.textContent = obj[i]['Cuisine'];
+					var spicy = document.createElement("label");
+					if(obj[i]['Spicy'] == '1')
+						spicy.textContent = "Spicy";
+					else
+						spicy.textContent = "Not spicy";
+					spicy.setAttribute("class", "spicylabel");
+					var type = document.createElement("label");
+					type.setAttribute("class", "typelabel");
+					type.textContent = obj[i]['Type_Name'];
+					var restaurant = document.createElement("label");
+					restaurant.setAttribute("class", "restlabel");
+					restaurant.textContent = obj[i]['Restaurant'];
+					var city = document.createElement("label");
+					city.setAttribute("class", "citylabel");
+					city.textContent = obj[i]['City'];
+					var link = document.createElement("a");
+					link.setAttribute("class", "linkname");
+					link.href = obj[i]['Link'];
+					link.textContent = obj[i]['Link'];
+
+					container.appendChild(img);
+					container.appendChild(namelabel);
+					container.appendChild(cuisine);
+					container.appendChild(desclabel);
+					container.appendChild(type);
+					container.appendChild(spicy);
+					container.appendChild(restaurant);
+					container.appendChild(city);
+					container.appendChild(link);
+					document.body.appendChild(container);
+
+				}
+
+				/*var div=document.createElement("div");
+=======
           	console.log(this.responseText);
 			for(var i=0;i<obj.length;++i)
 			{
 				var div=document.createElement("div");
+>>>>>>> c0d00ae3b5f56f3c3b13cbb95f857a6da060da1e
 				console.log(obj[i]['Dish_ID'])
 				div.setAttribute("class","result");
 				var imgsrc = "data:image/jpg;base64," + obj[i]['pic_name'];
@@ -82,19 +195,28 @@
 				div.appendChild(img);
 				/*var content=document.createElement("div");
 				content.setAttribute("class","data");
+<<<<<<< HEAD
+				content.innerHTML=obj[i]['Dish_ID']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
+				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];
+				div.appendChild(content);
+				document.body.appendChild(div);*/
+			
+			}
+=======
 				content.innerHTML=div.innerHTML=obj[i]['Dish_ID']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
 				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];*/
 				document.body.appendChild(div);
 			}
 			}
 
+>>>>>>> c0d00ae3b5f56f3c3b13cbb95f857a6da060da1e
 			};
 			console.log(c);
 			xmlhttp.open("GET","results.php?q="+c,true);
-		    xmlhttp.send();
+		    xmlhttp.send();           
 	}
 
 
-
+	
 </script>
 </html>
