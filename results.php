@@ -18,7 +18,11 @@ $conn = mysqli_connect("localhost", "root", "", "subdata");
 				$row['pic_name']=base64_encode($file);
 				array_push($store,$row);
 			}
+<<<<<<< HEAD
 		
+=======
+			//print_r($store);
+>>>>>>> c0d00ae3b5f56f3c3b13cbb95f857a6da060da1e
 			$jsonarray=JSON_encode($store);
 			echo $jsonarray;
 		}
