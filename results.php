@@ -18,7 +18,7 @@ $conn = mysqli_connect("localhost", "root", "", "subdata");
 				$row['pic_name']=base64_encode($file);
 				array_push($store,$row);
 			}
-			print_r($store);
+			//print_r($store);
 			$jsonarray=JSON_encode($store);
 			echo $jsonarray;
 		}
