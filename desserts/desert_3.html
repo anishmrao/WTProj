@@ -48,11 +48,12 @@
 					text-align: center;
 
 				}
-			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
-			li{float:left;}
-			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
-			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
-			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+					#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+      li{float:left;}
+      .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 23px;cursor: pointer}
+      .menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+      #menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
 			.searchDiv
 			{
 				display: table;
@@ -136,6 +137,7 @@
 				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
 				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
 				<li><img id="searchimg" src="searchicon.png"/></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
 		</div>
 		<div class="a" >
@@ -243,31 +245,44 @@ Plunge into delight with this lush dessert. Indulge in this olive oil based cake
 
 		}
 		document.body.addEventListener("keyup",change_next,false);
-		function search()
-			{
-				if(!document.querySelector(".searchDiv"))
-				{
-					var searchDiv = document.createElement("div");
-					var searchBar = document.createElement("input");
-					var searchButton = document.createElement("input");
-					searchDiv.setAttribute("class", "searchDiv");
-					searchBar.setAttribute("class", "searchBar");
-					searchButton.setAttribute("class", "searchButton");
-					searchBar.setAttribute("type", "text");
-					searchBar.setAttribute("id","query");
-					//searchBar.addEventListener("keydown",find,false);
-					//searchButton.addEventListener("click",find2,false);
-					searchButton.setAttribute("type", "button");
-					searchBar.setAttribute("placeholder", "Search...");
-					searchDiv.appendChild(searchBar);
-					searchDiv.appendChild(searchButton);
-					var referenceNode = document.getElementById("menubar");
-					referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
-			  }
-				else {
-					document.body.removeChild(document.querySelector(".searchDiv"));
-				}
-		}
+		 function search()
+      {
+        if(!document.querySelector(".searchDiv"))
+        {
+          var searchDiv = document.createElement("div");
+          var searchBar = document.createElement("input");
+          var searchButton = document.createElement("input");
+          searchDiv.setAttribute("class", "searchDiv");
+          searchBar.setAttribute("class", "searchBar");
+          searchButton.setAttribute("class", "searchButton");
+          searchBar.setAttribute("type", "text");
+          searchBar.setAttribute("id","query");
+          searchBar.addEventListener("keydown",find,false);
+          searchButton.addEventListener("click",find2,false);
+          searchButton.setAttribute("type", "button");
+          searchBar.setAttribute("placeholder", "Search...");
+          searchDiv.appendChild(searchBar);
+          searchDiv.appendChild(searchButton);
+          var referenceNode = document.getElementById("menubar");
+          referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+        }
+        else {
+          document.body.removeChild(document.querySelector(".searchDiv"));
+        }
+    }
+    function find(e)
+      {
+        if(e.keyCode==13)
+        {
+          find2(e);
+        }
+      }
+      function find2(e)
+      {
+        console.log("a");
+        var x=document.getElementById("query");
+        window.location.href="../results.html?var1="+x.value;
+      }
 			function startSearch(e)
 			{
 
@@ -292,7 +307,35 @@ Plunge into delight with this lush dessert. Indulge in this olive oil based cake
 			window.addEventListener("scroll", placeDiv);
 			window.addEventListener("keydown", startSearch);
 			document.getElementById("searchimg").addEventListener("click", function(){search();});
+			function redirectLogin(e)
+      {
+        window.location = "../login/login.html";
+      }
+      function redirectAdmin(e)
+      {
+        window.location = "../admin/admin.html";
+      }
 
+      var login = document.getElementById("login");
+      if(sessionStorage.getItem('loggedIn')=='1')
+      {
+        login.textContent = sessionStorage.getItem('Username');
+        console.log(sessionStorage.getItem('Username'));
+        if(sessionStorage.getItem('isAdmin')=='1')
+        {
+          var adminTools = document.createElement('img');
+          adminTools.setAttribute('id', 'adminTools');
+          adminTools.setAttribute('src', 'wrench-512.png');
+          var ref = document.getElementById("menubar");
+          ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+          adminTools.addEventListener('click', redirectAdmin, false);
+        }
+      }
+      else {
+        login.textContent = "Login";
+        document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+      }
+      
 
 	</script>
 </html>
