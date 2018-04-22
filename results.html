@@ -125,7 +125,6 @@
           if (this.readyState == 4 && this.status == 200) {
 
           	var obj = JSON.parse(this.responseText);
-<<<<<<< HEAD
           	
           	console.log(typeof(submissionslist));
 			
@@ -180,12 +179,6 @@
 				}
 
 				/*var div=document.createElement("div");
-=======
-          	console.log(this.responseText);
-			for(var i=0;i<obj.length;++i)
-			{
-				var div=document.createElement("div");
->>>>>>> c0d00ae3b5f56f3c3b13cbb95f857a6da060da1e
 				console.log(obj[i]['Dish_ID'])
 				div.setAttribute("class","result");
 				var imgsrc = "data:image/jpg;base64," + obj[i]['pic_name'];
@@ -193,23 +186,14 @@
 				img.src=imgsrc;
 				console.log(img.src);
 				div.appendChild(img);
-				/*var content=document.createElement("div");
+				var content=document.createElement("div");
 				content.setAttribute("class","data");
-<<<<<<< HEAD
 				content.innerHTML=obj[i]['Dish_ID']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
 				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];
 				div.appendChild(content);
 				document.body.appendChild(div);*/
 			
 			}
-=======
-				content.innerHTML=div.innerHTML=obj[i]['Dish_ID']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
-				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];*/
-				document.body.appendChild(div);
-			}
-			}
-
->>>>>>> c0d00ae3b5f56f3c3b13cbb95f857a6da060da1e
 			};
 			console.log(c);
 			xmlhttp.open("GET","results.php?q="+c,true);
