@@ -4,20 +4,21 @@
 		echo mysqli_connect_error();
 	else
 	{
-		$query = "SELECT source from foodart";
+		$query = "SELECT dish_id,pic_name from dish";
 		$res = mysqli_query($conn, $query);
 		$return =[];
-		
-		if (mysqli_num_rows($res) > 0) 
+
+		if (mysqli_num_rows($res) > 0)
 		{
-			while($row = mysqli_fetch_assoc($res)) 
-				array_push($return, $row['source']);
+			while($row = mysqli_fetch_assoc($res))
+				$return[$row['dish_id']] = $row['pic_name'];
+
 			//print_r($return);
 			header("Content-Type: image/jpg");
-			foreach($return as $filename)
+			foreach($return as $id => $filename)
 			{
 			  $file = file_get_contents("uploads/".$filename);
-			  echo $filename."*".base64_encode($file)."#";
+			  echo $id."*".$filename."*".base64_encode($file)."#";
 			}
 		}
 		else
