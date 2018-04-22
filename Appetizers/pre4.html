@@ -14,7 +14,7 @@
                       padding: 0;
                       overflow-x: hidden;
                   }
-                
+
             .center{
                                 position: absolute;
                                 left: 50%;
@@ -27,7 +27,7 @@
              .options{
                                  background-color:rgb(150,120,234);height:30px;width:160px;
                                  color:blue;
-                                 padding: 20px 20px 20px 20px; 
+                                 padding: 20px 20px 20px 20px;
                                  /*position:relative;right:400px;bottom:250px; */
                                  -webkit-filter: grayscale(70%);
                                  filter: grayscale(70%);
@@ -48,13 +48,13 @@
                                                             to {font-size:22px;}
                                                              } */
 
-                              
 
-                      
-               #mx     {             
+
+
+               #mx     {
                                  position:relative;left:-450px;bottom:400px;
-                                 -webkit-animation-name: example2; 
-                                 -webkit-animation-duration: 4s; 
+                                 -webkit-animation-name: example2;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example2;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
@@ -63,26 +63,26 @@
                                                             from {position:relative;right:450px;}
                                                             to {position:relative;right:200px;}
                                                              } */
-               #am     {             
+               #am     {
                                  position:relative;left:-610px;bottom:300px;
-                                 -webkit-animation-name: example3; 
-                                 -webkit-animation-duration: 4s; 
+                                 -webkit-animation-name: example3;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example3;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
-                       }          
+                       }
                                  /*@-webkit-keyframes example3 {
                                                             from {right:350px;}
                                                             to {right:600px;}
                                                              } */
-                      
-               #ab     {             
+
+               #ab     {
                                  position:relative;left:-775px;bottom:200px;
                       }
-               #it    {             
+               #it    {
                                  position:relative;left:60px;bottom:400px;
-                                 webkit-animation-name: example4; 
-                                 -webkit-animation-duration: 4s; 
+                                 webkit-animation-name: example4;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example4;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
@@ -92,18 +92,18 @@
                                                             to   {right:-80px;}
                                                              } */
 
-               #in    {             
+               #in    {
                                  position:relative;left:390px;bottom:250px;
-                                 webkit-animation-name: example4; 
-                                 -webkit-animation-duration: 4s; 
+                                 webkit-animation-name: example4;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example4;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
                       }
-               #fr    {             
+               #fr    {
                                  position:relative;left:553px;bottom:350px;
-                                 webkit-animation-name: example5; 
-                                 -webkit-animation-duration: 4s; 
+                                 webkit-animation-name: example5;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example5;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
@@ -111,7 +111,7 @@
                                  /*@-webkit-keyframes example5 {
                                                             from {right:50px;}
                                                             to {right:280px;}
-                                                            
+
                                                             } */
 		body{
         background-image: url("woodback.jpg");
@@ -126,7 +126,7 @@
 			top:70%;
 			left:40%;
 		}
-    
+
     p{font-family:"Purisa";color:white;position:relative;bottom:10%;left:15%;margin-left:8%;font-size:26px;padding-top:7%}
 
 
@@ -205,9 +205,26 @@
         left:-18px;
 
       }
-      
- 
-		
+      #adminTools
+			{
+				width: 3%;
+				margin-right: 10px;
+				position: fixed;
+				top: 10%;
+				right: 1%;
+				height: 6%;
+				z-index: 1;
+				cursor: pointer;
+				transition: all 200ms ease-in;
+			}
+			#adminTools:hover
+			{
+				width: 4%;
+				height: 8%;
+				transition: all 200ms ease-out;
+			}
+
+
 
 </style>
 
@@ -226,28 +243,28 @@
         <li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
 		</div>
-      
-      
-      
+
+
+
       <div class="center"><h1><u>Appetizers</u></h1></div>
       <p><br><br> Here are some the most delicious appetizers from a variety of cusinies.</p>
-      <div id="first" style="height:650px;width:650px;background-color:rgb(250,235,215);;font-size:28px; text-align:center; border-radius:50px; position:relative; top:-70px; font-family: Comic Sans MS;"> 
+      <div id="first" style="height:650px;width:650px;background-color:rgb(250,235,215);;font-size:28px; text-align:center; border-radius:50px; position:relative; top:-70px; font-family: Comic Sans MS;">
               <img id="arrowleft" src="arrowleft.png" onclick="go(presentIndex,0,10)">
                <img id="arrowright" src="arrowright.png"onclick="go(presentIndex,1,10)">
               <img id="mainimg" src="mex.jpg" alt="Hong Kong Noodles" height="85%"/>
-				<br><br> 
-                
-      
+				<br><br>
+
+
 				<span id="name">Mexican cheesy corn dip</span><br>
 				<!-- <span id="ings">Ingredients : </span> -->
-                
+
                 </div>
-                
+
      <!-- <img src ="app7.jpg" height="360px" width="750px" id="img"/> -->
      <!-- <img src ="mex2.jpg"height="360px" width="240px" id="img"/> -->
       <!--<img src ="mex3.jpg"height="360px" width="240px" id="img"/>
       <img src ="mex4.jpg"height="360px" width="240px" id="img"/>  -->
-      
+
       </div>
 <div id="pos">
       <button type="button" class="options" id="mx" onclick="go(presentIndex,1,0)"/>Mexican</button>
@@ -256,17 +273,17 @@
       <button type="button" class="options" id="it" onclick="go(presentIndex,1,3)"/>Italian</button>
       <button type="button" class="options" id="fr" onclick="go(presentIndex,1,4)"/>French</button>
       <button type="button" class="options" id="in" onclick="go(presentIndex,1,5)"/>Indian</button>
-    
-	  
-      
+
+
+
     </div>
 
 
 
-<div> 
+<div>
 <div>
 </body>
-<script> 
+<script>
 
 
 function go(presentIndex, dir,group)
@@ -288,14 +305,14 @@ function go(presentIndex, dir,group)
                     presentIndex.index = 14;
                  else
                     presentIndex.index+=0;
-                    
+
                 if(dir == 1)
         {
           if(presentIndex.index == 17)
             presentIndex.index = 0;
                     else
                         presentIndex.index+=1;
-                 } 
+                 }
         if(dir == 0)
         {
           if(presentIndex.index == 0)
@@ -303,16 +320,16 @@ function go(presentIndex, dir,group)
                     else
                         presentIndex.index-=1;
         }
-                
+
         var mainimg = document.getElementById("mainimg");
         mainimg.setAttribute("src", imgsrcs[presentIndex.index]);
-        
+
         var name = document.getElementById("name");
         name.textContent = names[presentIndex.index];
-        
+
         /*var ings = document.getElementById("ings");
         ings.textContent = ingsdesc[presentIndex.index]; */
-                
+
                if(presentIndex.index < 3 && presentIndex.index > -1)
                 document.getElementById("mx").style.backgroundColor = 'red';
                else
@@ -344,9 +361,9 @@ function go(presentIndex, dir,group)
                 document.getElementById("in").style.backgroundColor = 'rgb(150,120,234)';
 
 
-              
+
       }
-      
+
       var presentIndex = {index:0};
       var right = document.getElementById("arrowright");
       right.addEventListener("click", function(){go(presentIndex, 1,10)}, false);
@@ -442,7 +459,7 @@ function go(presentIndex, dir,group)
         login.textContent = "Login";
         document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
       }
-      
 
-</script> 
+
+</script>
 </html>

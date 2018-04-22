@@ -296,6 +296,24 @@
 				display: block;
 				margin: 5px auto;
 			}
+			#adminTools
+			{
+				width: 3%;
+				margin-right: 10px;
+				position: fixed;
+				top: 10%;
+				right: 1%;
+				height: 6%;
+				z-index: 1;
+				cursor: pointer;
+				transition: all 200ms ease-in;
+			}
+			#adminTools:hover
+			{
+				width: 4%;
+				height: 8%;
+				transition: all 200ms ease-out;
+			}
 		</style>
 	</head>
 	<body onload="load()">
@@ -405,7 +423,7 @@
 		{
 			var x=document.getElementById("query");
 			window.location.href="../results.html?var1="+x.value;
-		}		
+		}
 
 	function startSearch(e)
 	{
@@ -980,25 +998,36 @@
 													window.alert("Please enter all values before submitting");
 
 											}, false);
-			function redirectLogin(e)
-			{
-				window.location = "..\\login\\login.html";
-			}
+			
 			imgfilenames = {};
 			imgs = {};
 			newnameslist={};
 			window.addEventListener("keydown", startSearch);
 			document.getElementById("searchimg").addEventListener("click", function(){search();});
+			function redirectLogin(e)
+			{
+				window.location = "..\\login\\login.html";
+			}
+			function redirectAdmin(e)
+			{
+				window.location = "..\\admin\\admin.html";
+			}
+
 			var login = document.getElementById("login");
 			if(sessionStorage.getItem('loggedIn')=='1')
 			{
 				login.textContent = sessionStorage.getItem('Username');
+				console.log(sessionStorage.getItem('Username'));
+				if(sessionStorage.getItem('isAdmin')=='1')
+				{
+					var adminTools = document.createElement('img');
+					adminTools.setAttribute('id', 'adminTools');
+					adminTools.setAttribute('src', 'wrench-512.png');
+					var ref = document.getElementById("menubar");
+					ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+					adminTools.addEventListener('click', redirectAdmin, false);
+				}
 			}
-			else {
-				login.textContent = "Login";
-				document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
-			}
-
 		</script>
 	</body>
 </html>

@@ -15,7 +15,7 @@
 				justify-content:center;
 				align-items:center;
 			}
-			
+
 			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
       li{float:left;}
       .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 23px;cursor: pointer}
@@ -97,6 +97,24 @@
 				display:block;
 				margin: 5px;
 			}
+			#adminTools
+			{
+				width: 3%;
+				margin-right: 10px;
+				position: fixed;
+				top: 10%;
+				right: 1%;
+				height: 6%;
+				z-index: 1;
+				cursor: pointer;
+				transition: all 200ms ease-in;
+			}
+			#adminTools:hover
+			{
+				width: 4%;
+				height: 8%;
+				transition: all 200ms ease-out;
+			}
 </style>
 <body onload="searchResult()">
 	<div id="menubar">
@@ -113,8 +131,8 @@
 		</div>
 </body>
 <script>
-	
-	
+
+
 	function searchResult()
 	{
 		  var url_string=window.location.href;
@@ -123,13 +141,37 @@
 		  xmlhttp = new XMLHttpRequest();
 		  var dish_id, name, src="", ing, cuisine, spicy, user_id,restaurant,city,link,type;
 		  xmlhttp.onreadystatechange = function() {
-      	  	
+				var obj={};
           if (this.readyState == 4 && this.status == 200) {
+						try
+						{
+							obj = JSON.parse(this.responseText);
+						}
+						catch (e)
+						{
+							console.log(this.responseText);
+							var container = document.createElement("div");
+							container.setAttribute("class", "submitcontainer");
+							var error=document.createElement("label");
+							error.innerHTML="Sorry we do not have your desired item '"+c+"'<br>You can your upload file on your submissions page";
+							container.appendChild(error);
+							document.body.appendChild(container);
+							return;
+						}
+						if(obj.length==0)
+						{
+							var container = document.createElement("div");
+							container.setAttribute("class", "submitcontainer");
+							var error=document.createElement("label");
+							error.innerHTML="Sorry we do not have your desired item '"+c+"'<br>You can your upload file on your submissions page";
+							container.appendChild(error);
+							document.body.appendChild(container);
+							return;
+						}
 
-          	var obj = JSON.parse(this.responseText);
-          	
+
           	console.log(typeof(submissionslist));
-			
+
 				for(var i=0;i<obj.length;i++)
 				{
 					var imgsrc = "data:image/jpg;base64," + obj[i]['pic_name'];
@@ -180,13 +222,13 @@
 
 				}
 
-			
-			
+
+
 			}
 			};
 			console.log(c);
 			xmlhttp.open("GET","results.php?q="+c,true);
-		    xmlhttp.send();           
+		    xmlhttp.send();
 	}
 	function redirectLogin(e)
       {
@@ -216,10 +258,10 @@
         login.textContent = "Login";
         document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
       }
-      
 
 
 
-	
+
+
 </script>
 </html>
