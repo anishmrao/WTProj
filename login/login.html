@@ -92,8 +92,7 @@
       background-color: green;
       border-radius: 5px;
       border-style: none;
-      margin:10% auto;
-      margin-left: 10%;
+      margin:20px auto;
       justify-content: center;
       height: 10%;
       cursor: pointer;
@@ -115,6 +114,31 @@
       color: red;
       font-family: "Berlin Sans FB";
       font-size: 15px;
+    }
+    #register
+    {
+      display: block;
+      width: 30%;
+      text-align: center;
+      font-family: "Berlin Sans FB";
+      font-size: 20px;
+      color: white;
+      background-color: green;
+      border-radius: 5px;
+      border-style: none;
+      margin:0 auto;
+      justify-content: center;
+      height: 10%;
+      padding: 5px;
+      cursor: pointer;
+    }
+    #register:hover
+    {
+      background-color: inherit;
+      border-width: 1px;
+      border-style: solid;
+      border-color: green;
+      color: green;
     }
   </style>
   <body onload="load()">
@@ -140,6 +164,7 @@
           <input name="password" type="password" class="boxes" id="password" placeholder="***************"></input>
           <input type="submit" value="Login" id="submit"></input>
         </form>
+        <input type="button" value="Register" id="register"></input>
       </div>
     </div>
   </body>
@@ -153,6 +178,8 @@
       sessionStorage.removeItem('Username');
     if(sessionStorage.getItem('UserID'))
       sessionStorage.removeItem('UserID');
+      if(sessionStorage.getItem('isAdmin'))
+        sessionStorage.removeItem('isAdmin');
   }
     function submitnow(e)
     {
@@ -181,18 +208,29 @@
                     sessionStorage.setItem('Username', user_name);
                     var userid = split[2];
                     sessionStorage.setItem('UserID', userid);
+                    if(userid == "CSADMIN")
+                      sessionStorage.setItem('isAdmin', '1');
                     window.location="..\\home.html";
                   }
                   else {
-                    var invalid = document.createElement("label");
-                    invalid.setAttribute("id", "invalid");
-                    invalid.textContent = "Invalid Username or Password";
-                    document.getElementById("form").insertBefore(invalid, document.getElementById("userlabel"));
+                    if(!(document.getElementById("invalid")))
+                    {
+                      var invalid = document.createElement("label");
+                      invalid.setAttribute("id", "invalid");
+                      invalid.textContent = "Invalid Username or Password";
+                      document.getElementById("form").insertBefore(invalid, document.getElementById("userlabel"));
+                    }
                   }
               }
       };
       xmlhttp.send(formData);
     }
+    function redirectRegister(e)
+    {
+      window.location = "..\\register\\register.html";
+    }
+    var register = document.getElementById("register");
+    register.addEventListener("click", redirectRegister, false);
 
   </script>
 </html>
