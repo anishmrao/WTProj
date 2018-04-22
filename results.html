@@ -15,12 +15,14 @@
 				justify-content:center;
 				align-items:center;
 			}
+			
 			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
-			li{float:left;}
-			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 36px;}
-			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
-			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
-			#searchimg
+      li{float:left;}
+      .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 23px;cursor: pointer}
+      .menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+      #menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
+
 			{
 				display: block;
 				width: 35%;
@@ -101,12 +103,12 @@
 			<ol id="menu">
 				<li><a class="menuopt" href="home.html">Home</a></li>
 				<li><a class="menuopt" href="Appetizers\pre4.html">Appetizers</a></li>
-				<li><a class="menuopt" href="">Main Course</a></li>
+				<li><a class="menuopt" href="mains\mains.html">Main Course</a></li>
 				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
 				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
 				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
-				<li><a class="menuopt" href="newsubs\submissions.html">Submissions</a></li>
-				<li><img id="searchimg" src="searchicon.png"/></li>
+				<li><a class="menuopt" href="submissions\submissions.html">Submissions</a></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
 		</div>
 </body>
@@ -178,20 +180,7 @@
 
 				}
 
-				/*var div=document.createElement("div");
-				console.log(obj[i]['Dish_ID'])
-				div.setAttribute("class","result");
-				var imgsrc = "data:image/jpg;base64," + obj[i]['pic_name'];
-				var img=document.createElement("img");
-				img.src=imgsrc;
-				console.log(img.src);
-				div.appendChild(img);
-				var content=document.createElement("div");
-				content.setAttribute("class","data");
-				content.innerHTML=obj[i]['Dish_ID']+"       <h2> Dish name:  "+obj[i]['Dish_Name']+"</h2><br>Spicy  "
-				+obj[i]['Spicy']+"       "+obj[i]['Cuisine'];
-				div.appendChild(content);
-				document.body.appendChild(div);*/
+			
 			
 			}
 			};
@@ -199,6 +188,36 @@
 			xmlhttp.open("GET","results.php?q="+c,true);
 		    xmlhttp.send();           
 	}
+	function redirectLogin(e)
+      {
+        window.location = "login/login.html";
+      }
+      function redirectAdmin(e)
+      {
+        window.location = "admin/admin.html";
+      }
+
+      var login = document.getElementById("login");
+      if(sessionStorage.getItem('loggedIn')=='1')
+      {
+        login.textContent = sessionStorage.getItem('Username');
+        console.log(sessionStorage.getItem('Username'));
+        if(sessionStorage.getItem('isAdmin')=='1')
+        {
+          var adminTools = document.createElement('img');
+          adminTools.setAttribute('id', 'adminTools');
+          adminTools.setAttribute('src', 'wrench-512.png');
+          var ref = document.getElementById("menubar");
+          ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+          adminTools.addEventListener('click', redirectAdmin, false);
+        }
+      }
+      else {
+        login.textContent = "Login";
+        document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+      }
+      
+
 
 
 	
