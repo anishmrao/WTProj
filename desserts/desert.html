@@ -12,8 +12,79 @@
 		margin-top: 75px;
 }
 
+			.searchDiv
+			{
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 50px;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			.searchBar
+			{
+				display: table-cell;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 40px;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
+				background: transparent;
+			}
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			::placeholder
+			{
+				color: white;
+			}
+			.searchButton
+			{
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
+				border-style: none;
+				transition: all 200ms ease-in;
+				height: 40px;
+				padding:0px;
+				width: 40px;
+			}
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px;
+
+			}
+
 .rig-img {
-    //display:block;
+    display:block;
     width: 700px;
 	height: 400px;
     transform:scaleX(1);
@@ -34,15 +105,23 @@
     position: relative;
     overflow:hidden;
 	width: 45%;
-		
-		float: right;
-		align-items: center;
-		padding: 10px;
+	float: right;
+	align-items: center;
+	padding: 10px;
 }
 
 #hot{
 	position:relative;
-	bottom:17px;
+	left:555px;
+	width:90%;
+	top:57.5px;
+}
+#cold{
+	position: absolute;
+	bottom: 5.75%;
+	left:3px;
+
+
 }
 
 #rig li:hover .rig-img {
@@ -96,13 +175,33 @@
     		background-size: cover;
 				border:0px;
 				padding:0px;
+				
 			}
 
-#menu{list-style-type:none; padding:15px; margin:0}
-			li{display:inline;margin:20px; padding:20px}
-			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
-			#menubar{padding:0; margin:0; background-color:#252525; height:50px;width:100.85%}
-
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+      li{float:left;}
+      .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 23px;cursor: pointer}
+      .menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+      #menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
+      #adminTools
+      {
+        width: 3%;
+        margin-right: 10px;
+        position: fixed;
+        top: 10%;
+        right: 1%;
+        height: 6%;
+        z-index: 1;
+        cursor: pointer;
+        transition: all 200ms ease-in;
+      }
+      #adminTools:hover
+      {
+        width: 4%;
+        height: 8%;
+        transition: all 200ms ease-out;
+      } 
 
 	</style>
 	</head>
@@ -116,11 +215,14 @@
 				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
 				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
 				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
 		</div>
+		
 		<ul id="rig">
 		    <li>
-		        <a class="rig-cell1" href="desert_3.html">
+		        <a class="rig-cell1" id="cold" href="desert_3.html">
 		            <img id="a" src="cold.jpg">
 		            <span class="rig-overlay"></span>
 		            <span class="rig-text" >COLD</span>
@@ -144,5 +246,98 @@ btn2.addEventListener("onmouseover",blur,false);
 function blur(){
 back.style.blur="50%";
 }
+ function search()
+      {
+        if(!document.querySelector(".searchDiv"))
+        {
+          var searchDiv = document.createElement("div");
+          var searchBar = document.createElement("input");
+          var searchButton = document.createElement("input");
+          searchDiv.setAttribute("class", "searchDiv");
+          searchBar.setAttribute("class", "searchBar");
+          searchButton.setAttribute("class", "searchButton");
+          searchBar.setAttribute("type", "text");
+          searchBar.setAttribute("id","query");
+          searchBar.addEventListener("keydown",find,false);
+          searchButton.addEventListener("click",find2,false);
+          searchButton.setAttribute("type", "button");
+          searchBar.setAttribute("placeholder", "Search...");
+          searchDiv.appendChild(searchBar);
+          searchDiv.appendChild(searchButton);
+          var referenceNode = document.getElementById("menubar");
+          referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+        }
+        else {
+          document.body.removeChild(document.querySelector(".searchDiv"));
+        }
+    }
+    function find(e)
+      {
+        if(e.keyCode==13)
+        {
+          find2(e);
+        }
+      }
+      function find2(e)
+      {
+        console.log("a");
+        var x=document.getElementById("query");
+        window.location.href="../results.html?var1="+x.value;
+      }
+			function startSearch(e)
+			{
+
+				if(e.ctrlKey && e.keyCode === 70)
+				{
+					e.preventDefault();
+					search();
+				}
+			}
+			function placeDiv() {
+  				var d = document.getElementById("foodart");
+				var s = window.pageYOffset;
+				console.log(s);
+				if(s<=678)
+				{
+					var translate = 'translateY(' + s + 'px)';
+					console.log(translate);
+					d.style.transform = translate;
+				}
+
+			}
+			window.addEventListener("scroll", placeDiv);
+			window.addEventListener("keydown", startSearch);
+			document.getElementById("searchimg").addEventListener("click", function(){search();});
+			//console.log(document.body.scrollTop);
+			function redirectLogin(e)
+      {
+        window.location = "../login/login.html";
+      }
+      function redirectAdmin(e)
+      {
+        window.location = "../admin/admin.html";
+      }
+
+      var login = document.getElementById("login");
+      if(sessionStorage.getItem('loggedIn')=='1')
+      {
+        login.textContent = sessionStorage.getItem('Username');
+        console.log(sessionStorage.getItem('Username'));
+        if(sessionStorage.getItem('isAdmin')=='1')
+        {
+          var adminTools = document.createElement('img');
+          adminTools.setAttribute('id', 'adminTools');
+          adminTools.setAttribute('src', 'wrench-512.png');
+          var ref = document.getElementById("menubar");
+          ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+          adminTools.addEventListener('click', redirectAdmin, false);
+        }
+      }
+      else {
+        login.textContent = "Login";
+        document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+      }
+      
+
 </script>
 </html>

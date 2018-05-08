@@ -1,0 +1,520 @@
+<html>
+  <head>
+    <script src="checkAdmin.js"></script>
+    <script src="canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      google.load('visualization', '1', {'packages':['corechart']});
+      //google.setOnLoadCallback(drawChart);
+
+    function drawChart()
+    {
+      xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+            console.log(response);
+            var bar_chart_data = new google.visualization.DataTable(response);
+            var options = {
+                           title: 'User Cuisine Preferences',
+                           is3D: 'true',//3D effect true
+                           width: 900,
+                           height: 500
+                          };
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+            chart.draw(bar_chart_data, options);
+          }
+        };
+        xmlhttp.open("GET","pie_chart.php");
+        xmlhttp.send();
+    }
+
+      function usersList()
+      {
+        if(document.getElementById("userstable")) return;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log(this.responseText);
+              var obj = JSON.parse(this.responseText);
+              console.log(obj);
+              //console.log(obj[0]['User_ID']);
+              var table = document.createElement("table");
+              table.setAttribute("class", "tableclass");
+              table.setAttribute("id", "userstable");
+              var row1 = document.createElement("tr");
+              var th1 = document.createElement("th");
+              th1.textContent = "User ID";
+              var th2 = document.createElement("th");
+              th2.textContent = "Username";
+              var th3 = document.createElement("th");
+              th3.textContent = "Latest Upload Date";
+              row1.appendChild(th1);
+              row1.appendChild(th2);
+              row1.appendChild(th3);
+              table.appendChild(row1);
+              for(i=0; i< obj.length; ++i)
+              {
+                var row = document.createElement("tr");
+                var td1 = document.createElement("td");
+                td1.textContent = obj[i]['User_ID'];
+                var td2 = document.createElement("td");
+                td2.textContent = obj[i]['User_Name'];
+                var td3 = document.createElement("td");
+                td3.textContent = obj[i]['upload_date'];
+                row.appendChild(td1);
+                row.appendChild(td2);
+                row.appendChild(td3);
+                table.appendChild(row);
+              }
+              document.getElementById("userscontainer").appendChild(table);
+            }
+        };
+        xmlhttp.open("GET","returnusers.php",true);
+        xmlhttp.send();
+      }
+      function openCity(evt, cityName) {
+          // Declare all variables
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+          if(cityName == 'users')
+            usersList();
+          if(cityName=='cuisinetab')
+            drawChart();
+          if(cityName=='uploads')
+            drawGraph();
+
+      }
+
+      function sqlsubmit(e)
+      {
+        e.preventDefault();
+        var query = document.getElementById("query").value;
+        //console.log(query);
+        if(!query)
+        {
+          alert("Please enter an SQL query before submitting");
+          return;
+        }
+        xmlhttp = new XMLHttpRequest();
+
+        //var form = document.getElementById("sqlform");
+        var formData = new FormData(e.target);
+        console.log(formData);
+        xmlhttp.open("POST","puresql.php");
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            var response = this.responseText;
+            console.log(response);
+            try
+            {
+              var obj = JSON.parse(response);
+            }
+            catch(e)
+            {
+              alert("Invalid query");
+              return;
+            }
+            console.log(obj);
+
+            if(obj.length==0)
+            {
+              alert("Query returned no result");
+            }
+            else {
+              var sqlcontainer = document.getElementById("sqlcontainer");
+              var tablediv = document.createElement("div");
+              tablediv.setAttribute("class","tablediv");
+              var resultslabel = document.createElement("label");
+              resultslabel.setAttribute("class", "heading");
+              resultslabel.textContent = "Results";
+              tablediv.appendChild(resultslabel);
+              var keys = Object.keys(obj[0]);
+              var length = keys.length;
+              var table = document.createElement("table");
+              table.setAttribute("class", "tableclass");
+              var headtr = document.createElement("tr");
+              for(var i=0; i<length; ++i)
+              {
+                var th = document.createElement("th");
+                th.textContent = keys[i];
+                headtr.appendChild(th);
+              }
+              table.appendChild(headtr);
+              for(var i=0; i<obj.length; ++i)
+              {
+                var tr = document.createElement("tr");
+                for(var j=0; j<length; ++j)
+                {
+                  var td = document.createElement("td");
+                  td.textContent = obj[i][keys[j]];
+                  tr.appendChild(td);
+                }
+                table.appendChild(tr);
+              }
+              tablediv.appendChild(table);
+              sqlcontainer.parentNode.insertBefore(tablediv,sqlcontainer.nextSibling);
+            }
+
+          }
+        };
+        xmlhttp.send(formData);
+      }
+
+
+      function redirectLogin(e)
+      {
+        window.location = "login\\login.html";
+      }
+      function load()
+      {
+
+        var login = document.getElementById("login");
+        if(sessionStorage.getItem('loggedIn')=='1')
+        {
+          login.textContent = sessionStorage.getItem('Username');
+          console.log(sessionStorage.getItem('Username'));
+          if(sessionStorage.getItem('isAdmin')!='1')
+          {
+            redirectLogin();
+          }
+        }
+        else {
+          redirectLogin();
+        }
+        document.body.querySelectorAll(".tablinks")[0].click();
+        document.getElementById("sqlform").addEventListener("submit", sqlsubmit, false);
+        console.log("load done");
+      }
+      function drawGraph()
+      {
+         xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var array=new Array();
+            var obj = JSON.parse(this.responseText);
+            console.log(obj);
+        var xVal=1;
+            var yVal=1;
+      var dataPoints = []; // dataPoints
+      var chart = new CanvasJS.Chart("graphContainer", {
+      title :{
+            text: "Monthly Analysis"
+          },
+      axisY: {
+          includeZero: false,
+          title: "Number of uploads"
+          },   
+      axisX: {
+            title: "Month Number"
+          },   
+      data: [{
+          type: "line",
+          dataPoints: dataPoints
+           }]
+           })
+     
+      console.log(typeof(obj[0]['count']))
+      for (var i = 0; i < obj.length; i++) {
+        
+        var yVal=Number(obj[i].count);
+        console.log(yVal);
+        dataPoints.push({
+        x: xVal,
+        y: yVal
+        });
+        xVal++;
+    }
+  chart.render(); 
+      
+      
+      }
+      };
+      console.log("a");
+      xmlhttp.open("GET","month_wise.php",true);
+        xmlhttp.send();           
+  }
+
+    </script>
+    <title>Administrator Tools</title>
+    <style>
+      html,body
+      {
+        padding:0;
+        margin:0;
+        background-image: url('woodback.jpg');
+        background-size: contain;
+        background-repeat: repeat;
+      }
+      #back
+      {
+
+
+        height:100%;
+
+      }
+      .heading
+      {
+        position: relative;
+        margin: 10px auto;
+        top: 5%;
+        font-size: 35px;
+        font-family: "Copperplate Gothic";
+        color: black;
+      }
+      .tableclass th {
+    background-color: #2a7bfc;
+    border: 1px solid #ddd;
+    font-family: "Copperplate Gothic";
+    color: black;
+    padding: 10px;
+
+}
+
+
+      .tableclass
+      {
+        position: relative;
+        border-collapse: collapse;
+        width: 80%;
+        text-align: center;
+        border: none;
+        margin: 20px auto;
+        top: 20%;
+
+      }
+      .tableclass td{
+        font-family: "Trebuchet MS";
+        border: 1px solid #ddd;
+        padding: 10px;
+      }
+      .tableclass tr:nth-child(even){background-color: #f2f2f2;}
+      .tableclass tr:hover {background-color: #ddd;}
+      .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+          position: relative;
+          top: 8%;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+          background-color: inherit;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+          background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+          background-color: #ccc;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+          display: none;
+          padding: 6px 12px;
+          border: none;
+          animation: fadeEffect 1s;
+      }
+
+      /* Go from zero to full opacity */
+      @keyframes fadeEffect {
+          from {opacity: 0;}
+          to {opacity: 1;}
+      }
+      #menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+      li{float:left;}
+      .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 32px;cursor: pointer}
+      .menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+      #menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #sqlcontainer
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 100px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      #chartcontainer
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 100px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      #userscontainer
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 100px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      #query
+      {
+        width:80%;
+        height:50%;
+        margin: 20px auto;
+        font-size: 15px;
+      }
+      #sqllabel
+      {
+        position: relative;
+        display: block;
+        font-size: 25px;
+        font-family: "Copperplate Gothic";
+        margin: 10px auto;
+      }
+      #chartdivlabel
+      {
+        position: relative;
+        display: block;
+        font-size: 25px;
+        font-family: "Copperplate Gothic";
+        margin: 10px auto;
+      }
+      #sqlsubmit
+      {
+        display: block;
+        width: 30%;
+        border:1px solid green;
+        padding: 10px;
+        font-family: "Copperplate Gothic";
+        font-size: 15px;
+        color: white;
+        background-color: green;
+        margin: 10px auto;
+        cursor: pointer;
+      }
+      #sqlsubmit:hover
+      {
+        color: green;
+        background-color: white;
+      }
+      .tablediv
+      {
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        position: relative;
+        top: 200px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      #chart_div
+      {
+        margin: 10px auto;
+        margin-left: 10%;
+      }
+      #graphContainer
+      {
+        position: relative;
+        top:100px;
+        width:80%;
+        margin: 20px auto;
+        justify-content: center;
+   
+      }
+    </style>
+  </head>
+
+  <body onload="load()">
+    <div id="menubar">
+      <ol id="menu">
+        <li><a class="menuopt" href="">Home</a></li>
+        <li><a class="menuopt" href="..\Appetizers\pre4.html">Appetizers</a></li>
+        <li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+        <li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+        <li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+        <li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+        <li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
+        <li id="loginbutton"><label id="login" class="menuopt"></label></li>
+      </ol>
+
+    </div>
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'users')">Users</button>
+      <button class="tablinks" onclick="openCity(event, 'puresql')">Pure SQL</button>
+      <button class="tablinks" onclick="openCity(event, 'cuisinetab')">Cuisine Split Up</button>
+      <button class="tablinks" onclick="openCity(event,'uploads')">Month Wise Uploads</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="users" class="tabcontent">
+      <div id="back">
+        <div id="userscontainer">
+          <span id="users" class="heading">Users</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="puresql" class="tabcontent">
+      <div id="sqlcontainer">
+        <label id="sqllabel">Enter query here:</label>
+        <form id="sqlform">
+          <textarea id="query" name="query" placeholder="MySQL Query"></textarea>
+          <input type="submit" id="sqlsubmit" value="Submit"></input>
+        </form>
+      </div>
+    </div>
+
+    <div id="cuisinetab" class="tabcontent">
+      <div id="chartcontainer">
+        <label id="chartdivlabel">Cuisine Split Up</label>
+        <div id="chart_div"></div>
+      </div>
+    </div>
+    <div id="uploads" class="tabcontent">
+      <div id="graphContainer"> 
+         <div id="graph_div"></div>
+       </div>
+     </div>
+
+  </body>
+
+</html>

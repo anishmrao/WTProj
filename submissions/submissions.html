@@ -7,6 +7,8 @@
 			body{margin:0;padding:0;width:100%;display:table-cell}
 			#back
 			{
+				position:relative;
+				top:50px;
 				height:100%;
 				background-image:url("woodback.jpg");
 				display:block;
@@ -23,17 +25,18 @@
 				justify-content:center;
 				border-radius:20px;
 				padding:20px;
+
 				margin:50px auto;
 			}
 			#heading
 			{
 				font-family:"Copperplate Gothic";
+				display: inline-block;
 				color:white;
 				font-size:50px;
-				margin-top:50px;
-				margin-bottom:20px;
-				padding:0;
-				
+			  margin-top:4%;
+				margin-bottom:1%;
+
 			}
 			.subimg
 			{
@@ -46,6 +49,14 @@
 				font-size:40px;
 				margin:5px;
 				display:block;
+			}
+			.cuisinelabel
+			{
+				display: block;
+			}
+			.spicylabel
+			{
+				display: block;
 			}
 			.desclabel
 			{
@@ -64,7 +75,7 @@
 				margin:100px auto;
 				padding:20px;
 				position:relative;
-				
+
 			}
 			label
 			{
@@ -83,7 +94,7 @@
 				color:black;
 				display:block;
 				text-align:center;
-				
+
 			}
 			#artDesc
 			{
@@ -98,6 +109,7 @@
 				font-size:20px;
 				margin:5px auto;
 				text-align:center;
+				width: 70%;
 			}
 			.button
 			{
@@ -126,10 +138,182 @@
 			#close:hover{opacity:1}
 			#edit:hover{opacity:1}
 			#ok{width:4%;position:absolute;right:-1%;bottom:-2%;cursor:pointer;}
-			#menu{list-style-type:none; padding:15px; margin:0}
-			li{display:inline;margin:20px; padding:20px}
-			.menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"; cursor:pointer}
-			#menubar{padding:0; margin:0; background-color:#252525; height:50px}
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+			li{float:left;}
+			.menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 22px;cursor: pointer}
+			.menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+			#menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+
+
+			.searchDiv
+			{
+				display: table;
+				background: transparent;
+				opacity: 1;
+				position: fixed;
+				top: 50px;
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			.searchBar
+			{
+				display: table-cell;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px;
+				padding: 10px;
+				width: 80%;
+				height: 20px;
+				border-style: solid;
+				border-radius: 15px;
+				border-width: 0.5px;
+				color: white;
+				background: transparent;
+			}
+			.searchBar:focus
+			{
+				outline: none;
+			}
+			.searchBar::placeholder
+			{
+				color: white;
+			}
+			.searchButton
+			{
+				display: table-cell;
+				vertical-align: middle;
+				background: url('searchicon.png');
+				background-size: cover;
+				cursor:pointer;
+				background-repeat: no-repeat;
+				position: relative;
+				margin: 20 auto;
+				width: 2%;
+				border-style: none;
+				transition: all 200ms ease-in;
+				height: 40px;
+				padding:0;
+				width: 40px;
+			}
+			.searchButton:hover
+			{
+				transition: all 200ms ease-out;
+				height: 50px;
+				width: 50px;
+			}
+			#searchimg
+			{
+				display: block;
+				width: 35%;
+				padding-left:35%;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px
+
+			}
+			.edspicylabel
+			{
+				display: block;
+			}
+			.spicyselect
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.selectcuisine
+			{
+				display: block;
+				margin:5px auto;
+			}
+			.cuisinelabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.typelabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.restlabel
+			{
+				display:block;
+				margin: 5px;
+				font-family: "Purisa";
+			}
+			.citylabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.linkname
+			{
+				display:block;
+				margin: 5px;
+			}
+			.edrestlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.restwhatlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.linkwhatlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.citywhatlabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.edlink
+			{
+				display: block;
+				margin: 5px auto;
+				width: 50%;
+			}
+			.edcity
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.edtype
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			.edtypelabel
+			{
+				display: block;
+				margin: 5px auto;
+			}
+			#adminTools
+			{
+				width: 3%;
+				margin-right: 10px;
+				position: fixed;
+				top: 10%;
+				right: 1%;
+				height: 6%;
+				z-index: 1;
+				cursor: pointer;
+				transition: all 200ms ease-in;
+			}
+			#adminTools:hover
+			{
+				width: 4%;
+				height: 8%;
+				transition: all 200ms ease-out;
+			}
 		</style>
 	</head>
 	<body onload="load()">
@@ -142,7 +326,10 @@
 				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
 				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
 				<li><a class="menuopt" href="">Submissions</a></li>
+				<li><img id="searchimg" src="searchicon.png"/></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
 			</ol>
+
 		</div>
 		<div id="back">
 			<span  id="heading">Submissions</span>
@@ -154,31 +341,115 @@
 				<p>
 				<label>Name your art :</label>
 				<input type="text" id="name" placeholder="What's your art called?"/></p>
-				
-				<label>Add description :</label>
+				<label>Cuisine: </label>
+				<select id="cuisineselect">
+					<option value="italian">Italian</option>
+					<option value="indian">Indian</option>
+					<option value="mexican">Mexican</option>
+					<option value="japanese">Japanese</option>
+					<option value="chinese">Chinese</option>
+				</select>
+				<br><br>
+				<label>Is this dish spicy?</label>
+				<select id="isSpicy">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</select>
+				<br><br>
+				<label>Ingredients :</label>
 				<br>
 				<textarea id="artDesc"></textarea>
 				<br>
+				<select id="typeselect">
+					<option value="veg">Vegetarian</option>
+					<option value="nonveg">Non Vegetarian</option>
+				</select><br>
+				<input id="restname" placeholder="Restaurant name" type="text"/><br>
+				<input id="locationinput" type="text" placeholder="City"/><br>
+				<input id="recipie" type="text" placeholder="Recipe link"/><br>
 				<input id="submit" type="button" value="Submit Art" class="button"/>
 			</div>
 		</div>
-		
+
 		<script>
+		submissionslist={}
+		function submission(dish_id, name, pic_name, ing, cuisine, spicy, user_id, restaurant, city, link, type)
+		{
+			this.dish_id = dish_id;
+			this.nameval = name;
+			this.pic_name = pic_name;
+			this.ing = ing;
+			this.cuisine = cuisine;
+			this.spicy = spicy;
+			this.user_id = user_id;
+			this.restaurant = restaurant;
+			this.city = city;
+			this.link = link;
+			this.type = type;
+		}
+	function search()
+	{
+		 if(!document.querySelector(".searchDiv"))
+				{
+				 	var searchDiv = document.createElement("div");
+          		 	var searchBar = document.createElement("input");
+          			var searchButton = document.createElement("input");
+          		 	searchDiv.setAttribute("class", "searchDiv");
+			        searchBar.setAttribute("class", "searchBar");
+			        searchButton.setAttribute("class", "searchButton");
+			        searchBar.setAttribute("type", "text");
+			        searchBar.setAttribute("id","query");
+			        searchBar.addEventListener("keydown",find,false);
+			        searchButton.addEventListener("click",find2,false);
+			        searchButton.setAttribute("type", "button");
+			        searchBar.setAttribute("placeholder", "Search...");
+			        searchDiv.appendChild(searchBar);
+			        searchDiv.appendChild(searchButton);
+			        var referenceNode = document.getElementById("menubar");
+			        referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+        		}
+        else {
+          	document.body.removeChild(document.querySelector(".searchDiv"));
+        	}
+			}
+	function find(e)
+		{
+			if(e.keyCode==13)
+			{
+				find2(e);
+			}
+			}
+	function find2(e)
+		{
+			var x=document.getElementById("query");
+			window.location.href="../results.html?var1="+x.value;
+		}
+
+	function startSearch(e)
+	{
+
+		if(e.ctrlKey && e.keyCode === 70)
+		{
+			e.preventDefault();
+			search();
+		}
+	}
 			function load()
 			{
 
-		        if (window.XMLHttpRequest) {
-		            xmlhttp = new XMLHttpRequest();
-		            xhr = new XMLHttpRequest();
-		        } 
+       	if (!window.XMLHttpRequest) return;
+				console.log("Loading...");
+        xmlhttp = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
+
 				var done1 = 0, done2 = 0;
-				
+
 				var objs = []
-				var name, desc, src="";
+				var dish_id, name, src="", ing, cuisine, spicy, user_id,restaurant,city,link,type;
 		        xmlhttp.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
 						var retstring = this.responseText;
-		                //console.log(retstring);
+		                console.log(retstring);
 						if(retstring)
 						{
 							var subs = retstring.split("#");
@@ -187,26 +458,36 @@
 							for(var i=0; i<subs.length; ++i)
 							{
 								splits = subs[i].split("*");
-								name = splits[0];
-								if(name!="")
+								dish_id = splits[0];
+								if(dish_id!="")
 								{
-									desc = splits[1];
+									name = splits[1];
 									src = splits[2];
-									imgfilenames[name] = {name:src};
-									var obj = {subname:name,description:desc,source:src};
-									objs.push(obj);
+									ing = splits[3];
+									cuisine = splits[4];
+									spicy = splits[5];
+									user_id=splits[6];
+									restaurant = splits[7];
+									city = splits[8];
+									link = splits[9];
+									type = splits[10];
+									var sub = new submission(dish_id, name, {name:src}, ing, cuisine, spicy, user_id, restaurant, city, link, type);
+									//subs.push(sub);
+									//obj[dish_id] = sub;
+									objs.push(sub);
+									submissionslist[dish_id] = sub;
 									//console.log(name);
 									//console.log(desc);
 									//console.log(src);
-								
+
 								}
 							}
-						
+
 						}
-						
-						
+						xhr.send();
+
 		            }
-					
+
 			    };
 				 xhr.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
@@ -214,16 +495,17 @@
 		                //console.log(retstring);
 						var ims = retstring.split("#");
 						for(var i=0; i<ims.length; ++i)
-							imgs[ims[i].split("*")[0]] = ims[i].split("*")[1];
+							imgs[ims[i].split("*")[0]] = ims[i].split("*")[2];
 						addthem(objs);
 					}
-					
+
 				};
-				
+
 				xhr.open("GET", "backend3.php", true);
-				xhr.send();
-		        xmlhttp.open("GET","backend.php",true);
-		        xmlhttp.send();
+
+        xmlhttp.open("GET","backend.php",true);
+        xmlhttp.send();
+
 			}
 			function addthem(objs)
 			{
@@ -232,29 +514,32 @@
 				console.log(imgs);
 				for(var i=0; i<objs.length; ++i)
 				{
-					if(objs[i].source)
+					if(objs[i].dish_id)
 					{
-						var imgsrc = "data:image/jpg;base64," + imgs[objs[i].source];
-						addImg(imgsrc, objs[i].subname, objs[i].description, parent, 1);
+						var imgsrc = "data:image/jpg;base64," + imgs[objs[i].dish_id];
+						addImg(imgsrc, objs[i], parent, 1);
 						var parents = document.querySelectorAll(".submitcontainer");
 						parent = parents[parents.length - 1];
 					}
 				}
 				imgs = {};
+				console.log(submissionslist);
 			}
-			
+
 			var back = document.getElementById("back");
-			
+
 			var container = document.getElementById("container");
-			
+
 			var inpimage = document.getElementById("inpimage");
-			
+
 			function update()
 			{
-				if (window.XMLHttpRequest) {
-		            xmlhttp = new XMLHttpRequest();
-					xhr = new XMLHttpRequest();
-		        } 
+				if (!window.XMLHttpRequest) {
+		           console.log("Update failed.");
+							 return;
+		        }
+						xmlhttp = new XMLHttpRequest();
+			xhr = new XMLHttpRequest();
 		        xmlhttp.onreadystatechange = function() {
 		            if (this.readyState == 4 && this.status == 200) {
 		                console.log(this.responseText);
@@ -287,12 +572,12 @@
 		        xmlhttp.open("GET","alter.php?q="+entry,true);
 		        xmlhttp.send();
 			}
-			
+
 			function onUploadComplete(e)
 			{
 				console.log("Upload complete");
 			}
-			function onUploadProgress(event) 
+			function onUploadProgress(event)
 			{
 				if (event.lengthComputable) {
 					var percentComplete = event.loaded / event.total;
@@ -303,12 +588,28 @@
 			{
 				if(window.confirm("Are you sure you want to delete this submission?"))
 				{
-					var back = document.getElementById("back");
-					back.removeChild(e.target.parentNode);
+					if (!window.XMLHttpRequest) {
+			           console.log("Remove failed.");
+								 return;
+			        }
+
+							node = e.target.parentNode;
+							xmlhttp = new XMLHttpRequest();
+
+			        xmlhttp.onreadystatechange = function() {
+			            if (this.readyState == 4 && this.status == 200) {
+			                console.log(this.responseText);
+											var back = document.getElementById("back");
+											back.removeChild(node);
+			            }
+				    };
+						var entry = node.id;
+						xmlhttp.open("GET","remove.php?q="+entry,true);
+						xmlhttp.send();
 				}
-				
+
 			}
-			
+
 			function editsub(e)
 			{
 				if(!document.getElementById("ok"))
@@ -322,149 +623,411 @@
 						//console.log(children[i].className);
 						if(children[i].className == "subimg")
 							var img = children[i];
-						if(children[i].className == "submitnamelabel")
+						else if(children[i].className == "submitnamelabel")
 							var name = children[i];
-						if(children[i].className == "desclabel")
+						else if(children[i].className == "desclabel")
 							var desc = children[i];
+						else if(children[i].className == "cuisinelabel")
+							var cuisine = children[i];
+						else if(children[i].className == "spicylabel")
+							var spicy = children[i];
+						else if(children[i].className == "restlabel")
+							var restlabel = children[i];
+						else if(children[i].className == "citylabel")
+							var city = children[i];
+						else if(children[i].className == "typelabel")
+							var typelabel = children[i];
+						else if(children[i].className == "linkname")
+							var link = children[i];
+
 					}
-			
+
 					var edimage = document.createElement("input");
 					edimage.setAttribute("class", "edimage");
 					edimage.setAttribute("type", "file");
-					
+
 					var edname = document.createElement("input");
 					edname.setAttribute("class", "edname");
 					edname.setAttribute("placeholder", name.textContent);
-					
+
 					var eddesc = document.createElement("textarea");
 					eddesc.setAttribute("class", "eddesc");
 					eddesc.setAttribute("placeholder", desc.textContent);
-					
+
+					var edcuisinelabel = document.createElement("label");
+					edcuisinelabel.textContent = "Cuisine: ";
+					edcuisinelabel.setAttribute("class", "edcuisinelabel");
+
+					var cuisinelist = ["Italian", "Mexican", "Indian", "Japanese"];
+					var selectcuisine = document.createElement("select");
+					for(var i=0;i<cuisinelist.length; i+=1)
+					{
+						var option = document.createElement("option");
+						option.value = cuisinelist[i];
+						option.textContent = cuisinelist[i];
+						selectcuisine.appendChild(option);
+					}
+					selectcuisine.setAttribute("class", "selectcuisine");
+
+					var edspicylabel = document.createElement("label");
+					edspicylabel.textContent = "Is this dish spicy?";
+					edspicylabel.setAttribute("class", "edspicylabel");
+
+					var spicyselect = document.createElement("select");
+					var yesoption = document.createElement("option");
+					yesoption.value = "1";
+					yesoption.textContent = "Yes";
+					spicyselect.appendChild(yesoption);
+					var nooption = document.createElement("option");
+					nooption.value = "0";
+					nooption.textContent = "No";
+					spicyselect.appendChild(nooption);
+					spicyselect.setAttribute("class", "spicyselect");
+
+					var restwhatlabel = document.createElement("label");
+					restwhatlabel.textContent = "Restaurant:";
+					restwhatlabel.setAttribute("class", "restwhatlabel");
+
+					var edrestlabel = document.createElement("input");
+					edrestlabel.setAttribute("type", "input");
+					edrestlabel.setAttribute("class", "edrestlabel");
+					edrestlabel.setAttribute("placeholder", restlabel.textContent);
+
+					var citywhatlabel = document.createElement("label");
+					citywhatlabel.textContent = "City:";
+					citywhatlabel.setAttribute("class", "citywhatlabel");
+
+					var edcity = document.createElement("input");
+					edcity.setAttribute("type", "text");
+					edcity.setAttribute("class", "edcity");
+					edcity.setAttribute("placeholder", city.textContent);
+
+					var edtypelabel = document.createElement("label");
+					edtypelabel.textContent = "Type:";
+					edtypelabel.setAttribute("class", "edtypelabel");
+
+					var edtype = document.createElement("select");
+					edtype.setAttribute("class", "edtype");
+					var vegopt = document.createElement("option");
+					vegopt.value = "veg";
+					vegopt.textContent = "Vegetarian";
+					edtype.appendChild(vegopt);
+					var nonvegopt = document.createElement("option");
+					nonvegopt.value = "nonveg";
+					nonvegopt.textContent = "Non vegetarian";
+					edtype.appendChild(nonvegopt);
+
+					var linkwhatlabel = document.createElement("label");
+					linkwhatlabel.textContent = "Link:";
+					linkwhatlabel.setAttribute("class", "linktwhatlabel");
+
+					var edlink = document.createElement("input");
+					edlink.setAttribute("type", "text");
+					edlink.setAttribute("class", "edlink");
+					edlink.setAttribute("placeholder", link.textContent);
+
 					var ok = document.createElement("img");
 					ok.setAttribute("id", "ok");
 					ok.setAttribute("src", "ok.png");
-					ok.addEventListener("click", function(){ 
-													
+					ok.addEventListener("click", function(){
+
 													if(edname.value)
 														var newname = edname.value;
 													else
 														var newname = edname.placeholder;
-													
+
 													if(eddesc.value)
 														var newdesc = eddesc.value;
 													else
 														var newdesc = eddesc.placeholder;
-													
+
 													var back = document.getElementById("back");
-													
+
+													var newspicy = spicyselect.value;
+													var newcuisine = selectcuisine.value;
+													var newtype = edtype.value;
+
+													if(edrestlabel.value)
+													 	var newrest = edrestlabel.value;
+													else
+														var newrest = edrestlabel.placeholder;
+
+													if(edcity.value)
+													 	var newcity = edcity.value;
+													else
+														var newcity = edcity.placeholder;
+
+													if(edlink.value)
+													 	var newlink = edlink.value;
+													else
+														var newlink = edlink.placeholder;
+
 													if(edimage.value)
 													{
 														var reader = new FileReader();
 														imgfilenames[newname] = edimage.files[0];
 														//newnameslist[newname] = edname.placeholder;
 														reader.readAsDataURL(edimage.files[0]);
-														reader.onloadend = function(e){addImg(e.target.result, newname, newdesc, parent, 1);}
-												
+														var sub = new submission(parent.id, newname, edimage.files[0], newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'), newrest, newcity, newlink, newtype);
+														reader.onloadend = function(e){addImg(e.target.result, sub, parent, 1,1);}
+
 													}
 													else
 													{
 														//imgfilenames[newname] = {name:'ignore'};
-														addImg(img.src, newname, newdesc, parent, 1);
+														var sub = new submission(parent.id, newname, {name:submissionslist[parent.id].pic_name}, newdesc, newcuisine, newspicy, sessionStorage.getItem('UserID'),newrest, newcity, newlink, newtype);
+														addImg(img.src, sub, parent, 1,1);
 													}
-												
-													
+
+
 												}, false);
-					
+
+
+
 					parent.removeChild(name);
 					parent.removeChild(desc);
+					parent.removeChild(cuisine);
+					parent.removeChild(spicy);
+					parent.removeChild(restlabel);
+					parent.removeChild(city);
+					parent.removeChild(typelabel);
+					parent.removeChild(link);
 					parent.appendChild(edimage);
 					parent.appendChild(edname);
+					parent.appendChild(edspicylabel);
+					parent.appendChild(spicyselect);
+					parent.appendChild(edcuisinelabel);
+					parent.appendChild(selectcuisine);
 					parent.appendChild(eddesc);
+					parent.appendChild(restwhatlabel);
+					parent.appendChild(edrestlabel);
+					parent.appendChild(citywhatlabel);
+					parent.appendChild(edcity);
+					parent.appendChild(edtypelabel);
+					parent.appendChild(edtype);
+					parent.appendChild(linkwhatlabel);
+					parent.appendChild(edlink);
 					parent.appendChild(ok);
-					
+
 				}
 			}
-				
+
 			function showx(e)
 			{
 				//console.log("in mouseover function");
-				var close = document.createElement("img");
-				close.setAttribute("id", "close");
-				close.setAttribute("src", "close.png");
-				close.addEventListener("click", removesub, false);
-				var edit = document.createElement("img");
-				edit.setAttribute("id", "edit");
-				edit.setAttribute("src", "edit.png");
-				edit.addEventListener("click", editsub, false);
-				e.target.insertBefore(edit, e.target.children[0]);
-				e.target.insertBefore(close, e.target.children[0]);
+				if(sessionStorage.getItem('loggedIn')=='0') return;
+				var user_id = sessionStorage.getItem('UserID');
+				//console.log(sessionStorage.getItem('UserID'));
+				//console.log(e.target.id);
+
+				if(user_id == submissionslist[e.target.id].user_id || sessionStorage.getItem('isAdmin')=='1')
+				{
+					var close = document.createElement("img");
+					close.setAttribute("id", "close");
+					close.setAttribute("src", "close.png");
+					close.addEventListener("click", removesub, false);
+					var edit = document.createElement("img");
+					edit.setAttribute("id", "edit");
+					edit.setAttribute("src", "edit.png");
+					edit.addEventListener("click", editsub, false);
+					e.target.insertBefore(edit, e.target.children[0]);
+					e.target.insertBefore(close, e.target.children[0]);
+				}
 			}
-			
+
 			function hidex(e)
 			{
 				var x = document.getElementById("close");
 				var edit = document.getElementById("edit");
-				e.target.removeChild(x);
-				e.target.removeChild(edit);
+				if(x) e.target.removeChild(x);
+				if(edit) e.target.removeChild(edit);
 			}
-			
-			function addImg(filename, name, artDesc, refNode, cameFrom)
+			function insert(submission)
 			{
-	
+				if (!window.XMLHttpRequest)
+				{
+					console.log("Upload not possible.");
+					return;
+				}
+
+				xmlhttp = new XMLHttpRequest();
+				xhr = new XMLHttpRequest();
+
+				xmlhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+								console.log(this.responseText);
+						}
+				};
+
+				var formData = new FormData();
+				formData.append('fileToUpload', submission.pic_name, submission.pic_name.name);
+				xhr.open("POST", "backend2.php");
+				xhr.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+										console.log(this.responseText);
+								}
+					};
+				var entry = submission.dish_id+"*"+submission.nameval+"*"+submission.pic_name.name+"*"+submission.cuisine+"*"+submission.spicy+"*"+submission.ing+"*"+sessionStorage.getItem('UserID')+"*"+submission.restaurant+"*"+submission.city+"*"+submission.type+"*"+submission.link;
+
+				xmlhttp.open("GET","alter.php?q="+entry,true);
+
+				xhr.upload.addEventListener("load", function(){xmlhttp.send();}, false);
+				xhr.upload.addEventListener("progress", onUploadProgress, false);
+				xhr.send(formData);
+
+			}
+			function updatedb(submission)
+			{
+				if (!window.XMLHttpRequest)
+				{
+					console.log("Upload not possible.");
+					return;
+				}
+				var formData = new FormData();
+				formData.append('object', JSON.stringify(submission));
+				xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("POST", "update.php");
+				xmlhttp.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+										console.log(this.responseText);
+								}
+					};
+				xmlhttp.send(formData);
+			}
+			function addImg(filename, submission, refNode, cameFrom, update)
+			{
+
 				var container = document.createElement("div");
 				container.setAttribute("class", "submitcontainer");
-				container.addEventListener("mouseenter", showx, false); 
-				container.addEventListener("mouseleave", hidex, false); 
+				container.setAttribute("id", submission.dish_id);
+				container.addEventListener("mouseenter", showx, false);
+				container.addEventListener("mouseleave", hidex, false);
 				var img = document.createElement("img");
 				img.setAttribute("class", "subimg");
 				img.setAttribute("alt", "There was a problem loading your submission");
 				img.setAttribute("src", filename);
 				var namelabel = document.createElement("label");
 				namelabel.setAttribute("class", "submitnamelabel");
-				namelabel.textContent = name;
+				namelabel.textContent = submission.nameval;
 				var desclabel = document.createElement("label");
 				desclabel.setAttribute("class", "desclabel");
-				desclabel.textContent = artDesc;
+				desclabel.textContent = submission.ing;
+				var cuisine = document.createElement("label");
+				cuisine.setAttribute("class", "cuisinelabel");
+				cuisine.textContent = submission.cuisine;
+				var spicy = document.createElement("label");
+				if(submission.spicy == '1')
+					spicy.textContent = "Spicy";
+				else
+					spicy.textContent = "Not spicy";
+				spicy.setAttribute("class", "spicylabel");
+				var type = document.createElement("label");
+				type.setAttribute("class", "typelabel");
+				type.textContent = submission.type;
+				var restaurant = document.createElement("label");
+				restaurant.setAttribute("class", "restlabel");
+				restaurant.textContent = submission.restaurant;
+				var city = document.createElement("label");
+				city.setAttribute("class", "citylabel");
+				city.textContent = submission.city;
+				var link = document.createElement("a");
+				link.setAttribute("class", "linkname");
+				link.href = submission.link;
+				link.textContent = submission.link;
+
 				container.appendChild(img);
 				container.appendChild(namelabel);
+				container.appendChild(cuisine);
 				container.appendChild(desclabel);
+				container.appendChild(type);
+				container.appendChild(spicy);
+				container.appendChild(restaurant);
+				container.appendChild(city);
+				container.appendChild(link);
 				var back = document.getElementById("back");
 				//console.log(back.children.length);
 				var flag=0;
-				if(refNode && refNode != document.getElementById("container")) 
+				if(refNode && refNode != document.getElementById("container") && refNode.className == "submitcontainer")
 					flag =1;
 				var referenceNode = refNode || document.getElementById("container");
 				referenceNode.parentNode.insertBefore(container, referenceNode.nextSibling);
-				if(flag)
-					back.removeChild(refNode);
-				console.log("IMGFILENAMES",imgfilenames);
+
+
 				if(!cameFrom)
-					update();
-				
+					insert(submission);
+				if(update)
+				{
+					updatedb(submission);
+					if(flag)
+						back.removeChild(refNode);
+				}
+				submissionslist[submission.dish_id] = submission;
+				console.log("added",submission.nameval);
 			}
-			
-			
-			
+
+
+
 			var submit = document.getElementById("submit");
-			submit.addEventListener("click", function(){ 
+			submit.addEventListener("click", function(){
+												if(sessionStorage.getItem('loggedIn')!='1')
+												{
+													alert("Please log in to submit\n");
+													window.location = "..\\login\\login.html";
+												}
 												var name = document.getElementById("name");
 												var artDesc = document.getElementById("artDesc");
-												if(inpimage.value && name.value && artDesc.value)
+												var cuisine = document.getElementById("cuisineselect");
+												var spicy = document.getElementById("isSpicy");
+												var picName = inpimage.value.split("\\")[-1];
+												var type = document.getElementById("typeselect");
+												var link = document.getElementById("recipie");
+												var city = document.getElementById("locationinput");
+												var restaurant = document.getElementById("restname");
+												console.log(inpimage);
+												var obj = new submission('00'+document.querySelectorAll(".submitcontainer").length, name.value, inpimage.files[0], artDesc.value, cuisine.value, spicy.value, sessionStorage.getItem('UserID'), restaurant.value, city.value, link.value, type.value);
+												console.log(obj);
+												if(inpimage.value && name.value && artDesc.value && cuisine.value && link.value && type.value && city.value && restaurant.value)
 												{
 													var reader = new FileReader();
 													//console.log(inpimage.files[0].name);
 													imgfilenames[name.value] = inpimage.files[0];
 													reader.readAsDataURL(inpimage.files[0]);
-													reader.onloadend = function(e){addImg(e.target.result, name.value, artDesc.value);}
+													reader.onloadend = function(e){addImg(e.target.result, obj);}
 												}
 												else
 													window.alert("Please enter all values before submitting");
-												
+
 											}, false);
 			
 			imgfilenames = {};
 			imgs = {};
 			newnameslist={};
+			window.addEventListener("keydown", startSearch);
+			document.getElementById("searchimg").addEventListener("click", function(){search();});
+			function redirectLogin(e)
+			{
+				window.location = "..\\login\\login.html";
+			}
+			function redirectAdmin(e)
+			{
+				window.location = "..\\admin\\admin.html";
+			}
+
+			var login = document.getElementById("login");
+			if(sessionStorage.getItem('loggedIn')=='1')
+			{
+				login.textContent = sessionStorage.getItem('Username');
+				console.log(sessionStorage.getItem('Username'));
+				if(sessionStorage.getItem('isAdmin')=='1')
+				{
+					var adminTools = document.createElement('img');
+					adminTools.setAttribute('id', 'adminTools');
+					adminTools.setAttribute('src', 'wrench-512.png');
+					var ref = document.getElementById("menubar");
+					ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+					adminTools.addEventListener('click', redirectAdmin, false);
+				}
+			}
 		</script>
 	</body>
 </html>

@@ -2,16 +2,23 @@
 <html>
 <head> <title> Pre-Appetizers </title>
        <style>
-            #menu{list-style-type:none; padding:15px; margin:0}
-	    li{display:inline;margin:20px; padding:20px}
-	    .menuopt{text-decoration:none;color:white; font-family:"Copperplate Gothic"}
-	    #menubar{padding:0; margin:0; background-color:#252525; height:50px; width:150%;}
-            
-                
+       #menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+      li{float:left;}
+      .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 23px;cursor: pointer}
+      .menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+      #menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
+
+      html, body {
+                      margin: 0;
+                      padding: 0;
+                      overflow-x: hidden;
+                  }
+
             .center{
                                 position: absolute;
                                 left: 50%;
-                                bottom: 63%;
+                                bottom: 78%;
                                 transform: translate(-50%, -50%);
                                 font-size: 22px;
                                 font-family: "Purisa";
@@ -20,7 +27,7 @@
              .options{
                                  background-color:rgb(150,120,234);height:30px;width:160px;
                                  color:blue;
-                                 padding: 20px 20px 20px 20px; 
+                                 padding: 20px 20px 20px 20px;
                                  /*position:relative;right:400px;bottom:250px; */
                                  -webkit-filter: grayscale(70%);
                                  filter: grayscale(70%);
@@ -41,13 +48,13 @@
                                                             to {font-size:22px;}
                                                              } */
 
-                              
 
-                      
-               #mx     {             
+
+
+               #mx     {
                                  position:relative;left:-450px;bottom:400px;
-                                 -webkit-animation-name: example2; 
-                                 -webkit-animation-duration: 4s; 
+                                 -webkit-animation-name: example2;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example2;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
@@ -56,26 +63,26 @@
                                                             from {position:relative;right:450px;}
                                                             to {position:relative;right:200px;}
                                                              } */
-               #am     {             
+               #am     {
                                  position:relative;left:-610px;bottom:300px;
-                                 -webkit-animation-name: example3; 
-                                 -webkit-animation-duration: 4s; 
+                                 -webkit-animation-name: example3;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example3;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
-                       }          
+                       }
                                  /*@-webkit-keyframes example3 {
                                                             from {right:350px;}
                                                             to {right:600px;}
                                                              } */
-                      
-               #ab     {             
+
+               #ab     {
                                  position:relative;left:-775px;bottom:200px;
                       }
-               #it    {             
+               #it    {
                                  position:relative;left:60px;bottom:400px;
-                                 webkit-animation-name: example4; 
-                                 -webkit-animation-duration: 4s; 
+                                 webkit-animation-name: example4;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example4;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
@@ -85,18 +92,18 @@
                                                             to   {right:-80px;}
                                                              } */
 
-               #in    {             
+               #in    {
                                  position:relative;left:390px;bottom:250px;
-                                 webkit-animation-name: example4; 
-                                 -webkit-animation-duration: 4s; 
+                                 webkit-animation-name: example4;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example4;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
                       }
-               #fr    {             
+               #fr    {
                                  position:relative;left:553px;bottom:350px;
-                                 webkit-animation-name: example5; 
-                                 -webkit-animation-duration: 4s; 
+                                 webkit-animation-name: example5;
+                                 -webkit-animation-duration: 4s;
                                  animation-name: example5;
                                  animation-duration: 4s;
                                  animation-iteration-count: 3;
@@ -104,24 +111,23 @@
                                  /*@-webkit-keyframes example5 {
                                                             from {right:50px;}
                                                             to {right:280px;}
-                                                            
+
                                                             } */
-		#image{
-			
-			            margin-top:-2%;
-                        background-image: url(woodback.jpg);
-                        background-repeat: no-repeat;
-                        background-size:cover;
-		                background-position: center;
-                        
-			}
+		body{
+        background-image: url("woodback.jpg");
+        display:block;
+        position:relative;
+        background-size: cover;
+        border:0px;
+        padding:0px;
+      }
 		#pos{
 			position:absolute;
-			top:110%;
+			top:70%;
 			left:40%;
 		}
-    #img{opacity:100;margin-top:-12%;margin-right:100%;}
-    p{font-family:"Purisa";color:white;top:60%;margin-left:10%;font-size:26px;}
+
+    p{font-family:"Purisa";color:white;position:relative;bottom:10%;left:15%;margin-left:8%;font-size:26px;padding-top:7%}
 
 
     /*.set{background-color: "blue"; height:50%; width:30%;}   <!-- left is 30% --> */
@@ -129,19 +135,163 @@
 
     #arrowleft{height:7%;width:7%;margin-top:-55%;top:25%;left:70%;}
     #arrowright{height:7%;width:7%;color:red;}
- 
-		
+    .searchDiv
+      {
+        display: table;
+        background: transparent;
+        opacity: 1;
+        position: fixed;
+        top: 50px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+      }
+
+      .searchBar
+      {
+        display: table-cell;
+        vertical-align: middle;
+        position: relative;
+        margin: 10px;
+        padding: 10px;
+        width: 80%;
+        height: 20px;
+        border-style: solid;
+        border-radius: 15px;
+        border-width: 0.5px;
+        color: white;
+        background: transparent;
+      }
+      .searchBar:focus
+      {
+        outline: none;
+      }
+      ::placeholder
+      {
+        color: white;
+      }
+      .searchButton
+      {
+        display: table-cell;
+        vertical-align: middle;
+        background: url('searchicon.png');
+        background-size: cover;
+        cursor:pointer;
+        background-repeat: no-repeat;
+        position: relative;
+        margin: 20 auto;
+        width: 2%;
+        border-style: none;
+        transition: all 200ms ease-in;
+        height: 40px;
+        padding:0;
+        width: 40px;
+      }
+      .searchButton:hover
+      {
+        transition: all 200ms ease-out;
+        height: 50px;
+        width: 50px;
+      }
+      #searchimg
+      {
+        display: block;
+        width: 25%;
+        padding:0;
+        cursor: pointer;
+        position: relative;
+        top:10px;
+        left:-18px;
+
+      }
+      #adminTools
+			{
+				width: 3%;
+				margin-right: 10px;
+				position: fixed;
+				top: 10%;
+				right: 1%;
+				height: 6%;
+				z-index: 1;
+				cursor: pointer;
+				transition: all 200ms ease-in;
+			}
+			#adminTools:hover
+			{
+				width: 4%;
+				height: 8%;
+				transition: all 200ms ease-out;
+			}
+
+
 
 </style>
-<script> 
+
+</head>
+<body>
+<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="..\home.html">Home</a></li>
+				<li><a class="menuopt" href="">Appetizers</a></li>
+				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
+        <li><img id="searchimg" src="searchicon.png"/></li>
+        <li id="loginbutton"><label id="login" class="menuopt"></label></li>
+			</ol>
+		</div>
+
+
+
+      <div class="center"><h1><u>Appetizers</u></h1></div>
+      <p><br><br> Here are some the most delicious appetizers from a variety of cusinies.</p>
+      <div id="first" style="height:650px;width:650px;background-color:rgb(250,235,215);;font-size:28px; text-align:center; border-radius:50px; position:relative; top:-70px; font-family: Comic Sans MS;">
+              <img id="arrowleft" src="arrowleft.png" onclick="go(presentIndex,0,10)">
+               <img id="arrowright" src="arrowright.png"onclick="go(presentIndex,1,10)">
+              <img id="mainimg" src="mex.jpg" alt="Hong Kong Noodles" height="85%"/>
+				<br><br>
+
+
+				<span id="name">Mexican cheesy corn dip</span><br>
+				<!-- <span id="ings">Ingredients : </span> -->
+
+                </div>
+
+     <!-- <img src ="app7.jpg" height="360px" width="750px" id="img"/> -->
+     <!-- <img src ="mex2.jpg"height="360px" width="240px" id="img"/> -->
+      <!--<img src ="mex3.jpg"height="360px" width="240px" id="img"/>
+      <img src ="mex4.jpg"height="360px" width="240px" id="img"/>  -->
+
+      </div>
+<div id="pos">
+      <button type="button" class="options" id="mx" onclick="go(presentIndex,1,0)"/>Mexican</button>
+      <button type="button" class="options" id="am" onclick="go(presentIndex,1,1)"/>American</button>
+      <button type="button" class="options" id="ab" onclick="go(presentIndex,1,2)"/>Arabic</button>
+      <button type="button" class="options" id="it" onclick="go(presentIndex,1,3)"/>Italian</button>
+      <button type="button" class="options" id="fr" onclick="go(presentIndex,1,4)"/>French</button>
+      <button type="button" class="options" id="in" onclick="go(presentIndex,1,5)"/>Indian</button>
+
+
+
+    </div>
+
+
+
+<div>
+<div>
+</body>
+<script>
 
 
 function go(presentIndex, dir,group)
-			{
-				var names = ["Mexican Corn Cheese Dip", "Mini Tamale", "Nachos Supreme","Chicken Wings","Fried pickles with spicy Mayo","Honey Apple Brie Bites","Kofta","Moutabal","Shawarma","Carbonara Quasedillas","Garlic Bread","Stuffed Italian Chicken Sausage","Salmon Trout Tartare","Brandade de Morue Au Gratin","Mini smoked salmon croque","Chicken 65","Samosa","Dabeli"]
-				var imgsrcs = ["mex.jpg", "mex2.jpg", "mex3.jpg","amer1.jpg","amer2.jpg","amer3.jpg","ab.jpg","ab2.jpg","ab3.jpg","ita.jpg","ita2.jpg","ita3.jpg","fra.jpg","fra2.jpg","fra3.jpg","ind.jpg","ind2.jpg","ind3.jpg"]
-			/*	var ingsdesc = ["Hot Cheesy .; Mexican Salsa, Bean Mash", "Penne, Garlic Bread, Parmesan Cheese, Baby Corn, Zucchini, Black Olives, Basil Pesto","","","","","","","","","","","","","","" ] */
-				 if(group==0)
+      {
+        var names = ["Mexican Corn Cheese Dip", "Mini Tamale", "Nachos Supreme","Chicken Wings","Fried pickles with spicy Mayo","Honey Apple Brie Bites","Kofta","Moutabal","Shawarma","Carbonara Quasedillas","Garlic Bread","Stuffed Italian Chicken Sausage","Salmon Trout Tartare","Brandade de Morue Au Gratin","Mini smoked salmon croque","Chicken 65","Samosa","Dabeli"]
+        var imgsrcs = ["mex.jpg", "mex2.jpg", "mex3.jpg","amer1.jpg","amer2.jpg","amer3.jpg","ab.jpg","ab2.jpg","ab3.jpg","ita.jpg","ita2.jpg","ita3.jpg","fra.jpg","fra2.jpg","fra3.jpg","ind.jpg","ind2.jpg","ind3.jpg"]
+      /*  var ingsdesc = ["Hot Cheesy .; Mexican Salsa, Bean Mash", "Penne, Garlic Bread, Parmesan Cheese, Baby Corn, Zucchini, Black Olives, Basil Pesto","","","","","","","","","","","","","","" ] */
+         if(group==0)
                      presentIndex.index = -1;
                  else if(group==1)
                     presentIndex.index = 2;
@@ -155,31 +305,31 @@ function go(presentIndex, dir,group)
                     presentIndex.index = 14;
                  else
                     presentIndex.index+=0;
-                    
+
                 if(dir == 1)
-				{
-					if(presentIndex.index == 17)
-						presentIndex.index = 0;
+        {
+          if(presentIndex.index == 17)
+            presentIndex.index = 0;
                     else
                         presentIndex.index+=1;
-                 } 
-				if(dir == 0)
-				{
-					if(presentIndex.index == 0)
-						presentIndex.index = 17;
+                 }
+        if(dir == 0)
+        {
+          if(presentIndex.index == 0)
+            presentIndex.index = 17;
                     else
                         presentIndex.index-=1;
-				}
-                
-				var mainimg = document.getElementById("mainimg");
-				mainimg.setAttribute("src", imgsrcs[presentIndex.index]);
-				
-				var name = document.getElementById("name");
-				name.textContent = names[presentIndex.index];
-				
-				/*var ings = document.getElementById("ings");
-				ings.textContent = ingsdesc[presentIndex.index]; */
-                
+        }
+
+        var mainimg = document.getElementById("mainimg");
+        mainimg.setAttribute("src", imgsrcs[presentIndex.index]);
+
+        var name = document.getElementById("name");
+        name.textContent = names[presentIndex.index];
+
+        /*var ings = document.getElementById("ings");
+        ings.textContent = ingsdesc[presentIndex.index]; */
+
                if(presentIndex.index < 3 && presentIndex.index > -1)
                 document.getElementById("mx").style.backgroundColor = 'red';
                else
@@ -211,70 +361,105 @@ function go(presentIndex, dir,group)
                 document.getElementById("in").style.backgroundColor = 'rgb(150,120,234)';
 
 
-              
-			}
-			
-			var presentIndex = {index:0};
-			var right = document.getElementById("arrowright");
-			right.addEventListener("click", function(){go(presentIndex, 1,10)}, false);
-			var left = document.getElementById("arrowleft");
-			left.addEventListener("click", function(){go(presentIndex, 0,10)}, false);
 
-        
-			
+      }
 
-</script> 
-</head>
-<body>
-<div id="menubar">
-			<ol id="menu">
-				<li><a class="menuopt" href="..\home.html">Home</a></li>
-				<li><a class="menuopt" href="">Appetizers</a></li>
-				<li><a class="menuopt" href="..\mains\mains.html">Main Course</a></li>
-				<li><a class="menuopt" href="..\desserts\desert.html">Desserts</a></li>
-				<li><a class="menuopt" href="..\About Us\about.html">About Us</a></li>
-				<li><a class="menuopt" href="..\Contact Us\contact.html">Contact Us</a></li>
-				<li><a class="menuopt" href="..\submissions\submissions.html">Submissions</a></li>
-			</ol>
-		</div>
-      
-      <div id="image">
-      <p><br><br> Here are some the most delicious appetizers from a variety of cusinies.</p>
-      <div class="center"><h1><u>Appetizers</u></h1></div>
-      
-      <div id="first" style="height:650px;width:650px;background-color:rgb(250,235,215);;font-size:28px; text-align:center; border-radius:50px; position:relative; top:-70px; font-family: Comic Sans MS;"> 
-              <img id="arrowleft" src="arrowleft.png" onclick="go(presentIndex,0,10)">
-               <img id="arrowright" src="arrowright.png"onclick="go(presentIndex,1,10)">
-              <img id="mainimg" src="mex.jpg" alt="Hong Kong Noodles" height="85%"/>
-				<br><br> 
-                
-      
-				<span id="name">Mexican cheesy corn dip</span><br>
-				<!-- <span id="ings">Ingredients : </span> -->
-                
-                </div>
-                
-     <!-- <img src ="app7.jpg" height="360px" width="750px" id="img"/> -->
-     <!-- <img src ="mex2.jpg"height="360px" width="240px" id="img"/> -->
-      <!--<img src ="mex3.jpg"height="360px" width="240px" id="img"/>
-      <img src ="mex4.jpg"height="360px" width="240px" id="img"/>  -->
-      
-      </div>
-<div id="pos">
-      <button type="button" class="options" id="mx" onclick="go(presentIndex,1,0)"/>Mexican</button>
-      <button type="button" class="options" id="am" onclick="go(presentIndex,1,1)"/>American</button>
-      <button type="button" class="options" id="ab" onclick="go(presentIndex,1,2)"/>Arabic</button>
-      <button type="button" class="options" id="it" onclick="go(presentIndex,1,3)"/>Italian</button>
-      <button type="button" class="options" id="fr" onclick="go(presentIndex,1,4)"/>French</button>
-      <button type="button" class="options" id="in" onclick="go(presentIndex,1,5)"/>Indian</button>
-    
-	  
-      
-    </div></div>
+      var presentIndex = {index:0};
+      var right = document.getElementById("arrowright");
+      right.addEventListener("click", function(){go(presentIndex, 1,10)}, false);
+      var left = document.getElementById("arrowleft");
+      left.addEventListener("click", function(){go(presentIndex, 0,10)}, false);
+      function search()
+      {
+        if(!document.querySelector(".searchDiv"))
+        {
+          var searchDiv = document.createElement("div");
+          var searchBar = document.createElement("input");
+          var searchButton = document.createElement("input");
+          searchDiv.setAttribute("class", "searchDiv");
+          searchBar.setAttribute("class", "searchBar");
+          searchButton.setAttribute("class", "searchButton");
+          searchBar.setAttribute("type", "text");
+          searchBar.setAttribute("id","query");
+          searchBar.addEventListener("keydown",find,false);
+          searchButton.addEventListener("click",find2,false);
+          searchButton.setAttribute("type", "button");
+          searchBar.setAttribute("placeholder", "Search...");
+          searchDiv.appendChild(searchBar);
+          searchDiv.appendChild(searchButton);
+          var referenceNode = document.getElementById("menubar");
+          referenceNode.parentNode.insertBefore(searchDiv, referenceNode.nextSibling);
+        }
+        else {
+          document.body.removeChild(document.querySelector(".searchDiv"));
+        }
+    }
+    function find(e)
+      {
+        if(e.keyCode==13)
+        {
+          find2(e);
+        }
+      }
+      function find2(e)
+      {
+        console.log("a");
+        var x=document.getElementById("query");
+        window.location.href="../results.html?var1="+x.value;
+      }
+      function startSearch(e)
+      {
+
+        if(e.ctrlKey && e.keyCode === 70)
+        {
+          e.preventDefault();
+          search();
+        }
+      }
+      function placeDiv() {
+          var d = document.getElementById("foodart");
+        var s = window.pageYOffset;
+        console.log(s);
+        if(s<=678)
+        {
+          var translate = 'translateY(' + s + 'px)';
+          console.log(translate);
+          d.style.transform = translate;
+        }
+
+      }
+      window.addEventListener("scroll", placeDiv);
+      window.addEventListener("keydown", startSearch);
+      document.getElementById("searchimg").addEventListener("click", function(){search();});
+      function redirectLogin(e)
+      {
+        window.location = "../login/login.html";
+      }
+      function redirectAdmin(e)
+      {
+        window.location = "../admin/admin.html";
+      }
+
+      var login = document.getElementById("login");
+      if(sessionStorage.getItem('loggedIn')=='1')
+      {
+        login.textContent = sessionStorage.getItem('Username');
+        console.log(sessionStorage.getItem('Username'));
+        if(sessionStorage.getItem('isAdmin')=='1')
+        {
+          var adminTools = document.createElement('img');
+          adminTools.setAttribute('id', 'adminTools');
+          adminTools.setAttribute('src', 'wrench-512.png');
+          var ref = document.getElementById("menubar");
+          ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+          adminTools.addEventListener('click', redirectAdmin, false);
+        }
+      }
+      else {
+        login.textContent = "Login";
+        document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+      }
 
 
-
-<div> 
-<div>
-</body>
+</script>
 </html>

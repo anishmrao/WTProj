@@ -1,0 +1,267 @@
+<html>
+<head>
+</head>
+<style>
+
+			body,html{margin:0;padding:0;}
+			body
+			{
+				height:100%;
+				background-image:url("woodback.jpg");
+				display:block;
+    			background-repeat:repeat;
+    			background-size:contain;
+				text-align:center;
+				justify-content:center;
+				align-items:center;
+			}
+
+			#menu{list-style-type:none; padding:0; margin:0;display: table;overflow: hidden;height:100%}
+      li{float:left;}
+      .menuopt{display:block;text-align: center;text-decoration:none;color:white; font-family:"Copperplate Gothic";padding:18px 23px;cursor: pointer}
+      .menuopt:hover{color:black;background-color: white;transition: all 200ms ease-in-out;}
+      #menubar{overflow: hidden;width: 100%;z-index: 1;position: fixed; top:0;padding:0; margin:0; background-color:#252525; height:50px}
+      #feast{height:250px; width:100%;background-color:white;font-size:36px; text-align:center; border-radius:200px; position:absolute; bottom:-13%;opacity: 0.85; font-family: Purisa; margin-bottom:0;}
+
+			{
+				display: block;
+				width: 35%;
+				padding:0;
+				cursor: pointer;
+				position: relative;
+				top:3px;
+				left: 5px;
+			}
+			.submitcontainer
+			{
+				width:80%;
+				background-color:white;
+				border-radius:20px;
+				justify-content:center;
+				margin:100px auto;
+				padding:20px;
+				position:relative;
+
+			}
+			label
+			{
+				font-family:"Copperplate Gothic";
+				font-size:18px;
+			}
+			.subimg
+			{
+				width:100%;
+			}
+			.desclabel
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:20px;
+				margin:5px;
+				display:block;
+			}
+			.submitnamelabel
+			{
+				font-family:"Purisa";
+				color:black;
+				font-size:40px;
+				margin:5px;
+				display:block;
+			}
+			.cuisinelabel
+			{
+				display: block;
+			}
+			.spicylabel
+			{
+				display: block;
+			}
+			.typelabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.restlabel
+			{
+				display:block;
+				margin: 5px;
+				font-family: "Purisa";
+			}
+			.citylabel
+			{
+				display:block;
+				margin: 5px;
+			}
+			.linkname
+			{
+				display:block;
+				margin: 5px;
+			}
+			#adminTools
+			{
+				width: 3%;
+				margin-right: 10px;
+				position: fixed;
+				top: 10%;
+				right: 1%;
+				height: 6%;
+				z-index: 1;
+				cursor: pointer;
+				transition: all 200ms ease-in;
+			}
+			#adminTools:hover
+			{
+				width: 4%;
+				height: 8%;
+				transition: all 200ms ease-out;
+			}
+</style>
+<body onload="searchResult()">
+	<div id="menubar">
+			<ol id="menu">
+				<li><a class="menuopt" href="home.html">Home</a></li>
+				<li><a class="menuopt" href="Appetizers\pre4.html">Appetizers</a></li>
+				<li><a class="menuopt" href="mains\mains.html">Main Course</a></li>
+				<li><a class="menuopt" href="desserts\desert.html">Desserts</a></li>
+				<li><a class="menuopt" href="About Us\about.html">About Us</a></li>
+				<li><a class="menuopt" href="Contact Us\contact.html">Contact Us</a></li>
+				<li><a class="menuopt" href="submissions\submissions.html">Submissions</a></li>
+				<li id="loginbutton"><label id="login" class="menuopt"></label></li>
+			</ol>
+		</div>
+</body>
+<script>
+
+
+	function searchResult()
+	{
+		  var url_string=window.location.href;
+		  var url=new URL(url_string);
+		  var c=url.searchParams.get("var1");
+		  xmlhttp = new XMLHttpRequest();
+		  var dish_id, name, src="", ing, cuisine, spicy, user_id,restaurant,city,link,type;
+		  xmlhttp.onreadystatechange = function() {
+				var obj={};
+          if (this.readyState == 4 && this.status == 200) {
+						try
+						{
+							obj = JSON.parse(this.responseText);
+						}
+						catch (e)
+						{
+							console.log(this.responseText);
+							var container = document.createElement("div");
+							container.setAttribute("class", "submitcontainer");
+							var error=document.createElement("label");
+							error.innerHTML="Sorry we do not have your desired item '"+c+"'<br>You can your upload file on your submissions page";
+							container.appendChild(error);
+							document.body.appendChild(container);
+							return;
+						}
+						if(obj.length==0)
+						{
+							var container = document.createElement("div");
+							container.setAttribute("class", "submitcontainer");
+							var error=document.createElement("label");
+							error.innerHTML="Sorry we do not have your desired item '"+c+"'<br>You can your upload file on your submissions page";
+							container.appendChild(error);
+							document.body.appendChild(container);
+							return;
+						}
+
+
+          	console.log(typeof(submissionslist));
+
+				for(var i=0;i<obj.length;i++)
+				{
+					var imgsrc = "data:image/jpg;base64," + obj[i]['pic_name'];
+					var container = document.createElement("div");
+					container.setAttribute("class", "submitcontainer");
+					var img = document.createElement("img");
+					img.setAttribute("class", "subimg");
+					img.setAttribute("src", imgsrc);
+					var namelabel = document.createElement("label");
+					namelabel.setAttribute("class", "submitnamelabel");
+					namelabel.textContent = obj[i]['Dish_Name'];
+					var desclabel = document.createElement("label");
+					desclabel.setAttribute("class", "desclabel");
+					desclabel.textContent = obj[i]['Ingredients'];
+					var cuisine = document.createElement("label");
+					cuisine.setAttribute("class", "cuisinelabel");
+					cuisine.textContent = obj[i]['Cuisine'];
+					var spicy = document.createElement("label");
+					if(obj[i]['Spicy'] == '1')
+						spicy.textContent = "Spicy";
+					else
+						spicy.textContent = "Not spicy";
+					spicy.setAttribute("class", "spicylabel");
+					var type = document.createElement("label");
+					type.setAttribute("class", "typelabel");
+					type.textContent = obj[i]['Type_Name'];
+					var restaurant = document.createElement("label");
+					restaurant.setAttribute("class", "restlabel");
+					restaurant.textContent = obj[i]['Restaurant'];
+					var city = document.createElement("label");
+					city.setAttribute("class", "citylabel");
+					city.textContent = obj[i]['City'];
+					var link = document.createElement("a");
+					link.setAttribute("class", "linkname");
+					link.href = obj[i]['Link'];
+					link.textContent = obj[i]['Link'];
+
+					container.appendChild(img);
+					container.appendChild(namelabel);
+					container.appendChild(cuisine);
+					container.appendChild(desclabel);
+					container.appendChild(type);
+					container.appendChild(spicy);
+					container.appendChild(restaurant);
+					container.appendChild(city);
+					container.appendChild(link);
+					document.body.appendChild(container);
+
+				}
+
+
+
+			}
+			};
+			console.log(c);
+			xmlhttp.open("GET","results.php?q="+c,true);
+		    xmlhttp.send();
+	}
+	function redirectLogin(e)
+      {
+        window.location = "login/login.html";
+      }
+      function redirectAdmin(e)
+      {
+        window.location = "admin/admin.html";
+      }
+
+      var login = document.getElementById("login");
+      if(sessionStorage.getItem('loggedIn')=='1')
+      {
+        login.textContent = sessionStorage.getItem('Username');
+        console.log(sessionStorage.getItem('Username'));
+        if(sessionStorage.getItem('isAdmin')=='1')
+        {
+          var adminTools = document.createElement('img');
+          adminTools.setAttribute('id', 'adminTools');
+          adminTools.setAttribute('src', 'wrench-512.png');
+          var ref = document.getElementById("menubar");
+          ref.parentNode.insertBefore(adminTools, ref.nextSibling);
+          adminTools.addEventListener('click', redirectAdmin, false);
+        }
+      }
+      else {
+        login.textContent = "Login";
+        document.getElementById("loginbutton").addEventListener("click", redirectLogin, false);
+      }
+
+
+
+
+
+</script>
+</html>
